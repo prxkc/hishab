@@ -1,16 +1,14 @@
 import { useMemo } from 'react'
 import dayjs from 'dayjs'
 import type { EChartsOption } from 'echarts'
-import { PiggyBank, TrendingDown, TrendingUp } from 'lucide-react'
+import { ArrowDownRight, ArrowUpRight, TrendingUp } from 'lucide-react'
 
-import { ChartCard } from '@/components/shared/chart-card'
-import { PageHeader } from '@/components/shared/page-header'
-import { StatCard } from '@/components/shared/stat-card'
 import { EChart } from '@/components/charts/echart'
 import { Progress } from '@/components/ui/progress'
 import { MonthSwitcher } from '@/components/shared/month-switcher'
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { DEFAULT_CURRENCY } from '@/domain/constants'
-import { formatCurrency, formatNumber } from '@/lib/utils'
+import { formatCurrency } from '@/lib/utils'
 import { useAppStore } from '@/store/app-store'
 import {
   selectBudgetUsage,
@@ -26,140 +24,203 @@ export function DashboardPage() {
   const netWorth = useAppStore(selectFormattedNetWorth)
   const cashFlow = useAppStore(selectMonthlyCashFlow)
   const budgets = useAppStore(selectBudgetUsage)
-  const snapshots = useAppStore((state) => state.snapshots)
-  const goals = useAppStore((state) => state.goals)
   const categories = useAppStore((state) => state.categories)
-  const accountCount = useAppStore((state) => state.accounts.length)
+  const accounts = useAppStore((state) => state.accounts)
+  const transactions = useAppStore((state) => state.transactions)
 
-  const goalsSummary = useMemo(() => {
-    if (goals.length === 0) {
-      return {
-        target: 0,
-        allocated: 0,
-        completion: 0,
+  // Calculate account balances
+  const accountBalances = useMemo(() => {
+    const balances: Record<string, number> = {}
+    accounts.forEach((acc) => {
+      balances[acc.id] = acc.balance
+    })
+
+    transactions.forEach((tx) => {
+      if (tx.type === 'income') {
+        balances[tx.accountId] = (balances[tx.accountId] ?? 0) + tx.amount
+      } else if (tx.type === 'expense') {
+        balances[tx.accountId] = (balances[tx.accountId] ?? 0) - tx.amount
+      } else if (tx.type === 'transfer') {
+        const fromId = tx.fromAccountId as string | undefined
+        const toId = tx.toAccountId as string | undefined
+        if (fromId && toId && typeof fromId === 'string' && typeof toId === 'string') {
+          balances[fromId] = (balances[fromId] ?? 0) - tx.amount
+          balances[toId] = (balances[toId] ?? 0) + tx.amount
+        }
       }
-    }
-    const target = goals.reduce((total, goal) => total + goal.targetAmount, 0)
-    const allocated = goals.reduce((total, goal) => total + goal.currentAllocated, 0)
-    const completion = target > 0 ? allocated / target : 0
-    return { target, allocated, completion }
-  }, [goals])
+    })
 
-  const netWorthOption = useMemo<EChartsOption>(() => {
-    const baseSeries = snapshots
+    return balances
+  }, [accounts, transactions])
+
+  // Get specific accounts
+  const bankAccount = accounts.find((a) => a.type === 'bank')
+  const bkashAccount = accounts.find((a) => a.type === 'bkash')
+  const cashAccount = accounts.find((a) => a.type === 'cash')
+
+  // Recent transactions
+  const recentTransactions = useMemo(() => {
+    return transactions
       .slice()
-      .reverse()
-      .map((snapshot) => ({
-        month: snapshot.month,
-        value: snapshot.netWorth,
-      }))
+      .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
+      .slice(0, 6)
+  }, [transactions])
 
-    const currentMonth = dayjs(selectedMonth).format('YYYY-MM')
-    const hasCurrent = baseSeries.some((item) => item.month === currentMonth)
-    const data = hasCurrent
-      ? baseSeries
-      : [...baseSeries, { month: currentMonth, value: netWorthValue }]
+  // Weekly expenses for current month
+  const weeklyExpensesData = useMemo(() => {
+    const currentMonthStart = dayjs(selectedMonth).startOf('month')
+    const currentMonthEnd = dayjs(selectedMonth).endOf('month')
 
-    return {
-      tooltip: { trigger: 'axis' },
-      xAxis: {
-        type: 'category',
-        data: data.map((item) => item.month),
-      },
-      yAxis: {
-        type: 'value',
-        axisLabel: {
-          formatter: (value: number) => formatNumber(value / 1000) + 'k',
-        },
-      },
-      series: [
-        {
-          name: 'Net Worth',
-          type: 'line',
-          smooth: true,
-          showSymbol: false,
-          lineStyle: { width: 3 },
-          areaStyle: {
-            opacity: 0.2,
-          },
-          data: data.map((item) => item.value),
-        },
-      ],
-      grid: { left: 16, right: 16, top: 36, bottom: 40, containLabel: true },
+    // Get all expense transactions for current month
+    const monthExpenses = transactions.filter(
+      (tx) =>
+        tx.type === 'expense' &&
+        dayjs(tx.date).isAfter(currentMonthStart.subtract(1, 'day')) &&
+        dayjs(tx.date).isBefore(currentMonthEnd.add(1, 'day')),
+    )
+
+    // Group by week
+    const weeks: { label: string; amount: number }[] = []
+    let weekStart = currentMonthStart.startOf('week')
+
+    while (weekStart.isBefore(currentMonthEnd)) {
+      const weekEnd = weekStart.endOf('week')
+      const weekExpenses = monthExpenses.filter((tx) => {
+        const txDate = dayjs(tx.date)
+        return (
+          txDate.isAfter(weekStart.subtract(1, 'day')) && txDate.isBefore(weekEnd.add(1, 'day'))
+        )
+      })
+
+      const total = weekExpenses.reduce((sum, tx) => sum + tx.amount, 0)
+      weeks.push({
+        label: `Week ${weeks.length + 1}`,
+        amount: total,
+      })
+
+      weekStart = weekStart.add(1, 'week')
     }
-  }, [netWorthValue, selectedMonth, snapshots])
 
-  const cashFlowOption = useMemo<EChartsOption>(() => {
-    const categories = ['Income', 'Expense', 'Net']
-    const values = [cashFlow.income, cashFlow.expense, cashFlow.net]
-    const colors = ['#34d399', '#f87171', '#60a5fa']
+    return weeks
+  }, [transactions, selectedMonth])
+
+  const weeklyExpensesOption = useMemo<EChartsOption>(() => {
+    const maxValue = Math.max(...weeklyExpensesData.map((w) => w.amount), 0)
+    const highlightIndex = weeklyExpensesData.length > 0 ? weeklyExpensesData.length - 1 : 0
+
     return {
-      tooltip: {
-        trigger: 'axis',
-        axisPointer: { type: 'shadow' },
+      grid: {
+        left: 16,
+        right: 16,
+        top: 40,
+        bottom: 40,
+        containLabel: false,
       },
       xAxis: {
         type: 'category',
-        data: categories,
+        data: weeklyExpensesData.map((w) => w.label),
+        boundaryGap: false,
+        axisLine: { show: false },
+        axisTick: { show: false },
+        axisLabel: {
+          color: '#999',
+          fontSize: 11,
+          margin: 16,
+        },
+        splitLine: {
+          show: true,
+          lineStyle: {
+            color: '#e5e5e5',
+            type: 'dashed',
+            width: 1,
+          },
+        },
       },
       yAxis: {
         type: 'value',
-        axisLabel: {
-          formatter: (value: number) => formatNumber(value),
-        },
+        show: false,
+        max: maxValue * 1.3,
       },
       series: [
         {
-          type: 'bar',
-          data: values,
+          type: 'line',
+          data: weeklyExpensesData.map((w) => w.amount),
+          smooth: true,
+          showSymbol: true,
+          symbol: 'circle',
+          symbolSize: (value: unknown, params: { dataIndex: number }) => {
+            return params.dataIndex === highlightIndex ? 8 : 0
+          },
+          lineStyle: {
+            width: 3,
+            color: '#000',
+          },
           itemStyle: {
-            color: (params: { dataIndex: number }) => colors[params.dataIndex] ?? colors[0],
-            borderRadius: 8,
+            color: '#000',
           },
           label: {
             show: true,
             position: 'top',
-            formatter: (rawParams: unknown) => {
-              const params = rawParams as { value?: number | string | null }
-              const amount =
-                typeof params.value === 'number' ? params.value : Number(params.value ?? 0)
-              return formatNumber(amount)
+            formatter: (params: { dataIndex: number; value?: number | string | null }) => {
+              if (params.dataIndex === highlightIndex) {
+                const value =
+                  typeof params.value === 'number' ? params.value : Number(params.value ?? 0)
+                return formatCurrency(value, 'en-BD', DEFAULT_CURRENCY)
+              }
+              return ''
             },
+            color: '#000',
+            fontSize: 13,
+            fontWeight: 'bold',
+            offset: [0, -10],
           },
-          barWidth: '45%',
         },
       ],
-      grid: { left: 24, right: 16, top: 32, bottom: 32, containLabel: true },
+      tooltip: {
+        trigger: 'axis',
+        formatter: (params: unknown) => {
+          const param = (params as Array<{ name?: string; value?: number | string | null }>)[0]
+          const value = typeof param?.value === 'number' ? param.value : Number(param?.value ?? 0)
+          return `${param?.name}<br/>Expenses: ${formatCurrency(value, 'en-BD', DEFAULT_CURRENCY)}`
+        },
+      },
     }
-  }, [cashFlow])
+  }, [weeklyExpensesData])
 
+  // Spending by category
   const categoryOption = useMemo<EChartsOption>(() => {
     const getCategoryName = (categoryId: string) => {
       const match = categories.find((category) => category.id === categoryId)
       return match ? match.name : categoryId
     }
     const expenseBudgets = budgets.filter((budget) => budget.amount > 0)
-    const sorted = expenseBudgets
-      .sort((a, b) => (b.spent ?? 0) - (a.spent ?? 0))
-      .slice(0, 6)
+    const sorted = expenseBudgets.sort((a, b) => (b.spent ?? 0) - (a.spent ?? 0)).slice(0, 5)
     return {
       tooltip: {
         trigger: 'item',
         formatter: (rawParams: unknown) => {
-          const params = rawParams as { name?: string; value?: number | string | null; percent?: number }
+          const params = rawParams as {
+            name?: string
+            value?: number | string | null
+            percent?: number
+          }
           const amount = typeof params.value === 'number' ? params.value : Number(params.value ?? 0)
           const pct = typeof params.percent === 'number' ? params.percent : 0
           const label = params.name ?? 'Category'
-          return `${label}<br/>Spent: ${formatCurrency(amount, 'en-BD', DEFAULT_CURRENCY)} (${pct}%)`
+          return `${label}<br/>Spent: ${formatCurrency(amount, 'en-BD', DEFAULT_CURRENCY)} (${pct.toFixed(1)}%)`
         },
       },
       series: [
         {
           type: 'pie',
-          radius: ['30%', '70%'],
+          radius: ['40%', '70%'],
           avoidLabelOverlap: false,
-          itemStyle: { borderRadius: 8, borderColor: '#0f172a', borderWidth: 2 },
-          label: { show: true, formatter: '{b}\n{d}%' },
+          itemStyle: { borderRadius: 8, borderColor: '#fff', borderWidth: 2 },
+          label: {
+            show: true,
+            formatter: '{b}\n{d}%',
+            fontSize: 11,
+          },
           data: sorted.map((budget) => ({
             name: getCategoryName(budget.categoryId),
             value: budget.spent,
@@ -169,96 +230,274 @@ export function DashboardPage() {
     }
   }, [budgets, categories])
 
+  // Calculate extra balance after budget expenses (total balance - sum of budget allocations)
+  const totalBudgetAllocated = budgets.reduce((sum, budget) => sum + budget.amount, 0)
+  const extraBalanceAfterBudgets = netWorthValue - totalBudgetAllocated
+
   return (
-    <div className="space-y-10">
-      <PageHeader
-        eyebrow="Overview"
-        title="Financial Pulse"
-        description="Your consolidated snapshot for balances, cash flow, and goals. Everything is stored locally on this device."
-        actions={<MonthSwitcher />}
-      />
+    <div className="space-y-5">
+      {/* Header Section */}
+      <div className="flex items-center justify-between">
+        <div>
+          <h1 className="text-xl font-bold text-foreground">Overview</h1>
+          <p className="mt-1 text-sm text-muted-foreground">
+            {dayjs().format('dddd, D MMMM YYYY')}
+          </p>
+        </div>
+        <MonthSwitcher />
+      </div>
 
-      <section className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
-        <StatCard
-          label="Net Worth"
-          value={netWorth}
-          description={`Across ${formatNumber(accountCount)} accounts`}
-          icon={<TrendingUp className="h-6 w-6" strokeWidth={1.6} />}
-        />
-        <StatCard
-          label="Monthly Income"
-          value={formatCurrency(cashFlow.income, 'en-BD', DEFAULT_CURRENCY)}
-          delta={{
-            value:
-              cashFlow.net >= 0
-                ? `Net +${formatCurrency(cashFlow.net, 'en-BD', DEFAULT_CURRENCY)}`
-                : `Net ${formatCurrency(cashFlow.net, 'en-BD', DEFAULT_CURRENCY)}`,
-            positive: cashFlow.net >= 0,
-          }}
-          icon={<TrendingUp className="h-6 w-6" strokeWidth={1.6} />}
-        />
-        <StatCard
-          label="Monthly Expenses"
-          value={formatCurrency(cashFlow.expense, 'en-BD', DEFAULT_CURRENCY)}
-          delta={{
-            value: `${formatNumber(budgets.length)} budget categories`,
-            positive: false,
-          }}
-          icon={<TrendingDown className="h-6 w-6" strokeWidth={1.6} />}
-        />
-        <StatCard
-          label="Goals Progress"
-          value={formatCurrency(goalsSummary.allocated, 'en-BD', DEFAULT_CURRENCY)}
-          description={`Target ${formatCurrency(goalsSummary.target, 'en-BD', DEFAULT_CURRENCY)}`}
-          icon={<PiggyBank className="h-6 w-6" strokeWidth={1.6} />}
-          delta={{
-            value: `${Math.round(goalsSummary.completion * 100)}% funded`,
-            positive: true,
-          }}
-        />
-      </section>
+      {/* Total Balance and Extra Balance Cards */}
+      <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
+        {/* Total Balance Card */}
+        <Card className="rounded-2xl border-0 bg-card shadow-sm">
+          <CardContent className="p-6">
+            <div className="space-y-4">
+              {/* Title and Balance */}
+              <div>
+                <p className="mb-2 text-sm text-muted-foreground">Total Balance</p>
+                <p className="text-4xl font-bold tracking-tight text-foreground">{netWorth}</p>
+              </div>
 
-      <section className="grid gap-4 xl:grid-cols-[2fr_1fr]">
-        <ChartCard
-          title="Net Worth"
-          description={`Rolling trend up to ${dayjs(selectedMonth).format('MMMM YYYY')}`}
-        >
-          <EChart option={netWorthOption} aria-label="Net worth trend" />
-        </ChartCard>
-        <ChartCard title="Budget Utilization" description="Track spend vs allocation per category">
-          <div className="flex h-full flex-col gap-4 overflow-y-auto pr-2">
-            {budgets.slice(0, 6).map((budget) => (
-              <div key={budget.id} className="space-y-2">
-                <div className="flex items-center justify-between text-sm">
-                  <span className="text-muted-foreground">{budget.categoryId}</span>
-                  <span className="font-medium">
-                    {formatCurrency(budget.spent, 'en-BD', DEFAULT_CURRENCY)} /{' '}
-                    {formatCurrency(budget.amount, 'en-BD', DEFAULT_CURRENCY)}
-                  </span>
+              {/* Income and Expense Boxes */}
+              <div className="flex items-center gap-3">
+                {/* Income Box */}
+                <div className="flex items-center gap-2 rounded-xl bg-success/10 px-3 py-2">
+                  <div className="flex h-7 w-7 items-center justify-center rounded-lg bg-success/20">
+                    <ArrowUpRight className="h-3.5 w-3.5 text-success" />
+                  </div>
+                  <div>
+                    <p className="text-base font-bold text-foreground">
+                      {formatCurrency(cashFlow.income, 'en-BD', DEFAULT_CURRENCY)}
+                    </p>
+                    <p className="text-xs text-muted-foreground">Income</p>
+                  </div>
                 </div>
-                <Progress value={Math.min(100, budget.progress * 100)} className="h-2 bg-primary/10" />
-              </div>
-            ))}
-            {budgets.length === 0 ? (
-              <div className="flex flex-1 items-center justify-center text-sm text-muted-foreground">
-                Budgets will appear here once created.
-              </div>
-            ) : null}
-          </div>
-        </ChartCard>
-      </section>
 
-      <section className="grid gap-4 xl:grid-cols-2">
-        <ChartCard
-          title="Cash Flow"
-          description={`Income vs expense for ${dayjs(selectedMonth).format('MMMM YYYY')}`}
-        >
-          <EChart option={cashFlowOption} aria-label="Cash flow comparison" />
-        </ChartCard>
-        <ChartCard title="Top Categories" description="Highest spending categories this month">
-          <EChart option={categoryOption} aria-label="Top spending categories" />
-        </ChartCard>
-      </section>
+                {/* Expense Box */}
+                <div className="flex items-center gap-2 rounded-xl bg-destructive/10 px-3 py-2">
+                  <div className="flex h-7 w-7 items-center justify-center rounded-lg bg-destructive/20">
+                    <ArrowDownRight className="h-3.5 w-3.5 text-destructive" />
+                  </div>
+                  <div>
+                    <p className="text-base font-bold text-foreground">
+                      {formatCurrency(cashFlow.expense, 'en-BD', DEFAULT_CURRENCY)}
+                    </p>
+                    <p className="text-xs text-muted-foreground">Expenses</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+
+        {/* Extra Balance After Budgets Card */}
+        <Card className="rounded-2xl border-0 bg-card shadow-sm">
+          <CardContent className="p-6">
+            <div className="space-y-4">
+              <div>
+                <p className="mb-2 text-sm text-muted-foreground">Extra Balance After Budgets</p>
+                <p className="text-4xl font-bold tracking-tight text-foreground">
+                  {formatCurrency(extraBalanceAfterBudgets, 'en-BD', DEFAULT_CURRENCY)}
+                </p>
+              </div>
+              <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                <TrendingUp className="h-4 w-4" />
+                <span>
+                  Available after covering{' '}
+                  {formatCurrency(totalBudgetAllocated, 'en-BD', DEFAULT_CURRENCY)} in budgets
+                </span>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+      </div>
+
+      {/* Account Cards */}
+      <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
+        {/* Bank Asia */}
+        <Card className="rounded-2xl border-0 bg-card shadow-sm">
+          <CardContent className="p-6">
+            <div className="space-y-3">
+              <p className="text-sm text-muted-foreground">Bank Asia</p>
+              <p className="text-3xl font-bold tracking-tight text-foreground">
+                {bankAccount
+                  ? formatCurrency(accountBalances[bankAccount.id] ?? 0, 'en-BD', DEFAULT_CURRENCY)
+                  : formatCurrency(0, 'en-BD', DEFAULT_CURRENCY)}
+              </p>
+            </div>
+          </CardContent>
+        </Card>
+
+        {/* Bkash */}
+        <Card className="rounded-2xl border-0 bg-card shadow-sm">
+          <CardContent className="p-6">
+            <div className="space-y-3">
+              <p className="text-sm text-muted-foreground">Bkash</p>
+              <p className="text-3xl font-bold tracking-tight text-foreground">
+                {bkashAccount
+                  ? formatCurrency(accountBalances[bkashAccount.id] ?? 0, 'en-BD', DEFAULT_CURRENCY)
+                  : formatCurrency(0, 'en-BD', DEFAULT_CURRENCY)}
+              </p>
+            </div>
+          </CardContent>
+        </Card>
+
+        {/* Cash */}
+        <Card className="rounded-2xl border-0 bg-card shadow-sm">
+          <CardContent className="p-6">
+            <div className="space-y-3">
+              <p className="text-sm text-muted-foreground">Cash</p>
+              <p className="text-3xl font-bold tracking-tight text-foreground">
+                {cashAccount
+                  ? formatCurrency(accountBalances[cashAccount.id] ?? 0, 'en-BD', DEFAULT_CURRENCY)
+                  : formatCurrency(0, 'en-BD', DEFAULT_CURRENCY)}
+              </p>
+            </div>
+          </CardContent>
+        </Card>
+      </div>
+
+      {/* Weekly Expenses & Recent Transactions */}
+      <div className="grid gap-4 lg:grid-cols-[1fr_1.5fr]">
+        {/* Weekly Expenses */}
+        <Card className="rounded-2xl border-0 bg-card shadow-sm">
+          <CardContent className="p-5">
+            <div className="mb-3">
+              <h3 className="text-base font-bold text-foreground">Weekly expenses</h3>
+              <div className="mt-1 flex items-center gap-1">
+                <span className="text-xs text-muted-foreground">Expenses</span>
+                <ArrowDownRight className="h-3 w-3 text-destructive" />
+              </div>
+            </div>
+            <div className="h-[180px]">
+              {weeklyExpensesData.length > 0 ? (
+                <EChart option={weeklyExpensesOption} aria-label="Weekly expenses" />
+              ) : (
+                <div className="flex h-full items-center justify-center text-sm text-muted-foreground">
+                  No expenses this month
+                </div>
+              )}
+            </div>
+          </CardContent>
+        </Card>
+
+        {/* Recent Transactions */}
+        <Card className="rounded-2xl border-0 bg-card shadow-sm">
+          <CardHeader className="pb-3">
+            <CardTitle className="text-base font-bold">Recent Transactions</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="space-y-2">
+              {recentTransactions.length > 0 ? (
+                recentTransactions.map((tx) => {
+                  const category = categories.find((c) => c.id === tx.categoryId)
+                  return (
+                    <div
+                      key={tx.id}
+                      className="flex items-center justify-between border-b border-border py-2 last:border-0"
+                    >
+                      <div className="flex items-center gap-3">
+                        <div
+                          className={`flex h-8 w-8 items-center justify-center rounded-lg ${
+                            tx.type === 'income' ? 'bg-success/10' : 'bg-primary/10'
+                          }`}
+                        >
+                          {tx.type === 'income' ? (
+                            <ArrowUpRight className="h-4 w-4 text-success" />
+                          ) : (
+                            <ArrowDownRight className="h-4 w-4 text-primary" />
+                          )}
+                        </div>
+                        <div>
+                          <p className="text-sm font-medium">
+                            {tx.notes || category?.name || tx.type}
+                          </p>
+                          <p className="text-xs text-muted-foreground">
+                            {dayjs(tx.date).format('MMM DD, YYYY')}
+                          </p>
+                        </div>
+                      </div>
+                      <p
+                        className={`text-sm font-semibold ${tx.type === 'income' ? 'text-success' : 'text-foreground'}`}
+                      >
+                        {tx.type === 'income' ? '+' : '-'}
+                        {formatCurrency(tx.amount, 'en-BD', DEFAULT_CURRENCY)}
+                      </p>
+                    </div>
+                  )
+                })
+              ) : (
+                <p className="py-8 text-center text-sm text-muted-foreground">
+                  No transactions yet
+                </p>
+              )}
+            </div>
+          </CardContent>
+        </Card>
+      </div>
+
+      {/* Spending by Category & Budget Status */}
+      <div className="grid gap-4 lg:grid-cols-2">
+        {/* Spending by Category */}
+        <Card className="rounded-2xl border-0 bg-card shadow-sm">
+          <CardHeader className="pb-3">
+            <CardTitle className="text-base font-bold">Spending by Category</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="h-[260px]">
+              {budgets.length > 0 ? (
+                <EChart option={categoryOption} aria-label="Spending by category" />
+              ) : (
+                <div className="flex h-full items-center justify-center text-sm text-muted-foreground">
+                  No spending data yet
+                </div>
+              )}
+            </div>
+          </CardContent>
+        </Card>
+
+        {/* Budget Status */}
+        <Card className="rounded-2xl border-0 bg-card shadow-sm">
+          <CardHeader className="pb-3">
+            <CardTitle className="text-base font-bold">Budget Status</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="space-y-3">
+              {budgets.slice(0, 5).map((budget) => {
+                const category = categories.find((c) => c.id === budget.categoryId)
+                const percentage = Math.min(100, budget.progress * 100)
+                const isOverBudget = percentage >= 100
+                return (
+                  <div key={budget.id} className="space-y-2">
+                    <div className="flex items-center justify-between text-sm">
+                      <span className="font-medium text-foreground">
+                        {category?.name || budget.categoryId}
+                      </span>
+                      <span className="text-xs text-muted-foreground">
+                        {formatCurrency(budget.spent ?? 0, 'en-BD', DEFAULT_CURRENCY)} /{' '}
+                        {formatCurrency(budget.amount, 'en-BD', DEFAULT_CURRENCY)}
+                      </span>
+                    </div>
+                    <div className="relative">
+                      <Progress
+                        value={percentage}
+                        className={`h-2 ${isOverBudget ? 'bg-destructive/20' : 'bg-primary/20'}`}
+                      />
+                      <span className="absolute -top-5 right-0 text-xs font-medium text-muted-foreground">
+                        {percentage.toFixed(0)}%
+                      </span>
+                    </div>
+                  </div>
+                )
+              })}
+              {budgets.length === 0 && (
+                <p className="py-8 text-center text-sm text-muted-foreground">No budgets set yet</p>
+              )}
+            </div>
+          </CardContent>
+        </Card>
+      </div>
     </div>
   )
 }

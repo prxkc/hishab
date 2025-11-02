@@ -22,13 +22,19 @@ export function AppLayout({ children }: AppLayoutProps) {
   }, [initialize])
 
   return (
-    <div className="flex min-h-screen bg-background text-foreground">
+    <div className="min-h-screen bg-background text-foreground">
       <Sidebar />
-      <div className="flex flex-1 flex-col">
+      <div className="flex flex-col lg:ml-64">
         <Topbar />
         <main className="flex-1 overflow-y-auto">
-          <div className="mx-auto w-full max-w-6xl px-6 py-8">
-            {isLoading ? <LoadingState /> : loadError ? <ErrorState message={loadError} onRetry={refresh} /> : children}
+          <div className="mx-auto w-full max-w-7xl px-6 py-8">
+            {isLoading ? (
+              <LoadingState />
+            ) : loadError ? (
+              <ErrorState message={loadError} onRetry={refresh} />
+            ) : (
+              children
+            )}
           </div>
         </main>
       </div>
@@ -48,14 +54,26 @@ function LoadingState() {
   )
 }
 
-function ErrorState({ message, onRetry }: { message: string; onRetry: () => Promise<void> | void }) {
+function ErrorState({
+  message,
+  onRetry,
+}: {
+  message: string
+  onRetry: () => Promise<void> | void
+}) {
   return (
     <div className="flex min-h-[60vh] flex-col items-center justify-center gap-4 text-center">
       <div className="space-y-2">
         <p className="text-lg font-semibold text-foreground">Unable to load data</p>
         <p className="max-w-md text-sm text-muted-foreground">{message}</p>
       </div>
-      <Button onClick={() => { void onRetry() }}>Try again</Button>
+      <Button
+        onClick={() => {
+          void onRetry()
+        }}
+      >
+        Try again
+      </Button>
     </div>
   )
 }

@@ -17,15 +17,17 @@ export function ChartCard({ title, description, actions, children }: ChartCardPr
       animate={{ opacity: 1, scale: 1 }}
       transition={{ duration: 0.25, ease: 'easeOut' }}
     >
-      <Card className="h-full border border-border/40 bg-card/80 backdrop-blur">
-        <CardHeader className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
+      <Card className="h-full rounded-2xl border-0 bg-white shadow-sm transition-shadow duration-300 hover:shadow-md">
+        <CardHeader className="flex flex-col gap-2 pt-6 sm:flex-row sm:items-center sm:justify-between">
           <div className="space-y-1">
-            <CardTitle className="text-base font-semibold">{title}</CardTitle>
-            {description ? <CardDescription>{description}</CardDescription> : null}
+            <CardTitle className="text-lg font-bold">{title}</CardTitle>
+            {description ? (
+              <CardDescription className="text-sm">{description}</CardDescription>
+            ) : null}
           </div>
           {actions ? <div className="flex items-center gap-2">{actions}</div> : null}
         </CardHeader>
-        <CardContent className="h-[320px]">
+        <CardContent className="h-[320px] pb-6">
           <Suspense
             fallback={
               <div className="flex h-full items-center justify-center text-sm text-muted-foreground">

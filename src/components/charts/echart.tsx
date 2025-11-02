@@ -12,7 +12,9 @@ export interface EChartProps {
 export function EChart({ option, className, 'aria-label': ariaLabel }: EChartProps) {
   const containerRef = useRef<HTMLDivElement | null>(null)
   const themeMode =
-    typeof window !== 'undefined' && document.documentElement.classList.contains('dark') ? 'dark' : 'light'
+    typeof window !== 'undefined' && document.documentElement.classList.contains('dark')
+      ? 'dark'
+      : 'light'
 
   useEffect(() => {
     let chart: ECharts | undefined
@@ -23,9 +25,13 @@ export function EChart({ option, className, 'aria-label': ariaLabel }: EChartPro
       if (!containerRef.current) {
         return
       }
-      chart = echarts.init(containerRef.current, themeMode === 'dark' ? minimalDarkTheme : undefined, {
-        renderer: 'canvas',
-      })
+      chart = echarts.init(
+        containerRef.current,
+        themeMode === 'dark' ? minimalDarkTheme : minimalLightTheme,
+        {
+          renderer: 'canvas',
+        },
+      )
       chart.setOption(option)
       resizeHandler = () => chart?.resize()
       window.addEventListener('resize', resizeHandler)
@@ -43,30 +49,41 @@ export function EChart({ option, className, 'aria-label': ariaLabel }: EChartPro
     }
   }, [option, themeMode])
 
-  return <div ref={containerRef} role="img" aria-label={ariaLabel} className={cn('h-full w-full', className)} />
+  return (
+    <div
+      ref={containerRef}
+      role="img"
+      aria-label={ariaLabel}
+      className={cn('h-full w-full', className)}
+    />
+  )
 }
 
-// Minimal dark theme definition inspired by Apache ECharts examples.
-const minimalDarkTheme = {
-  color: ['#34d399', '#60a5fa', '#f472b6', '#f59e0b', '#818cf8'],
+// Minimal light theme with coral/orange accent
+const minimalLightTheme = {
+  color: ['#EA6A47', '#6b7280', '#34d399', '#f59e0b', '#a78bfa'],
   backgroundColor: 'transparent',
   textStyle: {
-    color: '#e2e8f0',
+    color: '#1f1f1f',
+    fontFamily: 'Inter, system-ui, sans-serif',
   },
   title: {
     textStyle: {
-      color: '#f8fafc',
+      color: '#1f1f1f',
     },
     subtextStyle: {
-      color: '#94a3b8',
+      color: '#737373',
     },
   },
   tooltip: {
-    backgroundColor: 'rgba(15, 23, 42, 0.92)',
-    borderWidth: 0,
+    backgroundColor: 'rgba(255, 255, 255, 0.98)',
+    borderWidth: 1,
+    borderColor: '#e5e5e5',
     textStyle: {
-      color: '#f8fafc',
+      color: '#1f1f1f',
     },
+    shadowBlur: 8,
+    shadowColor: 'rgba(0, 0, 0, 0.08)',
   },
   grid: {
     top: 32,
@@ -76,13 +93,58 @@ const minimalDarkTheme = {
     containLabel: true,
   },
   valueAxis: {
-    axisLine: { lineStyle: { color: '#334155' } },
-    splitLine: { lineStyle: { color: 'rgba(148,163,184,0.12)' } },
-    axisLabel: { color: '#94a3b8' },
+    axisLine: { lineStyle: { color: '#e5e5e5' } },
+    splitLine: { lineStyle: { color: '#f5f5f5' } },
+    axisLabel: { color: '#737373' },
   },
   categoryAxis: {
-    axisLine: { lineStyle: { color: '#334155' } },
-    axisLabel: { color: '#94a3b8' },
+    axisLine: { lineStyle: { color: '#e5e5e5' } },
+    axisLabel: { color: '#737373' },
+    axisTick: { alignWithLabel: true },
+  },
+}
+
+// Same light theme for dark mode (no dark mode)
+const minimalDarkTheme = {
+  color: ['#EA6A47', '#6b7280', '#34d399', '#f59e0b', '#a78bfa'],
+  backgroundColor: 'transparent',
+  textStyle: {
+    color: '#1f1f1f',
+    fontFamily: 'Inter, system-ui, sans-serif',
+  },
+  title: {
+    textStyle: {
+      color: '#1f1f1f',
+    },
+    subtextStyle: {
+      color: '#737373',
+    },
+  },
+  tooltip: {
+    backgroundColor: 'rgba(255, 255, 255, 0.98)',
+    borderWidth: 1,
+    borderColor: '#e5e5e5',
+    textStyle: {
+      color: '#1f1f1f',
+    },
+    shadowBlur: 8,
+    shadowColor: 'rgba(0, 0, 0, 0.08)',
+  },
+  grid: {
+    top: 32,
+    left: 16,
+    right: 16,
+    bottom: 16,
+    containLabel: true,
+  },
+  valueAxis: {
+    axisLine: { lineStyle: { color: '#e5e5e5' } },
+    splitLine: { lineStyle: { color: '#f5f5f5' } },
+    axisLabel: { color: '#737373' },
+  },
+  categoryAxis: {
+    axisLine: { lineStyle: { color: '#e5e5e5' } },
+    axisLabel: { color: '#737373' },
     axisTick: { alignWithLabel: true },
   },
 }

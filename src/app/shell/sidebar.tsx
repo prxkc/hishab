@@ -11,7 +11,6 @@ import {
 } from 'lucide-react'
 
 import { cn } from '@/lib/utils'
-import { ScrollArea } from '@/components/ui/scroll-area'
 
 interface NavItem {
   label: string
@@ -74,51 +73,46 @@ function SidebarLink({ item }: { item: NavItem }) {
     <Link
       to={item.to}
       className={cn(
-        'group flex flex-col rounded-xl border border-transparent px-3 py-3 transition-colors duration-200',
-        'hover:border-primary/20 hover:bg-primary/5',
-        isActive ? 'border-primary/40 bg-primary/10 text-primary' : 'text-muted-foreground',
+        'group flex items-center gap-3 rounded-xl px-4 py-3 transition-all duration-200',
+        'hover:bg-primary/5',
+        isActive ? 'bg-primary/10 text-primary' : 'text-muted-foreground',
       )}
     >
-      <div className="flex items-center gap-3">
-        <span
-          className={cn(
-            'flex h-10 w-10 items-center justify-center rounded-lg border border-border/40 bg-black/40 transition-colors duration-200',
-            isActive && 'border-primary/40 bg-primary/15 text-primary',
-          )}
-        >
-          <Icon className="h-5 w-5" strokeWidth={1.6} />
-        </span>
-        <div className="flex flex-col">
-          <span className="text-sm font-medium tracking-tight">{item.label}</span>
-          <span className="text-xs text-muted-foreground">{item.description}</span>
-        </div>
-      </div>
+      <Icon className="h-5 w-5" strokeWidth={1.8} />
+      <span className="text-sm font-medium">{item.label}</span>
     </Link>
   )
 }
 
 export function Sidebar() {
   return (
-    <aside className="hidden h-screen w-72 shrink-0 border-r border-border/50 bg-black/50 backdrop-blur-xl lg:flex lg:flex-col">
-      <div className="flex items-center gap-3 px-6 py-6">
-        <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-primary/10 text-primary">
-          <Sparkles className="h-5 w-5" strokeWidth={1.7} />
+    <aside className="fixed hidden h-screen w-64 shrink-0 border-r border-border bg-card lg:flex lg:flex-col">
+      {/* Logo Section */}
+      <div className="flex items-center gap-2 border-b border-border px-6 py-6">
+        <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-primary text-primary-foreground">
+          <Sparkles className="h-5 w-5" strokeWidth={1.8} />
         </div>
         <div>
-          <p className="text-base font-semibold tracking-tight">Hishab</p>
-          <p className="text-xs text-muted-foreground">Offline Personal Finance</p>
+          <p className="text-base font-bold tracking-tight">Hishab</p>
+          <p className="text-xs text-muted-foreground">Personal Finance</p>
         </div>
       </div>
-      <ScrollArea className="flex-1 px-4">
+
+      {/* Navigation */}
+      <div className="flex-1 px-4 py-4">
         <nav className="flex flex-col gap-1">
           {navItems.map((item) => (
             <SidebarLink key={item.to} item={item} />
           ))}
         </nav>
-      </ScrollArea>
-      <div className="border-t border-border/40 px-6 py-5 text-xs text-muted-foreground">
-        <p className="font-medium text-foreground">Offline-first</p>
-        <p>All data is stored locally in your browser.</p>
+      </div>
+
+      {/* Footer */}
+      <div className="border-t border-border px-6 py-4">
+        <div className="text-xs text-muted-foreground">
+          <p className="mb-1 text-sm font-medium text-foreground">Offline-first</p>
+          <p>All data stored locally</p>
+        </div>
       </div>
     </aside>
   )

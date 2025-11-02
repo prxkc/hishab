@@ -1,16 +1,11 @@
 import { useEffect, useRef } from 'react'
-import dayjs from 'dayjs'
 import gsap from 'gsap'
-import { Link } from '@tanstack/react-router'
-import { CircleAlert, Plus, Signal } from 'lucide-react'
+import { CircleAlert, Signal } from 'lucide-react'
 
 import { Button } from '@/components/ui/button'
-import { Separator } from '@/components/ui/separator'
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip'
-import { ThemeToggle } from './theme-toggle'
 
 export function Topbar() {
-  const today = dayjs().format('dddd, D MMM YYYY')
   const headerRef = useRef<HTMLElement | null>(null)
   const badgeRef = useRef<HTMLDivElement | null>(null)
 
@@ -40,43 +35,48 @@ export function Topbar() {
   return (
     <header
       ref={headerRef}
-      className="sticky top-0 z-40 flex h-16 items-center justify-between border-b border-border/40 bg-background/80 px-6 backdrop-blur"
+      className="sticky top-0 z-40 flex h-16 items-center justify-between border-b border-border bg-card px-6"
     >
-      <div className="flex items-center gap-4">
-        <div>
-          <p className="text-xs uppercase tracking-[0.2em] text-primary/70">Today</p>
-          <p className="text-sm font-medium text-muted-foreground">{today}</p>
+      <div className="flex items-center gap-3">
+        <div className="relative">
+          <input
+            type="search"
+            placeholder="Search"
+            className="h-9 w-64 rounded-lg border border-border bg-background px-4 text-sm outline-none transition-all focus:border-primary/50 focus:ring-2 focus:ring-primary/20"
+          />
         </div>
-        <Separator orientation="vertical" className="h-8" />
+      </div>
+
+      <div className="flex items-center gap-3">
+        <TooltipProvider delayDuration={100}>
+          <Tooltip>
+            <TooltipTrigger asChild>
+              <Button variant="ghost" size="icon" className="relative">
+                <CircleAlert className="h-5 w-5" />
+              </Button>
+            </TooltipTrigger>
+            <TooltipContent side="bottom" className="max-w-xs text-xs">
+              <p>Notifications</p>
+            </TooltipContent>
+          </Tooltip>
+        </TooltipProvider>
+
         <TooltipProvider delayDuration={100}>
           <Tooltip>
             <TooltipTrigger asChild>
               <div
                 ref={badgeRef}
-                className="inline-flex items-center gap-1 rounded-full border border-primary/20 bg-primary/10 px-3 py-1 text-xs text-primary"
+                className="inline-flex items-center gap-1 rounded-lg border border-border bg-card px-3 py-1.5 text-xs text-foreground"
               >
-                <Signal className="h-3.5 w-3.5" />
-                <span>Offline-Ready</span>
+                <Signal className="h-3.5 w-3.5 text-primary" />
+                <span className="hidden sm:inline">Offline</span>
               </div>
             </TooltipTrigger>
             <TooltipContent side="bottom" className="max-w-xs text-xs">
-              <p>Hishab runs entirely in your browser. No data leaves your device.</p>
+              <p>All data stored locally on your device</p>
             </TooltipContent>
           </Tooltip>
         </TooltipProvider>
-      </div>
-
-      <div className="flex items-center gap-3">
-        <Button variant="ghost" size="icon" className="hidden sm:inline-flex">
-          <CircleAlert className="h-5 w-5" />
-        </Button>
-        <Button size="sm" className="gap-2" variant="default" asChild>
-          <Link to="/transactions">
-            <Plus className="h-4 w-4" />
-            Ledger
-          </Link>
-        </Button>
-        <ThemeToggle />
       </div>
     </header>
   )

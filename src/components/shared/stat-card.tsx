@@ -23,29 +23,33 @@ export function StatCard({ label, value, description, delta, icon, className }: 
       transition={{ duration: 0.3, ease: 'easeOut' }}
       className={cn(className)}
     >
-      <Card className="group border border-border/40 bg-card/80 backdrop-blur">
-        <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-          <div>
-            <CardDescription className="text-xs uppercase tracking-wide text-muted-foreground/80">
+      <Card className="group rounded-2xl border-0 bg-white shadow-sm transition-shadow duration-300 hover:shadow-md">
+        <CardHeader className="flex flex-row items-start justify-between space-y-0 pb-3 pt-6">
+          <div className="flex-1">
+            <CardDescription className="mb-2 text-sm font-medium text-muted-foreground">
               {label}
             </CardDescription>
-            <CardTitle className="text-2xl font-semibold text-foreground">{value}</CardTitle>
+            <CardTitle className="text-3xl font-bold tracking-tight text-foreground">
+              {value}
+            </CardTitle>
           </div>
-          {icon ? <div className="text-primary group-hover:scale-105 transition-transform duration-300">{icon}</div> : null}
+          {icon ? (
+            <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-primary/10 text-primary transition-transform duration-300 group-hover:scale-105">
+              {icon}
+            </div>
+          ) : null}
         </CardHeader>
         {description || delta ? (
-          <CardContent className="space-y-2 pt-4 text-sm text-muted-foreground">
-            {description ? <p>{description}</p> : null}
+          <CardContent className="space-y-2 pb-6">
+            {description ? <p className="text-sm text-muted-foreground">{description}</p> : null}
             {delta ? (
               <span
                 className={cn(
-                  'inline-flex items-center rounded-full px-3 py-1 text-xs font-medium',
-                  delta.positive
-                    ? 'bg-success/15 text-success'
-                    : 'bg-destructive/20 text-destructive-foreground',
+                  'inline-flex items-center gap-1 text-sm font-medium',
+                  delta.positive ? 'text-success' : 'text-destructive',
                 )}
               >
-                {delta.value}
+                {delta.positive ? '↑' : '↓'} {delta.value}
               </span>
             ) : null}
           </CardContent>
