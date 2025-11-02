@@ -64,5 +64,14 @@ export async function updateAccount(input: UpdateAccountInput) {
 
 export async function deleteAccount(id: string) {
   const db = await ensureDatabaseOpen()
+  const linkedTransactions = await db.transactions.where('accountId').equals(id).count()
+  const linkedTransfers = await db.transactions
+    .filter((txn) => txn.counterpartyAccountId === id)
+    .count()
+
+  if (linkedTransactions > 0 || linkedTransfers > 0) {
+    throw new Error('Remove transactions involving this account before deleting it.')
+  }
+
   await db.accounts.delete(id)
 }

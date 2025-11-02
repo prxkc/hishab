@@ -16,7 +16,6 @@ import {
   SelectValue,
 } from '@/components/ui/select'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
-import { DEFAULT_CURRENCY } from '@/domain/constants'
 import { formatCurrency, formatNumber } from '@/lib/utils'
 import { useAppStore } from '@/store/app-store'
 import {
@@ -42,7 +41,9 @@ export function ReportsPage() {
 
   const months = useMemo(() => {
     const end = dayjs(selectedMonth, 'YYYY-MM').endOf('month')
-    return Array.from({ length: monthsRange }, (_, index) => end.subtract(monthsRange - index - 1, 'month'))
+    return Array.from({ length: monthsRange }, (_, index) =>
+      end.subtract(monthsRange - index - 1, 'month'),
+    )
   }, [monthsRange, selectedMonth])
 
   const netWorthOption = useMemo<EChartsOption>(() => {
@@ -155,7 +156,10 @@ export function ReportsPage() {
       if (!start || !end || !date.isBetween(start, end, null, '[]')) {
         return
       }
-      totals.set(transaction.categoryId, (totals.get(transaction.categoryId) ?? 0) + transaction.amount)
+      totals.set(
+        transaction.categoryId,
+        (totals.get(transaction.categoryId) ?? 0) + transaction.amount,
+      )
     })
 
     const sorted = Array.from(totals.entries())
@@ -268,19 +272,22 @@ export function ReportsPage() {
       <div className="grid gap-4 md:grid-cols-3">
         <StatCard
           label="Current net worth"
-          value={formatCurrency(netWorthCurrent, 'en-BD', DEFAULT_CURRENCY)}
+          value={formatCurrency(netWorthCurrent)}
           description={`Snapshot as of ${dayjs(selectedMonth, 'YYYY-MM').format('MMMM YYYY')}`}
           delta={{ value: `${formatNumber(snapshots.length)} stored snapshots`, positive: true }}
         />
         <StatCard
           label="Monthly net"
-          value={formatCurrency(cashFlowCurrent.net, 'en-BD', DEFAULT_CURRENCY)}
-          description={`${formatCurrency(cashFlowCurrent.income, 'en-BD', DEFAULT_CURRENCY)} income vs ${formatCurrency(cashFlowCurrent.expense, 'en-BD', DEFAULT_CURRENCY)} expense`}
-          delta={{ value: cashFlowCurrent.net >= 0 ? 'Positive' : 'Negative', positive: cashFlowCurrent.net >= 0 }}
+          value={formatCurrency(cashFlowCurrent.net)}
+          description={`${formatCurrency(cashFlowCurrent.income)} income vs ${formatCurrency(cashFlowCurrent.expense)} expense`}
+          delta={{
+            value: cashFlowCurrent.net >= 0 ? 'Positive' : 'Negative',
+            positive: cashFlowCurrent.net >= 0,
+          }}
         />
         <StatCard
           label="Total expenses (range)"
-          value={formatCurrency(totalExpenseRange, 'en-BD', DEFAULT_CURRENCY)}
+          value={formatCurrency(totalExpenseRange)}
           description={`Based on ${transactions.length} transactions recorded locally.`}
           delta={{ value: `${formatNumber(budgets.length)} budgets tracked`, positive: true }}
         />
@@ -318,7 +325,10 @@ export function ReportsPage() {
           </ChartCard>
         </TabsContent>
         <TabsContent value="burn" className="space-y-4">
-          <ChartCard title="Budget burn" description="Compare allocation vs actual spend for this month.">
+          <ChartCard
+            title="Budget burn"
+            description="Compare allocation vs actual spend for this month."
+          >
             <EChart option={budgetBurnOption} aria-label="Budget burn chart" />
           </ChartCard>
         </TabsContent>

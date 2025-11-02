@@ -51,7 +51,11 @@ export interface AppState {
     balance: number
     currency: string
   }) => Promise<Account>
-  addCategory: (input: { name: string; type: Category['type']; parentId?: string | null }) => Promise<Category>
+  addCategory: (input: {
+    name: string
+    type: Category['type']
+    parentId?: string | null
+  }) => Promise<Category>
   upsertBudgets: (updates: Array<{ categoryId: string; amount: number }>) => Promise<void>
   copyBudgetsFromPreviousMonth: () => Promise<void>
   addGoal: (input: {
@@ -59,10 +63,11 @@ export interface AppState {
     targetAmount: number
     targetDate?: string | null
   }) => Promise<SavingsGoal>
-  updateGoal: (input: {
-    id: string
-    currentAllocated: number
-  }) => Promise<SavingsGoal>
+  updateGoal: (input: { id: string; currentAllocated: number }) => Promise<SavingsGoal>
+  deleteTransaction: (id: string) => Promise<void>
+  deleteAccount: (id: string) => Promise<void>
+  deleteGoal: (id: string) => Promise<void>
+  deleteBudget: (id: string) => Promise<void>
 }
 
 async function hydrateState(set: (partial: Partial<AppState>) => void, selectedMonth: string) {
@@ -161,7 +166,9 @@ export const useAppStore = create<AppState>()(
       upsertBudgets: async (updates) => {
         const month = get().selectedMonth
         await Promise.all(
-          updates.map((update) => budgetRepository.upsertBudget(month, update.categoryId, update.amount)),
+          updates.map((update) =>
+            budgetRepository.upsertBudget(month, update.categoryId, update.amount),
+          ),
         )
         await hydrateState(set, month).catch((error: unknown) => {
           const message = error instanceof Error ? error.message : 'Refresh failed.'
@@ -203,6 +210,46 @@ export const useAppStore = create<AppState>()(
           set({ loadError: message })
         })
         return goal
+      },
+      deleteTransaction: async (id) => {
+        try {
+          await transactionRepository.deleteTransaction(id)
+          await hydrateState(set, get().selectedMonth)
+        } catch (error: unknown) {
+          const message = error instanceof Error ? error.message : 'Failed to delete transaction.'
+          set({ loadError: message })
+          throw error
+        }
+      },
+      deleteAccount: async (id) => {
+        try {
+          await accountRepository.deleteAccount(id)
+          await hydrateState(set, get().selectedMonth)
+        } catch (error: unknown) {
+          const message = error instanceof Error ? error.message : 'Failed to delete account.'
+          set({ loadError: message })
+          throw error
+        }
+      },
+      deleteGoal: async (id) => {
+        try {
+          await goalRepository.deleteGoal(id)
+          await hydrateState(set, get().selectedMonth)
+        } catch (error: unknown) {
+          const message = error instanceof Error ? error.message : 'Failed to delete goal.'
+          set({ loadError: message })
+          throw error
+        }
+      },
+      deleteBudget: async (id) => {
+        try {
+          await budgetRepository.deleteBudget(id)
+          await hydrateState(set, get().selectedMonth)
+        } catch (error: unknown) {
+          const message = error instanceof Error ? error.message : 'Failed to delete budget.'
+          set({ loadError: message })
+          throw error
+        }
       },
     })),
     { name: 'hishab-app-store' },

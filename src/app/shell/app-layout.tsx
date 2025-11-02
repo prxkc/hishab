@@ -26,8 +26,8 @@ export function AppLayout({ children }: AppLayoutProps) {
       <Sidebar />
       <div className="flex flex-col lg:ml-64">
         <Topbar />
-        <main className="flex-1 overflow-y-auto">
-          <div className="mx-auto w-full max-w-7xl px-6 py-8">
+        <main className="flex-1 overflow-y-auto bg-background">
+          <div className="w-full px-8 py-8">
             {isLoading ? (
               <LoadingState />
             ) : loadError ? (

@@ -17,7 +17,6 @@ import { Label } from '@/components/ui/label'
 import { useToast } from '@/hooks/use-toast'
 import { useAppStore } from '@/store/app-store'
 import { formatCurrency, formatNumber } from '@/lib/utils'
-import { DEFAULT_CURRENCY } from '@/domain/constants'
 
 interface EditBudgetsSheetProps {
   triggerLabel?: string
@@ -26,7 +25,9 @@ interface EditBudgetsSheetProps {
 export function EditBudgetsSheet({ triggerLabel = 'Adjust Budgets' }: EditBudgetsSheetProps) {
   const [open, setOpen] = useState(false)
   const budgets = useAppStore((state) => state.budgets)
-  const categories = useAppStore((state) => state.categories.filter((category) => category.type === 'expense'))
+  const categories = useAppStore((state) =>
+    state.categories.filter((category) => category.type === 'expense'),
+  )
   const upsertBudgets = useAppStore((state) => state.upsertBudgets)
   const selectedMonth = useAppStore((state) => state.selectedMonth)
   const { toast } = useToast()
@@ -48,10 +49,13 @@ export function EditBudgetsSheet({ triggerLabel = 'Adjust Budgets' }: EditBudget
 
   useEffect(() => {
     if (open) {
-      const formatted = Object.entries(initialAllocations).reduce<Record<string, string>>((acc, [key, value]) => {
-        acc[key] = value ? value.toString() : ''
-        return acc
-      }, {})
+      const formatted = Object.entries(initialAllocations).reduce<Record<string, string>>(
+        (acc, [key, value]) => {
+          acc[key] = value ? value.toString() : ''
+          return acc
+        },
+        {},
+      )
       setAllocations(formatted)
     }
   }, [initialAllocations, open])
@@ -85,9 +89,7 @@ export function EditBudgetsSheet({ triggerLabel = 'Adjust Budgets' }: EditBudget
       setOpen(false)
       toast({
         title: 'Budgets updated',
-        description: `Allocated ${formatCurrency(total, 'en-BD', DEFAULT_CURRENCY)} for ${formatNumber(
-          categories.length,
-        )} categories in ${selectedMonth}.`,
+        description: `Allocated ${formatCurrency(total)} for ${formatNumber(categories.length)} categories in ${selectedMonth}.`,
       })
     } catch (error) {
       console.error(error)
@@ -124,12 +126,15 @@ export function EditBudgetsSheet({ triggerLabel = 'Adjust Budgets' }: EditBudget
                 <div className="flex items-center justify-between text-sm font-medium text-foreground">
                   <span>{category.name}</span>
                   <span className="text-xs text-muted-foreground">
-                    Current: {formatCurrency(initialAllocations[category.id] ?? 0, 'en-BD', DEFAULT_CURRENCY)}
+                    Current: {formatCurrency(initialAllocations[category.id] ?? 0)}
                   </span>
                 </div>
                 <div className="space-y-1">
-                  <Label htmlFor={`budget-${category.id}`} className="text-xs uppercase text-muted-foreground">
-                    Amount ({DEFAULT_CURRENCY})
+                  <Label
+                    htmlFor={`budget-${category.id}`}
+                    className="text-xs uppercase text-muted-foreground"
+                  >
+                    Amount
                   </Label>
                   <Input
                     id={`budget-${category.id}`}
@@ -141,16 +146,16 @@ export function EditBudgetsSheet({ triggerLabel = 'Adjust Budgets' }: EditBudget
               </motion.div>
             ))}
             {categories.length === 0 ? (
-              <p className="text-sm text-muted-foreground">Add expense categories in Settings to begin budgeting.</p>
+              <p className="text-sm text-muted-foreground">
+                Add expense categories in Settings to begin budgeting.
+              </p>
             ) : null}
           </div>
         </ScrollArea>
         <SheetFooter className="flex flex-col gap-3 sm:flex-col">
           <div className="flex items-center justify-between rounded-lg border border-border/20 bg-muted/10 px-4 py-2 text-sm">
             <span className="text-muted-foreground">Total allocation</span>
-            <span className="font-semibold text-foreground">
-              {formatCurrency(total, 'en-BD', DEFAULT_CURRENCY)}
-            </span>
+            <span className="font-semibold text-foreground">{formatCurrency(total)}</span>
           </div>
           <Button onClick={handleSubmit} disabled={categories.length === 0}>
             Save budgets

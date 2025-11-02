@@ -14,7 +14,14 @@ import {
   DialogTitle,
   DialogTrigger,
 } from '@/components/ui/dialog'
-import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form'
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
 import {
   Select,
@@ -25,7 +32,7 @@ import {
 } from '@/components/ui/select'
 import { Textarea } from '@/components/ui/textarea'
 import { useToast } from '@/hooks/use-toast'
-import { DEFAULT_CURRENCY } from '@/domain/constants'
+import { formatCurrency } from '@/lib/utils'
 import { useAppStore } from '@/store/app-store'
 
 const transactionSchema = z
@@ -71,7 +78,9 @@ interface NewTransactionDialogProps {
   triggerLabel?: string
 }
 
-export function NewTransactionDialog({ triggerLabel = 'New Transaction' }: NewTransactionDialogProps) {
+export function NewTransactionDialog({
+  triggerLabel = 'New Transaction',
+}: NewTransactionDialogProps) {
   const [open, setOpen] = useState(false)
   const accounts = useAppStore((state) => state.accounts)
   const categories = useAppStore((state) => state.categories)
@@ -98,7 +107,9 @@ export function NewTransactionDialog({ triggerLabel = 'New Transaction' }: NewTr
     if (transactionType === 'transfer') {
       return []
     }
-    return categories.filter((category) => category.type === (transactionType === 'income' ? 'income' : 'expense'))
+    return categories.filter(
+      (category) => category.type === (transactionType === 'income' ? 'income' : 'expense'),
+    )
   }, [categories, transactionType])
 
   useEffect(() => {
@@ -127,16 +138,14 @@ export function NewTransactionDialog({ triggerLabel = 'New Transaction' }: NewTr
     try {
       await addTransaction({
         ...values,
-        counterpartyAccountId: values.type === 'transfer' ? values.counterpartyAccountId ?? null : null,
-        categoryId: values.type === 'transfer' ? null : values.categoryId ?? null,
+        counterpartyAccountId:
+          values.type === 'transfer' ? (values.counterpartyAccountId ?? null) : null,
+        categoryId: values.type === 'transfer' ? null : (values.categoryId ?? null),
       })
       setOpen(false)
       toast({
         title: 'Transaction saved',
-        description: `Added ${values.type} of ${values.amount.toLocaleString('en-BD', {
-          style: 'currency',
-          currency: DEFAULT_CURRENCY,
-        })}.`,
+        description: `Added ${values.type} of ${formatCurrency(values.amount)}.`,
       })
     } catch (error) {
       console.error(error)
@@ -201,7 +210,7 @@ export function NewTransactionDialog({ triggerLabel = 'New Transaction' }: NewTr
                 name="amount"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Amount ({DEFAULT_CURRENCY})</FormLabel>
+                    <FormLabel>Amount</FormLabel>
                     <FormControl>
                       <Input type="number" min={0} step="0.01" {...field} />
                     </FormControl>

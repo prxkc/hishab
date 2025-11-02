@@ -22,8 +22,14 @@ export const selectMonthlyCashFlow = (state: AppState) => {
 
   const [year, month] = state.selectedMonth.split('-').map(Number)
   const range = {
-    start: dayjs().year(year).month((month ?? 1) - 1).startOf('month'),
-    end: dayjs().year(year).month((month ?? 1) - 1).endOf('month'),
+    start: dayjs()
+      .year(year)
+      .month((month ?? 1) - 1)
+      .startOf('month'),
+    end: dayjs()
+      .year(year)
+      .month((month ?? 1) - 1)
+      .endOf('month'),
   }
 
   state.transactions.forEach((transaction) => {
@@ -56,5 +62,4 @@ export const selectBudgetUsage = (state: AppState) => {
   })
 }
 
-export const selectFormattedNetWorth = (state: AppState) =>
-  formatCurrency(selectNetWorth(state), 'en-BD', 'BDT')
+export const selectFormattedNetWorth = (state: AppState) => formatCurrency(selectNetWorth(state))

@@ -13,10 +13,16 @@ import {
   DialogTitle,
   DialogTrigger,
 } from '@/components/ui/dialog'
-import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form'
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
 import { useToast } from '@/hooks/use-toast'
-import { DEFAULT_CURRENCY } from '@/domain/constants'
 import { useAppStore } from '@/store/app-store'
 import { formatCurrency } from '@/lib/utils'
 
@@ -64,7 +70,7 @@ export function NewGoalDialog({ triggerLabel = 'New Goal' }: NewGoalDialogProps)
       setOpen(false)
       toast({
         title: 'Goal created',
-        description: `Targeting ${formatCurrency(goal.targetAmount, 'en-BD', DEFAULT_CURRENCY)}.`,
+        description: `Targeting ${formatCurrency(goal.targetAmount)}.`,
       })
     } catch (error) {
       console.error(error)
@@ -106,7 +112,7 @@ export function NewGoalDialog({ triggerLabel = 'New Goal' }: NewGoalDialogProps)
               name="targetAmount"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Target amount ({DEFAULT_CURRENCY})</FormLabel>
+                  <FormLabel>Target amount</FormLabel>
                   <FormControl>
                     <Input type="number" min={0} step="0.01" {...field} />
                   </FormControl>

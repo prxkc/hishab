@@ -1,13 +1,24 @@
 import { useEffect, useMemo, useState } from 'react'
 import dayjs from 'dayjs'
 import { motion } from 'framer-motion'
+import { Trash2 } from 'lucide-react'
 
 import { Card, CardContent } from '@/components/ui/card'
 import { Input } from '@/components/ui/input'
 import { Progress } from '@/components/ui/progress'
 import { Badge } from '@/components/ui/badge'
+import { Button } from '@/components/ui/button'
+import {
+  Dialog,
+  DialogClose,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from '@/components/ui/dialog'
 import { EmptyState } from '@/components/shared/empty-state'
-import { DEFAULT_CURRENCY } from '@/domain/constants'
 import { formatCurrency } from '@/lib/utils'
 import { useAppStore } from '@/store/app-store'
 import { useToast } from '@/hooks/use-toast'
@@ -15,8 +26,11 @@ import { useToast } from '@/hooks/use-toast'
 export function GoalsList() {
   const goals = useAppStore((state) => state.goals)
   const updateGoal = useAppStore((state) => state.updateGoal)
+  const deleteGoal = useAppStore((state) => state.deleteGoal)
   const { toast } = useToast()
   const [allocations, setAllocations] = useState<Record<string, string>>({})
+  const [pendingDeleteId, setPendingDeleteId] = useState<string | null>(null)
+  const [isDeleting, setIsDeleting] = useState(false)
 
   useEffect(() => {
     const next = goals.reduce<Record<string, string>>((acc, goal) => {
@@ -49,7 +63,7 @@ export function GoalsList() {
       await updateGoal({ id: goalId, currentAllocated: numeric })
       toast({
         title: 'Goal updated',
-        description: `Allocated ${formatCurrency(numeric, 'en-BD', DEFAULT_CURRENCY)} so far.`,
+        description: `Allocated ${formatCurrency(numeric)} so far.`,
       })
     } catch (error) {
       console.error(error)
@@ -58,6 +72,27 @@ export function GoalsList() {
         description: 'Please try again.',
         variant: 'destructive',
       })
+    }
+  }
+
+  const handleDeleteGoal = async (goalId: string) => {
+    setIsDeleting(true)
+    try {
+      await deleteGoal(goalId)
+      toast({
+        title: 'Goal deleted',
+        description: 'Removed from your savings list.',
+      })
+    } catch (error) {
+      console.error(error)
+      toast({
+        title: 'Unable to delete goal',
+        description: error instanceof Error ? error.message : 'Please try again.',
+        variant: 'destructive',
+      })
+    } finally {
+      setIsDeleting(false)
+      setPendingDeleteId(null)
     }
   }
 
@@ -77,8 +112,7 @@ export function GoalsList() {
           <div>
             <p className="text-sm font-medium text-foreground">Portfolio progress</p>
             <p className="text-xs text-muted-foreground">
-              {formatCurrency(summary.allocated, 'en-BD', DEFAULT_CURRENCY)} saved of{' '}
-              {formatCurrency(summary.target, 'en-BD', DEFAULT_CURRENCY)} target.
+              {formatCurrency(summary.allocated)} saved of {formatCurrency(summary.target)} target.
             </p>
           </div>
           <div className="flex items-center gap-3">
@@ -91,7 +125,8 @@ export function GoalsList() {
       </Card>
       <div className="grid gap-4 md:grid-cols-2">
         {goals.map((goal, index) => {
-          const completion = goal.targetAmount > 0 ? (goal.currentAllocated / goal.targetAmount) * 100 : 0
+          const completion =
+            goal.targetAmount > 0 ? (goal.currentAllocated / goal.targetAmount) * 100 : 0
           return (
             <motion.div
               key={goal.id}
@@ -105,27 +140,70 @@ export function GoalsList() {
                     <div>
                       <p className="text-base font-semibold text-foreground">{goal.name}</p>
                       <p className="text-xs text-muted-foreground">
-                        Target: {formatCurrency(goal.targetAmount, 'en-BD', DEFAULT_CURRENCY)}
+                        Target: {formatCurrency(goal.targetAmount)}
                       </p>
                     </div>
-                    {goal.targetDate ? (
-                      <Badge variant="outline" className="border-primary/40 text-primary">
-                        Due {dayjs(goal.targetDate).format('MMM D, YYYY')}
-                      </Badge>
-                    ) : null}
+                    <div className="flex items-center gap-2">
+                      {goal.targetDate ? (
+                        <Badge variant="outline" className="border-primary/40 text-primary">
+                          Due {dayjs(goal.targetDate).format('MMM D, YYYY')}
+                        </Badge>
+                      ) : null}
+                      <Dialog
+                        open={pendingDeleteId === goal.id}
+                        onOpenChange={(open: boolean) => setPendingDeleteId(open ? goal.id : null)}
+                      >
+                        <DialogTrigger asChild>
+                          <Button
+                            variant="ghost"
+                            size="icon"
+                            className="text-muted-foreground hover:text-destructive"
+                            aria-label={`Delete ${goal.name}`}
+                          >
+                            <Trash2 className="h-4 w-4" />
+                          </Button>
+                        </DialogTrigger>
+                        <DialogContent>
+                          <DialogHeader>
+                            <DialogTitle>Delete goal?</DialogTitle>
+                            <DialogDescription>
+                              {goal.name} will be removed permanently, including its progress
+                              history.
+                            </DialogDescription>
+                          </DialogHeader>
+                          <DialogFooter>
+                            <DialogClose asChild>
+                              <Button variant="outline" disabled={isDeleting}>
+                                Cancel
+                              </Button>
+                            </DialogClose>
+                            <Button
+                              onClick={() => handleDeleteGoal(goal.id)}
+                              disabled={isDeleting}
+                              className="bg-destructive text-destructive-foreground hover:bg-destructive/90"
+                            >
+                              Delete
+                            </Button>
+                          </DialogFooter>
+                        </DialogContent>
+                      </Dialog>
+                    </div>
                   </div>
                   <div className="space-y-2">
                     <Progress value={Math.min(100, completion)} className="h-2 bg-primary/10" />
                     <div className="flex items-center justify-between text-xs text-muted-foreground">
                       <span>{Math.round(completion)}% funded</span>
                       <span>
-                        {formatCurrency(goal.currentAllocated, 'en-BD', DEFAULT_CURRENCY)} /{' '}
-                        {formatCurrency(goal.targetAmount, 'en-BD', DEFAULT_CURRENCY)}
+                        {formatCurrency(goal.currentAllocated)} /{' '}
+                        {formatCurrency(goal.targetAmount)}
                       </span>
                     </div>
                   </div>
                   <div className="space-y-1">
-                    <label htmlFor={`allocation-${goal.id}`} className="text-xs uppercase text-muted-foreground">
+                    <label
+                      htmlFor={`allocation-${goal.id}`}
+                      className="text-xs uppercase text-muted-foreground"
+                    >
                       Allocated so far
                     </label>
                     <Input

@@ -4,6 +4,7 @@
 **Stack:** React 18 + TypeScript, Vite, Tailwind (shadcn/ui), Zustand, Dexie, Apache ECharts, Framer Motion/GSAP, Vite PWA plugin.
 
 ## Current State (2025-02)
+
 - Fully scaffolded SPA with sidebar/topbar shell and themed dark UI.
 - Dexie database configured (`src/data/db.ts`) with repositories, seeding, and backup/import services.
 - Zustand store (`src/store/app-store.ts`) hydrates data, handles errors, and exposes actions for transactions, budgets, goals, etc.
@@ -15,29 +16,41 @@
   - Reports: Multi-tab charts (net worth, cash flow, categories, budget burn).
   - Data Studio: JSON export/import, IndexedDB usage, encryption placeholder.
   - Settings: Preferences persisted to `localStorage`, account/category forms, labs roadmap.
+- Monetary values are rendered as plain numbers (no currency symbol) across the UI per 2025-11 requirements.
 - PWA enabled via `vite-plugin-pwa`; service worker registers in `src/main.tsx`.
 - Tests: basic utility suite under `src/lib/__tests__`; Vitest config uses Node environment (Tinypool on Node 22 still flaky).
 
 ## Known Issues / Follow-ups
+
 - Bundle size exceeds 500 kB due to ECharts; consider dynamic import/manual chunks.
 - Vitest workers crash on Node 22 (tinypool bug). Use Node 20 or install `jsdom` once registry access is available.
 - Encryption flow is still a placeholder.
 - Replace `public/vite.svg` icons in manifest.
 
+## Notion Import (2025-11-02)
+
+- `scripts/generate_backup_from_notion.py` now auto-detects the nested Notion `Backend` directory (e.g. `notion-finance/Finance Tracker/Backend`) and generates `data-imports/notion-2025-10-backup.json`.
+- Transaction notes are normalised by stripping the leading `@<date>` prefix so entries like `@November 1, 2025 Salary` become `Salary` in-app.
+- Import skips 3 rows that were incomplete in Notion (`@October 10, 2025 cash adjustments`, `@October 23, 2025` cash adjustment with no amount, `@October 10, 2025 Apu Repay`). Everything else maps cleanly (4 accounts, 20 categories, 12 budgets, 155 transactions, 3 goals).
+
 ## How to Run
+
 ```bash
 pnpm install      # ensure dependencies (Node 20+ recommended)
 pnpm dev          # start local server at http://localhost:5173
 ```
+
 If prefetched data becomes inconsistent, open DevTools > Application > IndexedDB and delete the `hishab` database, then reload.
 
 ## Build & Distribution
+
 ```bash
 pnpm build        # type-check + production bundle + PWA assets
 pnpm preview      # serve dist/ locally on port 4173
 ```
 
 ## Key Entry Points
+
 - Routing: `src/app/router.tsx`
 - Layout: `src/app/shell/`
 - Store selectors: `src/store/selectors.ts`

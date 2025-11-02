@@ -7,8 +7,8 @@ describe('utils', () => {
     expect(cn('flex', undefined, 'items-center')).toBe('flex items-center')
   })
 
-  it('formats currency in BDT', () => {
-    expect(formatCurrency(1234.5, 'en-BD', 'BDT')).toContain('1,234.50')
+  it('formats currency with two decimals', () => {
+    expect(formatCurrency(1234.5, 'en-BD')).toBe('1,234.50')
   })
 
   it('formats numbers with two decimals max', () => {

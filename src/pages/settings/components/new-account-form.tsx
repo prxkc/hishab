@@ -3,7 +3,14 @@ import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 
 import { Button } from '@/components/ui/button'
-import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form'
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
 import {
   Select,
@@ -19,12 +26,22 @@ import { useAppStore } from '@/store/app-store'
 const accountSchema = z.object({
   name: z.string().min(2, 'Name is required'),
   type: z.enum(['cash', 'bank', 'wallet'], { required_error: 'Select an account type' }),
-  balance: z.coerce.number({ invalid_type_error: 'Balance must be a number' }).min(0, 'Balance cannot be negative'),
+  balance: z.coerce
+    .number({ invalid_type_error: 'Balance must be a number' })
+    .min(0, 'Balance cannot be negative'),
 })
 
 type AccountFormValues = z.infer<typeof accountSchema>
 
-export function NewAccountForm() {
+interface NewAccountFormProps {
+  onSuccess?: () => void
+  submitLabel?: string
+}
+
+export function NewAccountForm({
+  onSuccess,
+  submitLabel = 'Save account',
+}: NewAccountFormProps = {}) {
   const addAccount = useAppStore((state) => state.addAccount)
   const { toast } = useToast()
   const form = useForm<AccountFormValues>({
@@ -49,6 +66,7 @@ export function NewAccountForm() {
         description: `${values.name} is ready for transactions.`,
       })
       form.reset({ name: '', type: 'cash', balance: 0 })
+      onSuccess?.()
     } catch (error) {
       console.error(error)
       toast({
@@ -112,7 +130,7 @@ export function NewAccountForm() {
         />
         <div className="md:col-span-3">
           <Button type="submit" className="w-full md:w-auto">
-            Save account
+            {submitLabel}
           </Button>
         </div>
       </form>
