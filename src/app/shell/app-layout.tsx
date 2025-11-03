@@ -5,7 +5,6 @@ import { Button } from '@/components/ui/button'
 import { useAppStore } from '@/store/app-store'
 
 import { Sidebar } from './sidebar'
-import { Topbar } from './topbar'
 
 interface AppLayoutProps {
   children: React.ReactNode
@@ -25,7 +24,6 @@ export function AppLayout({ children }: AppLayoutProps) {
     <div className="min-h-screen bg-background text-foreground">
       <Sidebar />
       <div className="flex flex-col lg:ml-64">
-        <Topbar />
         <main className="flex-1 overflow-y-auto bg-background">
           <div className="w-full px-8 py-8">
             {isLoading ? (

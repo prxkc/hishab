@@ -94,32 +94,13 @@ function SidebarLink({ item }: { item: NavItem }) {
 export function Sidebar() {
   return (
     <aside className="fixed hidden h-screen w-64 shrink-0 border-r border-border bg-card lg:flex lg:flex-col">
-      {/* Logo Section */}
-      <div className="flex items-center gap-2 border-b border-border px-6 py-6">
-        <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-primary text-primary-foreground">
-          <Sparkles className="h-5 w-5" strokeWidth={1.8} />
-        </div>
-        <div>
-          <p className="text-base font-bold tracking-tight">Hishab</p>
-          <p className="text-xs text-muted-foreground">Personal Finance</p>
-        </div>
-      </div>
-
       {/* Navigation */}
-      <div className="flex-1 px-4 py-4">
+      <div className="flex-1 px-4 py-6">
         <nav className="flex flex-col gap-1">
           {navItems.map((item) => (
             <SidebarLink key={item.to} item={item} />
           ))}
         </nav>
-      </div>
-
-      {/* Footer */}
-      <div className="border-t border-border px-6 py-4">
-        <div className="text-xs text-muted-foreground">
-          <p className="mb-1 text-sm font-medium text-foreground">Offline-first</p>
-          <p>All data stored locally</p>
-        </div>
       </div>
     </aside>
   )

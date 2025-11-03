@@ -1,7 +1,7 @@
 import { useMemo } from 'react'
 import dayjs from 'dayjs'
 import type { EChartsOption } from 'echarts'
-import { ArrowDownRight, ArrowLeftRight, ArrowUpRight, TrendingUp } from 'lucide-react'
+import { ArrowDownRight, ArrowLeftRight, ArrowUpRight } from 'lucide-react'
 
 import { EChart } from '@/components/charts/echart'
 import { Progress } from '@/components/ui/progress'
@@ -13,7 +13,6 @@ import {
   selectBudgetUsage,
   selectFormattedNetWorth,
   selectMonthlyCashFlow,
-  selectNetWorth,
   selectSelectedMonth,
 } from '@/store/selectors'
 
@@ -25,7 +24,6 @@ type ChartCallbackParams = {
 
 export function DashboardPage() {
   const selectedMonth = useAppStore(selectSelectedMonth)
-  const netWorthValue = useAppStore(selectNetWorth)
   const netWorth = useAppStore(selectFormattedNetWorth)
   const cashFlow = useAppStore(selectMonthlyCashFlow)
   const budgets = useAppStore(selectBudgetUsage)
@@ -252,110 +250,73 @@ export function DashboardPage() {
     }
   }, [budgets, categories])
 
-  // Calculate extra balance after budget expenses (total balance - sum of budget allocations)
-  const totalBudgetAllocated = budgets.reduce((sum, budget) => sum + budget.amount, 0)
-  const extraBalanceAfterBudgets = netWorthValue - totalBudgetAllocated
-
   return (
     <div className="space-y-5">
       {/* Header Section */}
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-xl font-bold text-foreground">Overview</h1>
-          <p className="mt-1 text-sm text-muted-foreground">
-            {dayjs().format('dddd, D MMMM YYYY')}
+          <p className="text-sm text-muted-foreground">
+            {dayjs().format('dddd, D MMMM YYYY • h:mm A')}
           </p>
         </div>
         <MonthSwitcher />
       </div>
 
-      {/* Total Balance and Extra Balance Cards */}
-      <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
+      {/* Balance Cards - Total Balance and Account Cards */}
+      <div className="flex flex-wrap gap-4">
         {/* Total Balance Card */}
-        <Card className="rounded-2xl border-0 bg-card shadow-sm">
+        <Card className="min-w-[280px] flex-1 rounded-2xl border-0 bg-card shadow-sm">
           <CardContent className="p-6">
-            <div className="space-y-4">
+            <div className="space-y-3">
               {/* Title and Balance */}
               <div>
                 <p className="mb-2 text-sm text-muted-foreground">Total Balance</p>
                 <p className="text-4xl font-bold tracking-tight text-foreground">{netWorth}</p>
               </div>
 
-              {/* Income and Expense Boxes */}
-              <div className="flex items-center gap-3">
-                {/* Income Box */}
-                <div className="flex items-center gap-2 rounded-xl bg-success/10 px-3 py-2">
-                  <div className="flex h-7 w-7 items-center justify-center rounded-lg bg-success/20">
-                    <ArrowUpRight className="h-3.5 w-3.5 text-success" />
-                  </div>
-                  <div>
-                    <p className="text-base font-bold text-foreground">
-                      {formatCurrency(cashFlow.income)}
-                    </p>
-                    <p className="text-xs text-muted-foreground">Income</p>
-                  </div>
+              {/* Income and Expense - Compact */}
+              <div className="flex items-center gap-4">
+                {/* Income */}
+                <div className="flex items-center gap-1">
+                  <ArrowUpRight className="h-3 w-3 text-success" />
+                  <span className="text-xs font-medium text-success">
+                    {formatCurrency(cashFlow.income)}
+                  </span>
                 </div>
 
-                {/* Expense Box */}
-                <div className="flex items-center gap-2 rounded-xl bg-destructive/10 px-3 py-2">
-                  <div className="flex h-7 w-7 items-center justify-center rounded-lg bg-destructive/20">
-                    <ArrowDownRight className="h-3.5 w-3.5 text-destructive" />
-                  </div>
-                  <div>
-                    <p className="text-base font-bold text-foreground">
-                      {formatCurrency(cashFlow.expense)}
-                    </p>
-                    <p className="text-xs text-muted-foreground">Expenses</p>
-                  </div>
+                {/* Expense */}
+                <div className="flex items-center gap-1">
+                  <ArrowDownRight className="h-3 w-3 text-destructive" />
+                  <span className="text-xs font-medium text-destructive">
+                    {formatCurrency(cashFlow.expense)}
+                  </span>
                 </div>
               </div>
             </div>
           </CardContent>
         </Card>
 
-        {/* Extra Balance After Budgets Card */}
-        <Card className="rounded-2xl border-0 bg-card shadow-sm">
-          <CardContent className="p-6">
-            <div className="space-y-4">
-              <div>
-                <p className="mb-2 text-sm text-muted-foreground">Extra Balance After Budgets</p>
-                <p className="text-4xl font-bold tracking-tight text-foreground">
-                  {formatCurrency(extraBalanceAfterBudgets)}
-                </p>
-              </div>
-              <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                <TrendingUp className="h-4 w-4" />
-                <span>
-                  Available after covering {formatCurrency(totalBudgetAllocated)} in budgets
-                </span>
-              </div>
-            </div>
-          </CardContent>
-        </Card>
-      </div>
-
-      {/* Accounts Section */}
-      <section className="space-y-4">
-        <h2 className="text-base font-semibold text-foreground">Accounts</h2>
-        {accounts.length === 0 ? (
-          <p className="text-sm text-muted-foreground">No accounts yet</p>
+        {/* Account Cards */}
+        {accounts.length > 0 ? (
+          accounts.map((account) => (
+            <Card
+              key={account.id}
+              className="min-w-[200px] flex-1 rounded-2xl border-0 bg-card shadow-sm"
+            >
+              <CardContent className="p-6">
+                <div className="space-y-3">
+                  <p className="text-sm text-muted-foreground">{account.name}</p>
+                  <p className="text-3xl font-bold tracking-tight text-foreground">
+                    {formatCurrency(account.balance)}
+                  </p>
+                </div>
+              </CardContent>
+            </Card>
+          ))
         ) : (
-          <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4">
-            {accounts.map((account) => (
-              <Card key={account.id} className="rounded-2xl border-0 bg-card shadow-sm">
-                <CardContent className="p-6">
-                  <div className="space-y-3">
-                    <p className="text-sm text-muted-foreground">{account.name}</p>
-                    <p className="text-3xl font-bold tracking-tight text-foreground">
-                      {formatCurrency(account.balance)}
-                    </p>
-                  </div>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
+          <p className="text-sm text-muted-foreground">No accounts yet</p>
         )}
-      </section>
+      </div>
 
       {/* Weekly Expenses & Recent Transactions */}
       <div className="grid gap-4 lg:grid-cols-[1fr_1.5fr]">
