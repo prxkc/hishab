@@ -21,16 +21,20 @@ Open <http://localhost:5173>. Initial load seeds sample accounts, categories, an
 
 ### Scripts
 
-| Command | Description |
-| --- | --- |
-| `pnpm dev` | Start Vite dev server |
-| `pnpm build` | Type-check and build production bundle (PWA assets included) |
-| `pnpm preview` | Preview production build |
-| `pnpm lint` | Run ESLint over `src` |
-| `pnpm test` | Run Vitest unit suite (requires Node 20 or `jsdom`; see notes below) |
-| `pnpm test:e2e` | Playwright placeholder (configure before running) |
+| Command                   | Description                                                          |
+| ------------------------- | -------------------------------------------------------------------- |
+| `pnpm dev`                | Start Vite dev server                                                |
+| `pnpm build`              | Type-check and build production bundle (PWA assets included)         |
+| `pnpm preview`            | Preview production build                                             |
+| `pnpm lint`               | Run ESLint over `src`                                                |
+| `pnpm test`               | Run Vitest unit suite (requires Node 20 or `jsdom`; see notes below) |
+| `pnpm test:e2e`           | Playwright placeholder (configure before running)                    |
+| `pnpm playwright:install` | (On demand) Download Playwright browsers when you need E2E tests     |
 
-> **Note:** On Node 22 the Vitest pool (tinypool) may crash. If that happens, temporarily downgrade to Node 20 or install `jsdom` and rerun.
+> **Notes:**
+>
+> - Browser binaries are skipped during dependency install to keep `pnpm install` fast. Run `pnpm playwright:install` once before executing Playwright tests.
+> - On Node 22 the Vitest pool (tinypool) may crash. If that happens, temporarily downgrade to Node 20 or install `jsdom` and rerun.
 
 ## Project Structure
 

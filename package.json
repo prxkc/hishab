@@ -12,6 +12,7 @@
     "test": "vitest",
     "test:ui": "vitest --watch",
     "test:e2e": "playwright test",
+    "playwright:install": "playwright install",
     "typecheck": "tsc --noEmit",
     "prepare": "husky install"
   },
