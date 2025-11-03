@@ -1,7 +1,6 @@
 import { useState } from 'react'
 import { Trash2 } from 'lucide-react'
 
-import { Badge } from '@/components/ui/badge'
 import { Card, CardContent } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import {
@@ -17,12 +16,6 @@ import {
 import { formatCurrency } from '@/lib/utils'
 import { useAppStore } from '@/store/app-store'
 import { useToast } from '@/hooks/use-toast'
-
-const typeLabels: Record<string, string> = {
-  cash: 'Cash',
-  bank: 'Bank',
-  wallet: 'Wallet',
-}
 
 export function AccountsList() {
   const accounts = useAppStore((state) => state.accounts)
@@ -66,66 +59,54 @@ export function AccountsList() {
   return (
     <div className="grid gap-4 md:grid-cols-2">
       {accounts.map((account) => (
-        <Card key={account.id} className="border border-border/30 bg-card/80 backdrop-blur">
-          <CardContent className="flex flex-col gap-3 py-4">
-            <div className="flex items-center justify-between">
-              <div>
-                <p className="text-sm font-medium text-foreground">{account.name}</p>
-                <p className="text-xs text-muted-foreground">
-                  Balance {formatCurrency(account.balance)}
+        <Card key={account.id} className="rounded-2xl border-0 bg-card shadow-sm">
+          <CardContent className="p-6">
+            <div className="flex items-start justify-between gap-3">
+              <div className="space-y-3">
+                <p className="text-sm text-muted-foreground">{account.name}</p>
+                <p className="text-3xl font-bold tracking-tight text-foreground">
+                  {formatCurrency(account.balance)}
                 </p>
               </div>
-              <div className="flex items-center gap-2">
-                <Badge variant="secondary" className="bg-primary/10 text-primary">
-                  {typeLabels[account.type] ?? account.type}
-                </Badge>
-                <Dialog
-                  open={pendingDeleteId === account.id}
-                  onOpenChange={(open: boolean) => setPendingDeleteId(open ? account.id : null)}
-                >
-                  <DialogTrigger asChild>
-                    <Button
-                      variant="ghost"
-                      size="icon"
-                      className="text-muted-foreground hover:text-destructive"
-                      aria-label={`Delete ${account.name}`}
-                    >
-                      <Trash2 className="h-4 w-4" />
-                    </Button>
-                  </DialogTrigger>
-                  <DialogContent>
-                    <DialogHeader>
-                      <DialogTitle>Delete account?</DialogTitle>
-                      <DialogDescription>
-                        Removing {account.name} does not delete related transactions. Delete or
-                        reassign them first to avoid orphan data.
-                      </DialogDescription>
-                    </DialogHeader>
-                    <DialogFooter>
-                      <DialogClose asChild>
-                        <Button variant="outline" disabled={isDeleting}>
-                          Cancel
-                        </Button>
-                      </DialogClose>
-                      <Button
-                        onClick={() => handleDeleteAccount(account.id)}
-                        disabled={isDeleting}
-                        className="bg-destructive text-destructive-foreground hover:bg-destructive/90"
-                      >
-                        Delete
+              <Dialog
+                open={pendingDeleteId === account.id}
+                onOpenChange={(open: boolean) => setPendingDeleteId(open ? account.id : null)}
+              >
+                <DialogTrigger asChild>
+                  <Button
+                    variant="ghost"
+                    size="icon"
+                    className="text-muted-foreground hover:text-destructive"
+                    aria-label={`Delete ${account.name}`}
+                  >
+                    <Trash2 className="h-4 w-4" />
+                  </Button>
+                </DialogTrigger>
+                <DialogContent>
+                  <DialogHeader>
+                    <DialogTitle>Delete account?</DialogTitle>
+                    <DialogDescription>
+                      Removing {account.name} does not delete related transactions. Delete or
+                      reassign them first to avoid orphan data.
+                    </DialogDescription>
+                  </DialogHeader>
+                  <DialogFooter>
+                    <DialogClose asChild>
+                      <Button variant="outline" disabled={isDeleting}>
+                        Cancel
                       </Button>
-                    </DialogFooter>
-                  </DialogContent>
-                </Dialog>
-              </div>
+                    </DialogClose>
+                    <Button
+                      onClick={() => handleDeleteAccount(account.id)}
+                      disabled={isDeleting}
+                      className="bg-destructive text-destructive-foreground hover:bg-destructive/90"
+                    >
+                      Delete
+                    </Button>
+                  </DialogFooter>
+                </DialogContent>
+              </Dialog>
             </div>
-            <p className="text-xs text-muted-foreground">
-              Created{' '}
-              {new Date(account.createdAt).toLocaleDateString('en-BD', {
-                month: 'short',
-                day: 'numeric',
-              })}
-            </p>
           </CardContent>
         </Card>
       ))}

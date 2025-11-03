@@ -2,6 +2,7 @@ import { Outlet, createRootRoute, createRoute, createRouter } from '@tanstack/re
 
 import { AppLayout } from './shell/app-layout'
 import { DashboardPage } from '@/pages/dashboard/dashboard-page'
+import { AccountsPage } from '@/pages/accounts/accounts-page'
 import { TransactionsPage } from '@/pages/transactions/transactions-page'
 import { BudgetsPage } from '@/pages/budgets/budgets-page'
 import { ReportsPage } from '@/pages/reports/reports-page'
@@ -31,6 +32,12 @@ const dashboardRoute = createRoute({
   getParentRoute: () => rootRoute,
   path: '/',
   component: DashboardPage,
+})
+
+const accountsRoute = createRoute({
+  getParentRoute: () => rootRoute,
+  path: '/accounts',
+  component: AccountsPage,
 })
 
 const transactionsRoute = createRoute({
@@ -71,6 +78,7 @@ const settingsRoute = createRoute({
 
 const routeTree = rootRoute.addChildren([
   dashboardRoute,
+  accountsRoute,
   transactionsRoute,
   budgetsRoute,
   goalsRoute,

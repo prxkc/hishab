@@ -1,6 +1,7 @@
 import { Link, useRouterState } from '@tanstack/react-router'
 import type { LucideIcon } from 'lucide-react'
 import {
+  Building2,
   ChartNoAxesCombined,
   CreditCard,
   FolderKanban,
@@ -25,6 +26,12 @@ const navItems: NavItem[] = [
     to: '/',
     icon: ChartNoAxesCombined,
     description: 'Monthly summary & KPIs',
+  },
+  {
+    label: 'Accounts',
+    to: '/accounts',
+    icon: Building2,
+    description: 'Manage bank accounts & wallets',
   },
   {
     label: 'Transactions',
@@ -60,7 +67,7 @@ const navItems: NavItem[] = [
     label: 'Settings',
     to: '/settings',
     icon: Settings,
-    description: 'Preferences, accounts & categories',
+    description: 'Preferences & categories',
   },
 ]
 

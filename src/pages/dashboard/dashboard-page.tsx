@@ -1,29 +1,14 @@
-import { useMemo, useState } from 'react'
+import { useMemo } from 'react'
 import dayjs from 'dayjs'
 import type { EChartsOption } from 'echarts'
-import { ArrowDownRight, ArrowUpRight, Trash2, TrendingUp } from 'lucide-react'
+import { ArrowDownRight, ArrowUpRight, TrendingUp } from 'lucide-react'
 
 import { EChart } from '@/components/charts/echart'
 import { Progress } from '@/components/ui/progress'
-import { Button } from '@/components/ui/button'
-import {
-  Dialog,
-  DialogClose,
-  DialogContent,
-  DialogDescription,
-  DialogFooter,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from '@/components/ui/dialog'
 import { MonthSwitcher } from '@/components/shared/month-switcher'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
-import { Badge } from '@/components/ui/badge'
-import { EmptyState } from '@/components/shared/empty-state'
 import { formatCurrency } from '@/lib/utils'
-import { useToast } from '@/hooks/use-toast'
 import { useAppStore } from '@/store/app-store'
-import { NewAccountForm } from '@/pages/settings/components/new-account-form'
 import {
   selectBudgetUsage,
   selectFormattedNetWorth,
@@ -31,7 +16,6 @@ import {
   selectNetWorth,
   selectSelectedMonth,
 } from '@/store/selectors'
-import type { Account } from '@/domain/types'
 
 type ChartCallbackParams = {
   dataIndex: number
@@ -48,17 +32,6 @@ export function DashboardPage() {
   const categories = useAppStore((state) => state.categories)
   const accounts = useAppStore((state) => state.accounts)
   const transactions = useAppStore((state) => state.transactions)
-  const deleteAccount = useAppStore((state) => state.deleteAccount)
-  const { toast } = useToast()
-  const [isAddAccountOpen, setIsAddAccountOpen] = useState(false)
-  const [accountToDelete, setAccountToDelete] = useState<Account | null>(null)
-  const [isDeletingAccount, setIsDeletingAccount] = useState(false)
-
-  const accountTypeLabels: Record<Account['type'], string> = {
-    cash: 'Cash',
-    bank: 'Bank',
-    wallet: 'Wallet',
-  }
 
   const isChartCallbackParams = (input: unknown): input is ChartCallbackParams => {
     if (typeof input !== 'object' || input === null) {
@@ -66,28 +39,6 @@ export function DashboardPage() {
     }
     const candidate = input as Record<string, unknown>
     return typeof candidate.dataIndex === 'number'
-  }
-
-  const handleAccountDelete = async (id: string) => {
-    setIsDeletingAccount(true)
-    try {
-      await deleteAccount(id)
-      toast({
-        title: 'Account removed',
-        description: 'Balances and dashboards have been refreshed.',
-      })
-    } catch (error) {
-      console.error(error)
-      toast({
-        title: 'Unable to delete account',
-        description:
-          error instanceof Error ? error.message : 'Remove related transactions and try again.',
-        variant: 'destructive',
-      })
-    } finally {
-      setIsDeletingAccount(false)
-      setAccountToDelete(null)
-    }
   }
 
   // Recent transactions
@@ -375,95 +326,19 @@ export function DashboardPage() {
 
       {/* Accounts Section */}
       <section className="space-y-4">
-        <div className="flex flex-wrap items-center justify-between gap-2">
-          <div>
-            <h2 className="text-base font-semibold text-foreground">Accounts</h2>
-            <p className="text-xs text-muted-foreground">
-              Balances update instantly as you add, edit, or remove accounts.
-            </p>
-          </div>
-          <Dialog open={isAddAccountOpen} onOpenChange={setIsAddAccountOpen}>
-            <DialogTrigger asChild>
-              <Button size="sm">Add account</Button>
-            </DialogTrigger>
-            <DialogContent className="max-w-lg border border-border/40 bg-card/95 backdrop-blur">
-              <DialogHeader>
-                <DialogTitle>Add a new account</DialogTitle>
-                <DialogDescription>
-                  Track additional banks, wallets, or cash stashes in one place.
-                </DialogDescription>
-              </DialogHeader>
-              <NewAccountForm
-                onSuccess={() => setIsAddAccountOpen(false)}
-                submitLabel="Create account"
-              />
-            </DialogContent>
-          </Dialog>
-        </div>
+        <h2 className="text-base font-semibold text-foreground">Accounts</h2>
         {accounts.length === 0 ? (
-          <EmptyState
-            title="No accounts yet"
-            description="Add your first bank, wallet, or cash balance to get started."
-          />
+          <p className="text-sm text-muted-foreground">No accounts yet</p>
         ) : (
           <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4">
             {accounts.map((account) => (
-              <Card
-                key={account.id}
-                className="h-full rounded-2xl border border-border/20 bg-card shadow-sm"
-              >
-                <CardContent className="flex h-full flex-col gap-4 p-6">
-                  <div className="flex items-start justify-between gap-3">
-                    <div className="space-y-1">
-                      <p className="text-sm font-semibold text-foreground">{account.name}</p>
-                      <p className="text-xs text-muted-foreground">
-                        Balance {formatCurrency(account.balance)}
-                      </p>
-                    </div>
-                    <Badge variant="secondary" className="bg-primary/10 text-primary">
-                      {accountTypeLabels[account.type]}
-                    </Badge>
-                  </div>
-                  <div className="mt-auto flex items-center justify-between text-xs text-muted-foreground">
-                    <span>Updated {dayjs(account.updatedAt).format('MMM D, YYYY')}</span>
-                    <Dialog
-                      open={accountToDelete?.id === account.id}
-                      onOpenChange={(open) => setAccountToDelete(open ? account : null)}
-                    >
-                      <DialogTrigger asChild>
-                        <Button
-                          variant="ghost"
-                          size="icon"
-                          className="text-muted-foreground hover:text-destructive"
-                        >
-                          <Trash2 className="h-4 w-4" />
-                          <span className="sr-only">Remove account</span>
-                        </Button>
-                      </DialogTrigger>
-                      <DialogContent>
-                        <DialogHeader>
-                          <DialogTitle>Remove this account?</DialogTitle>
-                          <DialogDescription>
-                            {account.name} will disappear from the dashboard once removed.
-                            Transactions that reference it should be reassigned or deleted first.
-                          </DialogDescription>
-                        </DialogHeader>
-                        <DialogFooter>
-                          <DialogClose asChild>
-                            <Button variant="outline" disabled={isDeletingAccount}>
-                              Cancel
-                            </Button>
-                          </DialogClose>
-                          <Button
-                            onClick={() => handleAccountDelete(account.id)}
-                            disabled={isDeletingAccount}
-                            className="bg-destructive text-destructive-foreground hover:bg-destructive/90"
-                          >
-                            Delete
-                          </Button>
-                        </DialogFooter>
-                      </DialogContent>
-                    </Dialog>
+              <Card key={account.id} className="rounded-2xl border-0 bg-card shadow-sm">
+                <CardContent className="p-6">
+                  <div className="space-y-3">
+                    <p className="text-sm text-muted-foreground">{account.name}</p>
+                    <p className="text-3xl font-bold tracking-tight text-foreground">
+                      {formatCurrency(account.balance)}
+                    </p>
                   </div>
                 </CardContent>
               </Card>
