@@ -1,7 +1,7 @@
 import { useMemo } from 'react'
 import dayjs from 'dayjs'
 import type { EChartsOption } from 'echarts'
-import { ArrowDownRight, ArrowUpRight, TrendingUp } from 'lucide-react'
+import { ArrowDownRight, ArrowLeftRight, ArrowUpRight, TrendingUp } from 'lucide-react'
 
 import { EChart } from '@/components/charts/echart'
 import { Progress } from '@/components/ui/progress'
@@ -45,7 +45,17 @@ export function DashboardPage() {
   const recentTransactions = useMemo(() => {
     return transactions
       .slice()
-      .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
+      .sort((a, b) => {
+        const dateDiff = dayjs(b.date).valueOf() - dayjs(a.date).valueOf()
+        if (dateDiff !== 0) {
+          return dateDiff
+        }
+        const createdDiff = dayjs(b.createdAt).valueOf() - dayjs(a.createdAt).valueOf()
+        if (createdDiff !== 0 && Number.isFinite(createdDiff)) {
+          return createdDiff
+        }
+        return b.id.localeCompare(a.id)
+      })
       .slice(0, 6)
   }, [transactions])
 
@@ -387,20 +397,50 @@ export function DashboardPage() {
                       className="flex items-center justify-between border-b border-border py-2 last:border-0"
                     >
                       <div className="flex items-center gap-3">
-                        <div
-                          className={`flex h-8 w-8 items-center justify-center rounded-lg ${
-                            tx.type === 'income' ? 'bg-success/10' : 'bg-primary/10'
-                          }`}
-                        >
-                          {tx.type === 'income' ? (
-                            <ArrowUpRight className="h-4 w-4 text-success" />
-                          ) : (
-                            <ArrowDownRight className="h-4 w-4 text-primary" />
-                          )}
-                        </div>
+                        {(() => {
+                          const baseClasses =
+                            'flex h-8 w-8 items-center justify-center rounded-lg transition-colors'
+                          if (tx.type === 'income') {
+                            return (
+                              <div className={`${baseClasses} bg-success/10 text-success`}>
+                                <ArrowUpRight className="h-4 w-4" />
+                              </div>
+                            )
+                          }
+                          if (tx.type === 'transfer') {
+                            return (
+                              <div
+                                className={`${baseClasses} bg-blue-500/10 text-blue-500 dark:text-blue-400`}
+                              >
+                                <ArrowLeftRight className="h-4 w-4" />
+                              </div>
+                            )
+                          }
+                          return (
+                            <div className={`${baseClasses} bg-destructive/10 text-destructive`}>
+                              <ArrowDownRight className="h-4 w-4" />
+                            </div>
+                          )
+                        })()}
                         <div>
                           <p className="text-sm font-medium">
-                            {tx.notes || category?.name || tx.type}
+                            {(() => {
+                              const trimmedNotes = tx.notes?.trim()
+                              if (trimmedNotes) {
+                                return trimmedNotes
+                              }
+                              if (tx.type === 'transfer') {
+                                const sourceName =
+                                  accounts.find((account) => account.id === tx.accountId)?.name ??
+                                  'Source account'
+                                const destinationName =
+                                  accounts.find(
+                                    (account) => account.id === tx.counterpartyAccountId,
+                                  )?.name ?? 'Destination account'
+                                return `Transfer from ${sourceName} to ${destinationName}`
+                              }
+                              return category?.name ?? tx.type
+                            })()}
                           </p>
                           <p className="text-xs text-muted-foreground">
                             {dayjs(tx.date).format('MMM DD, YYYY')}
@@ -408,9 +448,15 @@ export function DashboardPage() {
                         </div>
                       </div>
                       <p
-                        className={`text-sm font-semibold ${tx.type === 'income' ? 'text-success' : 'text-foreground'}`}
+                        className={`text-sm font-semibold ${
+                          tx.type === 'income'
+                            ? 'text-success'
+                            : tx.type === 'expense'
+                              ? 'text-destructive'
+                              : 'text-blue-500 dark:text-blue-400'
+                        }`}
                       >
-                        {tx.type === 'income' ? '+' : '-'}
+                        {tx.type === 'income' ? '+' : tx.type === 'expense' ? '-' : ''}
                         {formatCurrency(tx.amount)}
                       </p>
                     </div>

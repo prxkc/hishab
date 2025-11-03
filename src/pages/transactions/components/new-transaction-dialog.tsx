@@ -17,6 +17,7 @@ import {
 import {
   Form,
   FormControl,
+  FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -46,6 +47,10 @@ const transactionSchema = z
     counterpartyAccountId: z.string().optional(),
     categoryId: z.string().optional(),
     notes: z.string().max(240).optional(),
+    charge: z.coerce
+      .number({ invalid_type_error: 'Charge must be a number' })
+      .min(0, 'Charge cannot be negative')
+      .optional(),
   })
   .superRefine((data, ctx) => {
     if (data.type === 'transfer') {
@@ -98,10 +103,13 @@ export function NewTransactionDialog({
       counterpartyAccountId: undefined,
       categoryId: undefined,
       notes: '',
+      charge: 0,
     },
   })
 
   const transactionType = form.watch('type')
+  const accountId = form.watch('accountId')
+  const counterpartyAccountId = form.watch('counterpartyAccountId')
 
   const filteredCategories = useMemo(() => {
     if (transactionType === 'transfer') {
@@ -111,6 +119,37 @@ export function NewTransactionDialog({
       (category) => category.type === (transactionType === 'income' ? 'income' : 'expense'),
     )
   }, [categories, transactionType])
+
+  const sourceAccount = useMemo(
+    () => accounts.find((account) => account.id === accountId),
+    [accounts, accountId],
+  )
+
+  const destinationAccount = useMemo(
+    () => accounts.find((account) => account.id === counterpartyAccountId),
+    [accounts, counterpartyAccountId],
+  )
+
+  const shouldShowChargeField = useMemo(() => {
+    if (transactionType !== 'transfer' || !sourceAccount || !destinationAccount) {
+      return false
+    }
+    const isBkashSource = sourceAccount.name.toLowerCase().includes('bkash')
+    const isCashDestination = destinationAccount.type === 'cash'
+
+    return isBkashSource && isCashDestination
+  }, [transactionType, sourceAccount, destinationAccount])
+
+  const chargeCategory = useMemo(() => {
+    const expenseCategories = categories.filter((category) => category.type === 'expense')
+    const strictMatch = expenseCategories.find((category) => /\bcharge(s)?\b/i.test(category.name))
+    if (strictMatch) {
+      return strictMatch
+    }
+    return (
+      expenseCategories.find((category) => category.id.toLowerCase().includes('charge')) ?? null
+    )
+  }, [categories])
 
   useEffect(() => {
     if (transactionType === 'transfer') {
@@ -130,22 +169,61 @@ export function NewTransactionDialog({
         counterpartyAccountId: undefined,
         categoryId: undefined,
         notes: '',
+        charge: 0,
       })
     }
   }, [open, accounts, form, selectedMonth])
 
   const handleSubmit = async (values: TransactionFormValues) => {
+    const chargeAmount =
+      typeof values.charge === 'number' && Number.isFinite(values.charge) ? values.charge : 0
+    const submittedSourceAccount =
+      accounts.find((account) => account.id === values.accountId) ?? null
+    const submittedDestinationAccount =
+      accounts.find((account) => account.id === values.counterpartyAccountId) ?? null
+    const isCashoutTransfer =
+      values.type === 'transfer' &&
+      submittedSourceAccount !== null &&
+      submittedDestinationAccount !== null &&
+      submittedSourceAccount.name.toLowerCase().includes('bkash') &&
+      submittedDestinationAccount.type === 'cash'
+    const shouldCreateCharge = isCashoutTransfer && chargeAmount > 0
+
+    if (shouldCreateCharge && !chargeCategory) {
+      toast({
+        title: 'Charge category not found',
+        description: 'Create a charge category before recording cashout fees.',
+        variant: 'destructive',
+      })
+      return
+    }
+
+    const { charge: _ignoredCharge, ...baseValues } = values
+
     try {
       await addTransaction({
-        ...values,
+        ...baseValues,
         counterpartyAccountId:
-          values.type === 'transfer' ? (values.counterpartyAccountId ?? null) : null,
-        categoryId: values.type === 'transfer' ? null : (values.categoryId ?? null),
+          baseValues.type === 'transfer' ? (baseValues.counterpartyAccountId ?? null) : null,
+        categoryId: baseValues.type === 'transfer' ? null : (baseValues.categoryId ?? null),
       })
+      if (shouldCreateCharge && chargeCategory && submittedSourceAccount) {
+        await addTransaction({
+          date: baseValues.date,
+          type: 'expense',
+          amount: chargeAmount,
+          accountId: submittedSourceAccount.id,
+          counterpartyAccountId: null,
+          categoryId: chargeCategory.id,
+          notes: `${submittedSourceAccount.name} cashout charge`,
+        })
+      }
       setOpen(false)
       toast({
         title: 'Transaction saved',
-        description: `Added ${values.type} of ${formatCurrency(values.amount)}.`,
+        description: shouldCreateCharge
+          ? `Transferred ${formatCurrency(baseValues.amount)} and recorded ${formatCurrency(chargeAmount)} cashout charge.`
+          : `Added ${baseValues.type} of ${formatCurrency(baseValues.amount)}.`,
       })
     } catch (error) {
       console.error(error)
@@ -243,32 +321,53 @@ export function NewTransactionDialog({
                 )}
               />
               {transactionType === 'transfer' ? (
-                <FormField
-                  control={form.control}
-                  name="counterpartyAccountId"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Destination account</FormLabel>
-                      <Select onValueChange={field.onChange} value={field.value ?? ''}>
-                        <FormControl>
-                          <SelectTrigger>
-                            <SelectValue placeholder="Select destination" />
-                          </SelectTrigger>
-                        </FormControl>
-                        <SelectContent>
-                          {accounts
-                            .filter((account) => account.id !== form.getValues('accountId'))
-                            .map((account) => (
-                              <SelectItem key={account.id} value={account.id}>
-                                {account.name}
-                              </SelectItem>
-                            ))}
-                        </SelectContent>
-                      </Select>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
+                <>
+                  <FormField
+                    control={form.control}
+                    name="counterpartyAccountId"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Destination account</FormLabel>
+                        <Select onValueChange={field.onChange} value={field.value ?? ''}>
+                          <FormControl>
+                            <SelectTrigger>
+                              <SelectValue placeholder="Select destination" />
+                            </SelectTrigger>
+                          </FormControl>
+                          <SelectContent>
+                            {accounts
+                              .filter((account) => account.id !== form.getValues('accountId'))
+                              .map((account) => (
+                                <SelectItem key={account.id} value={account.id}>
+                                  {account.name}
+                                </SelectItem>
+                              ))}
+                          </SelectContent>
+                        </Select>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                  {shouldShowChargeField ? (
+                    <FormField
+                      control={form.control}
+                      name="charge"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel>Charge</FormLabel>
+                          <FormControl>
+                            <Input type="number" min={0} step="0.01" {...field} />
+                          </FormControl>
+                          <FormDescription>
+                            Deducted from {sourceAccount?.name ?? 'source account'} when cashing
+                            out.
+                          </FormDescription>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+                  ) : null}
+                </>
               ) : (
                 <FormField
                   control={form.control}

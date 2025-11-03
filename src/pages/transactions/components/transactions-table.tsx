@@ -47,6 +47,18 @@ export function TransactionsTable() {
   const getCategoryName = (id: string | null | undefined, fallback: string) =>
     categories.find((category) => category.id === id)?.name ?? fallback
 
+  const resolveTransferNote = (transaction: (typeof transactions)[number]) => {
+    if (transaction.type !== 'transfer') {
+      return null
+    }
+    const sourceName = getAccountName(transaction.accountId, 'Source account')
+    const destinationName = getAccountName(
+      transaction.counterpartyAccountId ?? '',
+      'Destination account',
+    )
+    return `Transfer from ${sourceName} to ${destinationName}`
+  }
+
   const handleConfirmDelete = async () => {
     if (!pendingDeleteId) {
       return
@@ -107,6 +119,8 @@ export function TransactionsTable() {
               transaction.type === 'transfer'
                 ? getAccountName(transaction.counterpartyAccountId ?? '', '—')
                 : getCategoryName(transaction.categoryId ?? '', '—')
+            const transferNote = resolveTransferNote(transaction)
+            const noteDisplay = transaction.notes?.trim() || transferNote || '—'
 
             return (
               <tr key={transaction.id} className="border-t border-border/10">
@@ -126,9 +140,7 @@ export function TransactionsTable() {
                     {amountDisplay}
                   </span>
                 </td>
-                <td className="px-6 py-3 text-xs text-muted-foreground">
-                  {transaction.notes ?? '—'}
-                </td>
+                <td className="px-6 py-3 text-xs text-muted-foreground">{noteDisplay}</td>
                 <td className="px-6 py-3 text-right">
                   <Dialog
                     open={pendingDeleteId === transaction.id}

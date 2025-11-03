@@ -15,9 +15,12 @@ export async function getTransactions(filters: TransactionFilters = {}) {
 
   if (filters.month) {
     const [year, month] = filters.month.split('-').map(Number)
-    const start = dayjs().year(year).month((month ?? 1) - 1).startOf('month')
+    const start = dayjs()
+      .year(year)
+      .month((month ?? 1) - 1)
+      .startOf('month')
     const end = start.endOf('month')
-    return db.transactions
+    const transactions = await db.transactions
       .where('date')
       .between(start.toISOString(), end.toISOString(), true, true)
       .filter((txn) =>
@@ -26,11 +29,12 @@ export async function getTransactions(filters: TransactionFilters = {}) {
           !filters.accountId || txn.accountId === filters.accountId,
         ].every(Boolean),
       )
-      .reverse()
       .toArray()
+    return sortTransactions(transactions)
   }
 
-  return db.transactions.orderBy('date').reverse().toArray()
+  const transactions = await db.transactions.orderBy('date').toArray()
+  return sortTransactions(transactions)
 }
 
 interface CreateTransactionInput {
@@ -46,29 +50,43 @@ interface CreateTransactionInput {
 
 export async function createTransaction(input: CreateTransactionInput) {
   const db = await ensureDatabaseOpen()
-
   const timestamp = dayjs().toISOString()
-  const transaction: Transaction = {
-    id: createId('txn'),
-    date: input.date,
-    type: input.type,
-    amount: input.amount,
-    accountId: input.accountId,
-    counterpartyAccountId: input.counterpartyAccountId ?? null,
-    categoryId: input.categoryId ?? null,
-    notes: input.notes,
-    tags: input.tags ?? [],
-    createdAt: timestamp,
-    updatedAt: timestamp,
-  }
 
-  await db.transaction('rw', [db.transactions, db.accounts], async () => {
-    await db.transactions.put(transaction)
-
+  return db.transaction('rw', [db.transactions, db.accounts], async () => {
     const primaryAccount = await db.accounts.get(input.accountId)
     if (!primaryAccount) {
       throw new Error('Primary account not found for transaction')
     }
+
+    const counterpartyAccount =
+      input.counterpartyAccountId !== undefined && input.counterpartyAccountId !== null
+        ? await db.accounts.get(input.counterpartyAccountId)
+        : null
+
+    const trimmedNotes = input.notes?.trim() ?? ''
+    let resolvedNotes: string | undefined = trimmedNotes || undefined
+
+    if (input.type === 'transfer' && !resolvedNotes && (primaryAccount || counterpartyAccount)) {
+      resolvedNotes = `Transfer from ${primaryAccount.name}${
+        counterpartyAccount ? ` to ${counterpartyAccount.name}` : ''
+      }`
+    }
+
+    const transaction: Transaction = {
+      id: createId('txn'),
+      date: input.date,
+      type: input.type,
+      amount: input.amount,
+      accountId: input.accountId,
+      counterpartyAccountId: input.counterpartyAccountId ?? null,
+      categoryId: input.categoryId ?? null,
+      notes: resolvedNotes,
+      tags: input.tags ?? [],
+      createdAt: timestamp,
+      updatedAt: timestamp,
+    }
+
+    await db.transactions.put(transaction)
 
     const deltaForPrimary = calculateDelta(transaction.type, transaction.amount, 'primary')
     await db.accounts.update(primaryAccount.id, {
@@ -76,19 +94,16 @@ export async function createTransaction(input: CreateTransactionInput) {
       updatedAt: timestamp,
     })
 
-    if (transaction.type === 'transfer' && transaction.counterpartyAccountId) {
-      const counter = await db.accounts.get(transaction.counterpartyAccountId)
-      if (counter) {
-        const deltaForCounter = calculateDelta(transaction.type, transaction.amount, 'counterparty')
-        await db.accounts.update(counter.id, {
-          balance: counter.balance + deltaForCounter,
-          updatedAt: timestamp,
-        })
-      }
+    if (transaction.type === 'transfer' && counterpartyAccount) {
+      const deltaForCounter = calculateDelta(transaction.type, transaction.amount, 'counterparty')
+      await db.accounts.update(counterpartyAccount.id, {
+        balance: counterpartyAccount.balance + deltaForCounter,
+        updatedAt: timestamp,
+      })
     }
-  })
 
-  return transaction
+    return transaction
+  })
 }
 
 interface UpdateTransactionInput {
@@ -166,4 +181,20 @@ function calculateDelta(type: TransactionKind, amount: number, role: 'primary' |
     default:
       return 0
   }
+}
+
+function sortTransactions(transactions: Transaction[]) {
+  return [...transactions].sort((a, b) => {
+    const dateDiff = dayjs(b.date).valueOf() - dayjs(a.date).valueOf()
+    if (dateDiff !== 0) {
+      return dateDiff
+    }
+
+    const createdDiff = dayjs(b.createdAt).valueOf() - dayjs(a.createdAt).valueOf()
+    if (createdDiff !== 0 && Number.isFinite(createdDiff)) {
+      return createdDiff
+    }
+
+    return b.id.localeCompare(a.id)
+  })
 }

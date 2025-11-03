@@ -1,0 +1,2762 @@
+{
+  "version": 1,
+  "exportedAt": "2025-11-03T15:34:23.995Z",
+  "data": {
+    "accounts": [
+      {
+        "id": "acct-notion-bank-asia",
+        "name": "Bank Asia",
+        "type": "bank",
+        "balance": 59025,
+        "currency": "BDT",
+        "archived": false,
+        "createdAt": "2025-11-02T22:46:02Z",
+        "updatedAt": "2025-11-03T14:41:30.732Z"
+      },
+      {
+        "id": "acct-notion-bkash",
+        "name": "Bkash",
+        "type": "wallet",
+        "balance": 830.1799999999998,
+        "currency": "BDT",
+        "archived": false,
+        "createdAt": "2025-11-02T22:46:02Z",
+        "updatedAt": "2025-11-03T15:05:27.052Z"
+      },
+      {
+        "id": "acct-notion-cash",
+        "name": "Cash",
+        "type": "cash",
+        "balance": 500,
+        "currency": "BDT",
+        "archived": false,
+        "createdAt": "2025-11-02T22:46:02Z",
+        "updatedAt": "2025-11-03T15:05:27.009Z"
+      },
+      {
+        "id": "acct-notion-savings-usd",
+        "name": "Savings USD",
+        "type": "bank",
+        "balance": 3000,
+        "currency": "BDT",
+        "archived": false,
+        "createdAt": "2025-11-02T22:46:02Z",
+        "updatedAt": "2025-11-02T22:46:02Z"
+      }
+    ],
+    "categories": [
+      {
+        "id": "cat-expense-bills-utilities",
+        "name": "Bills & Utilities",
+        "type": "expense",
+        "parentId": null,
+        "archived": false,
+        "createdAt": "2025-11-02T22:46:02Z",
+        "updatedAt": "2025-11-02T22:46:02Z"
+      },
+      {
+        "id": "cat-expense-charge",
+        "name": "Charge",
+        "type": "expense",
+        "parentId": null,
+        "archived": false,
+        "createdAt": "2025-11-02T22:46:02Z",
+        "updatedAt": "2025-11-02T22:46:02Z"
+      },
+      {
+        "id": "cat-expense-family",
+        "name": "Family",
+        "type": "expense",
+        "parentId": null,
+        "archived": false,
+        "createdAt": "2025-11-02T22:46:02Z",
+        "updatedAt": "2025-11-02T22:46:02Z"
+      },
+      {
+        "id": "cat-expense-food",
+        "name": "Food",
+        "type": "expense",
+        "parentId": null,
+        "archived": false,
+        "createdAt": "2025-11-02T22:46:02Z",
+        "updatedAt": "2025-11-02T22:46:02Z"
+      },
+      {
+        "id": "cat-expense-investments",
+        "name": "Investments",
+        "type": "expense",
+        "parentId": null,
+        "archived": false,
+        "createdAt": "2025-11-02T22:46:02Z",
+        "updatedAt": "2025-11-02T22:46:02Z"
+      },
+      {
+        "id": "cat-expense-lending-money",
+        "name": "Lending Money",
+        "type": "expense",
+        "parentId": null,
+        "archived": false,
+        "createdAt": "2025-11-02T22:46:02Z",
+        "updatedAt": "2025-11-02T22:46:02Z"
+      },
+      {
+        "id": "cat-expense-loan-payment",
+        "name": "Loan Payment",
+        "type": "expense",
+        "parentId": null,
+        "archived": false,
+        "createdAt": "2025-11-02T22:46:02Z",
+        "updatedAt": "2025-11-02T22:46:02Z"
+      },
+      {
+        "id": "cat-expense-lunch-office",
+        "name": "Lunch (Office)",
+        "type": "expense",
+        "parentId": null,
+        "archived": false,
+        "createdAt": "2025-11-02T22:46:02Z",
+        "updatedAt": "2025-11-02T22:46:02Z"
+      },
+      {
+        "id": "cat-expense-outing",
+        "name": "Outing",
+        "type": "expense",
+        "parentId": null,
+        "archived": false,
+        "createdAt": "2025-11-02T22:46:02Z",
+        "updatedAt": "2025-11-02T22:46:02Z"
+      },
+      {
+        "id": "cat-expense-own-work",
+        "name": "Own Work",
+        "type": "expense",
+        "parentId": null,
+        "archived": false,
+        "createdAt": "2025-11-02T22:46:02Z",
+        "updatedAt": "2025-11-02T22:46:02Z"
+      },
+      {
+        "id": "cat-expense-savings",
+        "name": "Savings",
+        "type": "expense",
+        "parentId": null,
+        "archived": false,
+        "createdAt": "2025-11-02T22:46:02Z",
+        "updatedAt": "2025-11-02T22:46:02Z"
+      },
+      {
+        "id": "cat-expense-shokh",
+        "name": "Shokh",
+        "type": "expense",
+        "parentId": null,
+        "archived": false,
+        "createdAt": "2025-11-02T22:46:02Z",
+        "updatedAt": "2025-11-02T22:46:02Z"
+      },
+      {
+        "id": "cat-expense-transportation-office",
+        "name": "Transportation (Office)",
+        "type": "expense",
+        "parentId": null,
+        "archived": false,
+        "createdAt": "2025-11-02T22:46:02Z",
+        "updatedAt": "2025-11-02T22:46:02Z"
+      },
+      {
+        "id": "cat-income-bug-bounty",
+        "name": "Bug Bounty",
+        "type": "income",
+        "parentId": null,
+        "archived": false,
+        "createdAt": "2025-11-02T22:46:02Z",
+        "updatedAt": "2025-11-02T22:46:02Z"
+      },
+      {
+        "id": "cat-income-freelance",
+        "name": "Freelance",
+        "type": "income",
+        "parentId": null,
+        "archived": false,
+        "createdAt": "2025-11-02T22:46:02Z",
+        "updatedAt": "2025-11-02T22:46:02Z"
+      },
+      {
+        "id": "cat-income-investment-income",
+        "name": "Investment Income",
+        "type": "income",
+        "parentId": null,
+        "archived": false,
+        "createdAt": "2025-11-02T22:46:02Z",
+        "updatedAt": "2025-11-02T22:46:02Z"
+      },
+      {
+        "id": "cat-income-pocket-money",
+        "name": "Pocket Money",
+        "type": "income",
+        "parentId": null,
+        "archived": false,
+        "createdAt": "2025-11-02T22:46:02Z",
+        "updatedAt": "2025-11-02T22:46:02Z"
+      },
+      {
+        "id": "cat-income-repayment",
+        "name": "Repayment",
+        "type": "income",
+        "parentId": null,
+        "archived": false,
+        "createdAt": "2025-11-02T22:46:02Z",
+        "updatedAt": "2025-11-02T22:46:02Z"
+      },
+      {
+        "id": "cat-income-salary-wages",
+        "name": "Salary/Wages",
+        "type": "income",
+        "parentId": null,
+        "archived": false,
+        "createdAt": "2025-11-02T22:46:02Z",
+        "updatedAt": "2025-11-02T22:46:02Z"
+      },
+      {
+        "id": "cat-income-selling-income",
+        "name": "Selling Income",
+        "type": "income",
+        "parentId": null,
+        "archived": false,
+        "createdAt": "2025-11-02T22:46:02Z",
+        "updatedAt": "2025-11-02T22:46:02Z"
+      }
+    ],
+    "budgets": [
+      {
+        "id": "bdg-notion-bills-utilities",
+        "month": "2025-10",
+        "categoryId": "cat-expense-bills-utilities",
+        "amount": 2000,
+        "spent": 0,
+        "createdAt": "2025-11-02T22:46:02Z",
+        "updatedAt": "2025-11-02T22:46:02Z"
+      },
+      {
+        "id": "bdg-notion-charge",
+        "month": "2025-10",
+        "categoryId": "cat-expense-charge",
+        "amount": 3000,
+        "spent": 0,
+        "createdAt": "2025-11-02T22:46:02Z",
+        "updatedAt": "2025-11-02T22:46:02Z"
+      },
+      {
+        "id": "bdg-notion-family",
+        "month": "2025-10",
+        "categoryId": "cat-expense-family",
+        "amount": 2000,
+        "spent": 0,
+        "createdAt": "2025-11-02T22:46:02Z",
+        "updatedAt": "2025-11-02T22:46:02Z"
+      },
+      {
+        "id": "bdg-notion-food",
+        "month": "2025-10",
+        "categoryId": "cat-expense-food",
+        "amount": 2000,
+        "spent": 0,
+        "createdAt": "2025-11-02T22:46:02Z",
+        "updatedAt": "2025-11-02T22:46:02Z"
+      },
+      {
+        "id": "bdg-notion-investments",
+        "month": "2025-10",
+        "categoryId": "cat-expense-investments",
+        "amount": 2000,
+        "spent": 0,
+        "createdAt": "2025-11-02T22:46:02Z",
+        "updatedAt": "2025-11-02T22:46:02Z"
+      },
+      {
+        "id": "bdg-notion-lending-money",
+        "month": "2025-10",
+        "categoryId": "cat-expense-lending-money",
+        "amount": 2000,
+        "spent": 0,
+        "createdAt": "2025-11-02T22:46:02Z",
+        "updatedAt": "2025-11-02T22:46:02Z"
+      },
+      {
+        "id": "bdg-notion-lunch-office",
+        "month": "2025-10",
+        "categoryId": "cat-expense-lunch-office",
+        "amount": 3000,
+        "spent": 0,
+        "createdAt": "2025-11-02T22:46:02Z",
+        "updatedAt": "2025-11-02T22:46:02Z"
+      },
+      {
+        "id": "bdg-notion-outing",
+        "month": "2025-10",
+        "categoryId": "cat-expense-outing",
+        "amount": 10000,
+        "spent": 0,
+        "createdAt": "2025-11-02T22:46:02Z",
+        "updatedAt": "2025-11-02T22:46:02Z"
+      },
+      {
+        "id": "bdg-notion-own-work",
+        "month": "2025-10",
+        "categoryId": "cat-expense-own-work",
+        "amount": 1000,
+        "spent": 0,
+        "createdAt": "2025-11-02T22:46:02Z",
+        "updatedAt": "2025-11-02T22:46:02Z"
+      },
+      {
+        "id": "bdg-notion-savings",
+        "month": "2025-10",
+        "categoryId": "cat-expense-savings",
+        "amount": 20000,
+        "spent": 0,
+        "createdAt": "2025-11-02T22:46:02Z",
+        "updatedAt": "2025-11-02T22:46:02Z"
+      },
+      {
+        "id": "bdg-notion-shokh",
+        "month": "2025-10",
+        "categoryId": "cat-expense-shokh",
+        "amount": 3000,
+        "spent": 0,
+        "createdAt": "2025-11-02T22:46:02Z",
+        "updatedAt": "2025-11-02T22:46:02Z"
+      },
+      {
+        "id": "bdg-notion-transportation-office",
+        "month": "2025-10",
+        "categoryId": "cat-expense-transportation-office",
+        "amount": 3640,
+        "spent": 0,
+        "createdAt": "2025-11-02T22:46:02Z",
+        "updatedAt": "2025-11-02T22:46:02Z"
+      }
+    ],
+    "transactions": [
+      {
+        "id": "txn-041e7fadece0",
+        "date": "2025-11-03",
+        "type": "transfer",
+        "amount": 500,
+        "accountId": "acct-notion-bkash",
+        "counterpartyAccountId": "acct-notion-cash",
+        "categoryId": null,
+        "notes": "",
+        "tags": [],
+        "createdAt": "2025-11-03T15:05:27.009Z",
+        "updatedAt": "2025-11-03T15:05:27.009Z"
+      },
+      {
+        "id": "txn-196a00df4dfb",
+        "date": "2025-11-02",
+        "type": "expense",
+        "amount": 459,
+        "accountId": "acct-notion-bkash",
+        "counterpartyAccountId": null,
+        "categoryId": "cat-expense-food",
+        "notes": "Ordered from Munchies. Charred",
+        "tags": [],
+        "createdAt": "2025-11-03T14:38:11.150Z",
+        "updatedAt": "2025-11-03T14:38:11.150Z"
+      },
+      {
+        "id": "txn-6f2444149ac9",
+        "date": "2025-11-02",
+        "type": "expense",
+        "amount": 325.95,
+        "accountId": "acct-notion-bkash",
+        "counterpartyAccountId": null,
+        "categoryId": "cat-expense-food",
+        "notes": "Habiby's Shawarma",
+        "tags": [],
+        "createdAt": "2025-11-03T14:39:09.958Z",
+        "updatedAt": "2025-11-03T14:39:09.958Z"
+      },
+      {
+        "id": "txn-873c3b601927",
+        "date": "2025-11-03",
+        "type": "transfer",
+        "amount": 510,
+        "accountId": "acct-notion-bank-asia",
+        "counterpartyAccountId": "acct-notion-bkash",
+        "categoryId": null,
+        "notes": "",
+        "tags": [],
+        "createdAt": "2025-11-03T14:41:30.732Z",
+        "updatedAt": "2025-11-03T14:41:30.732Z"
+      },
+      {
+        "id": "txn-exp-bank-asia-october-10-2025-debit-card-annual-charge-october-10-2025",
+        "date": "2025-10-10T12:00:00Z",
+        "type": "expense",
+        "amount": 575,
+        "accountId": "acct-notion-bank-asia",
+        "counterpartyAccountId": null,
+        "categoryId": "cat-expense-bills-utilities",
+        "notes": "Debit Card Annual Charge",
+        "tags": [
+          "notion-import-2025-10"
+        ],
+        "createdAt": "2025-10-10T12:00:00Z",
+        "updatedAt": "2025-10-10T12:00:00Z"
+      },
+      {
+        "id": "txn-exp-bank-asia-october-10-2025-sherafries-october-10-2025",
+        "date": "2025-10-10T12:00:00Z",
+        "type": "expense",
+        "amount": 185,
+        "accountId": "acct-notion-bank-asia",
+        "counterpartyAccountId": null,
+        "categoryId": "cat-expense-outing",
+        "notes": "Sherafries",
+        "tags": [
+          "notion-import-2025-10"
+        ],
+        "createdAt": "2025-10-10T12:00:00Z",
+        "updatedAt": "2025-10-10T12:00:00Z"
+      },
+      {
+        "id": "txn-exp-bank-asia-october-10-2025-yumcha-october-10-2025",
+        "date": "2025-10-10T12:00:00Z",
+        "type": "expense",
+        "amount": 2095,
+        "accountId": "acct-notion-bank-asia",
+        "counterpartyAccountId": null,
+        "categoryId": "cat-expense-outing",
+        "notes": "Yumcha",
+        "tags": [
+          "notion-import-2025-10"
+        ],
+        "createdAt": "2025-10-10T12:00:00Z",
+        "updatedAt": "2025-10-10T12:00:00Z"
+      },
+      {
+        "id": "txn-exp-bank-asia-october-17-2025-dessert-boutique-october-17-2025",
+        "date": "2025-10-17T12:00:00Z",
+        "type": "expense",
+        "amount": 1530,
+        "accountId": "acct-notion-bank-asia",
+        "counterpartyAccountId": null,
+        "categoryId": "cat-expense-outing",
+        "notes": "dessert boutique",
+        "tags": [
+          "notion-import-2025-10"
+        ],
+        "createdAt": "2025-10-17T12:00:00Z",
+        "updatedAt": "2025-10-17T12:00:00Z"
+      },
+      {
+        "id": "txn-exp-bank-asia-october-17-2025-white-mocha-october-17-2025",
+        "date": "2025-10-17T12:00:00Z",
+        "type": "expense",
+        "amount": 485,
+        "accountId": "acct-notion-bank-asia",
+        "counterpartyAccountId": null,
+        "categoryId": "cat-expense-outing",
+        "notes": "white mocha",
+        "tags": [
+          "notion-import-2025-10"
+        ],
+        "createdAt": "2025-10-17T12:00:00Z",
+        "updatedAt": "2025-10-17T12:00:00Z"
+      },
+      {
+        "id": "txn-exp-bank-asia-october-20-2025-ammu-knee-checkup-october-20-2025",
+        "date": "2025-10-20T12:00:00Z",
+        "type": "expense",
+        "amount": 1450,
+        "accountId": "acct-notion-bank-asia",
+        "counterpartyAccountId": null,
+        "categoryId": "cat-expense-family",
+        "notes": "ammu knee checkup",
+        "tags": [
+          "notion-import-2025-10"
+        ],
+        "createdAt": "2025-10-20T12:00:00Z",
+        "updatedAt": "2025-10-20T12:00:00Z"
+      },
+      {
+        "id": "txn-exp-bank-asia-october-23-2025-apu-order-october-23-2025",
+        "date": "2025-10-23T12:00:00Z",
+        "type": "expense",
+        "amount": 1810,
+        "accountId": "acct-notion-bank-asia",
+        "counterpartyAccountId": null,
+        "categoryId": "cat-expense-lending-money",
+        "notes": "apu order",
+        "tags": [
+          "notion-import-2025-10"
+        ],
+        "createdAt": "2025-10-23T12:00:00Z",
+        "updatedAt": "2025-10-23T12:00:00Z"
+      },
+      {
+        "id": "txn-exp-bank-asia-october-23-2025-burger-xpress-october-23-2025",
+        "date": "2025-10-23T12:00:00Z",
+        "type": "expense",
+        "amount": 383,
+        "accountId": "acct-notion-bank-asia",
+        "counterpartyAccountId": null,
+        "categoryId": "cat-expense-food",
+        "notes": "burger xpress",
+        "tags": [
+          "notion-import-2025-10"
+        ],
+        "createdAt": "2025-10-23T12:00:00Z",
+        "updatedAt": "2025-10-23T12:00:00Z"
+      },
+      {
+        "id": "txn-exp-bank-asia-october-24-2025-pizzaheist-october-24-2025",
+        "date": "2025-10-24T12:00:00Z",
+        "type": "expense",
+        "amount": 350,
+        "accountId": "acct-notion-bank-asia",
+        "counterpartyAccountId": null,
+        "categoryId": "cat-expense-food",
+        "notes": "pizzaheist",
+        "tags": [
+          "notion-import-2025-10"
+        ],
+        "createdAt": "2025-10-24T12:00:00Z",
+        "updatedAt": "2025-10-24T12:00:00Z"
+      },
+      {
+        "id": "txn-exp-bank-asia-october-25-2025-ammu-medicice-october-25-2025",
+        "date": "2025-10-25T12:00:00Z",
+        "type": "expense",
+        "amount": 1020,
+        "accountId": "acct-notion-bank-asia",
+        "counterpartyAccountId": null,
+        "categoryId": "cat-expense-family",
+        "notes": "ammu medicice",
+        "tags": [
+          "notion-import-2025-10"
+        ],
+        "createdAt": "2025-10-25T12:00:00Z",
+        "updatedAt": "2025-10-25T12:00:00Z"
+      },
+      {
+        "id": "txn-exp-bank-asia-october-27-2025-demon-slayer-movie-food-october-27-2025",
+        "date": "2025-10-27T12:00:00Z",
+        "type": "expense",
+        "amount": 1210,
+        "accountId": "acct-notion-bank-asia",
+        "counterpartyAccountId": null,
+        "categoryId": "cat-expense-outing",
+        "notes": "demon slayer movie food",
+        "tags": [
+          "notion-import-2025-10"
+        ],
+        "createdAt": "2025-10-27T12:00:00Z",
+        "updatedAt": "2025-10-27T12:00:00Z"
+      },
+      {
+        "id": "txn-exp-bkash-october-10-2025-ammu-october-10-2025",
+        "date": "2025-10-10T12:00:00Z",
+        "type": "expense",
+        "amount": 2005,
+        "accountId": "acct-notion-bkash",
+        "counterpartyAccountId": null,
+        "categoryId": "cat-expense-family",
+        "notes": "Ammu",
+        "tags": [
+          "notion-import-2025-10"
+        ],
+        "createdAt": "2025-10-10T12:00:00Z",
+        "updatedAt": "2025-10-10T12:00:00Z"
+      },
+      {
+        "id": "txn-exp-bkash-october-10-2025-apu-october-10-2025",
+        "date": "2025-10-10T12:00:00Z",
+        "type": "expense",
+        "amount": 1005,
+        "accountId": "acct-notion-bkash",
+        "counterpartyAccountId": null,
+        "categoryId": "cat-expense-lending-money",
+        "notes": "Apu",
+        "tags": [
+          "notion-import-2025-10"
+        ],
+        "createdAt": "2025-10-10T12:00:00Z",
+        "updatedAt": "2025-10-10T12:00:00Z"
+      },
+      {
+        "id": "txn-exp-bkash-october-10-2025-chatgpt-october-10-2025",
+        "date": "2025-10-10T12:00:00Z",
+        "type": "expense",
+        "amount": 1700,
+        "accountId": "acct-notion-bkash",
+        "counterpartyAccountId": null,
+        "categoryId": "cat-expense-investments",
+        "notes": "ChatGPT",
+        "tags": [
+          "notion-import-2025-10"
+        ],
+        "createdAt": "2025-10-10T12:00:00Z",
+        "updatedAt": "2025-10-10T12:00:00Z"
+      },
+      {
+        "id": "txn-exp-bkash-october-10-2025-dmd-cafe-october-10-2025",
+        "date": "2025-10-10T12:00:00Z",
+        "type": "expense",
+        "amount": 1441.08,
+        "accountId": "acct-notion-bkash",
+        "counterpartyAccountId": null,
+        "categoryId": "cat-expense-outing",
+        "notes": "DMD Cafe",
+        "tags": [
+          "notion-import-2025-10"
+        ],
+        "createdAt": "2025-10-10T12:00:00Z",
+        "updatedAt": "2025-10-10T12:00:00Z"
+      },
+      {
+        "id": "txn-exp-bkash-october-10-2025-foodpanda-october-10-2025",
+        "date": "2025-10-10T12:00:00Z",
+        "type": "expense",
+        "amount": 353,
+        "accountId": "acct-notion-bkash",
+        "counterpartyAccountId": null,
+        "categoryId": "cat-expense-food",
+        "notes": "Foodpanda",
+        "tags": [
+          "notion-import-2025-10"
+        ],
+        "createdAt": "2025-10-10T12:00:00Z",
+        "updatedAt": "2025-10-10T12:00:00Z"
+      },
+      {
+        "id": "txn-exp-bkash-october-10-2025-foodpanda-october-10-2025-2",
+        "date": "2025-10-10T12:00:00Z",
+        "type": "expense",
+        "amount": 401,
+        "accountId": "acct-notion-bkash",
+        "counterpartyAccountId": null,
+        "categoryId": "cat-expense-food",
+        "notes": "Foodpanda",
+        "tags": [
+          "notion-import-2025-10"
+        ],
+        "createdAt": "2025-10-10T12:00:00Z",
+        "updatedAt": "2025-10-10T12:00:00Z"
+      },
+      {
+        "id": "txn-exp-bkash-october-10-2025-home-to-dmd-october-10-2025",
+        "date": "2025-10-10T12:00:00Z",
+        "type": "expense",
+        "amount": 240,
+        "accountId": "acct-notion-bkash",
+        "counterpartyAccountId": null,
+        "categoryId": "cat-expense-outing",
+        "notes": "HOME TO DMD",
+        "tags": [
+          "notion-import-2025-10"
+        ],
+        "createdAt": "2025-10-10T12:00:00Z",
+        "updatedAt": "2025-10-10T12:00:00Z"
+      },
+      {
+        "id": "txn-exp-bkash-october-10-2025-icloud-october-10-2025",
+        "date": "2025-10-10T12:00:00Z",
+        "type": "expense",
+        "amount": 529.62,
+        "accountId": "acct-notion-bkash",
+        "counterpartyAccountId": null,
+        "categoryId": "cat-expense-bills-utilities",
+        "notes": "iCloud",
+        "tags": [
+          "notion-import-2025-10"
+        ],
+        "createdAt": "2025-10-10T12:00:00Z",
+        "updatedAt": "2025-10-10T12:00:00Z"
+      },
+      {
+        "id": "txn-exp-bkash-october-10-2025-net-bill-october-10-2025",
+        "date": "2025-10-10T12:00:00Z",
+        "type": "expense",
+        "amount": 1040,
+        "accountId": "acct-notion-bkash",
+        "counterpartyAccountId": null,
+        "categoryId": "cat-expense-bills-utilities",
+        "notes": "Net Bill",
+        "tags": [
+          "notion-import-2025-10"
+        ],
+        "createdAt": "2025-10-10T12:00:00Z",
+        "updatedAt": "2025-10-10T12:00:00Z"
+      },
+      {
+        "id": "txn-exp-bkash-october-10-2025-peaches-net-october-10-2025",
+        "date": "2025-10-10T12:00:00Z",
+        "type": "expense",
+        "amount": 161,
+        "accountId": "acct-notion-bkash",
+        "counterpartyAccountId": null,
+        "categoryId": "cat-expense-bills-utilities",
+        "notes": "Peaches Net",
+        "tags": [
+          "notion-import-2025-10"
+        ],
+        "createdAt": "2025-10-10T12:00:00Z",
+        "updatedAt": "2025-10-10T12:00:00Z"
+      },
+      {
+        "id": "txn-exp-bkash-october-10-2025-peaches-net-october-10-2025-2",
+        "date": "2025-10-10T12:00:00Z",
+        "type": "expense",
+        "amount": 161,
+        "accountId": "acct-notion-bkash",
+        "counterpartyAccountId": null,
+        "categoryId": "cat-expense-bills-utilities",
+        "notes": "Peaches Net",
+        "tags": [
+          "notion-import-2025-10"
+        ],
+        "createdAt": "2025-10-10T12:00:00Z",
+        "updatedAt": "2025-10-10T12:00:00Z"
+      },
+      {
+        "id": "txn-exp-bkash-october-10-2025-peaches-raya-october-10-2025",
+        "date": "2025-10-10T12:00:00Z",
+        "type": "expense",
+        "amount": 2000,
+        "accountId": "acct-notion-bkash",
+        "counterpartyAccountId": null,
+        "categoryId": "cat-expense-lending-money",
+        "notes": "Peaches Raya",
+        "tags": [
+          "notion-import-2025-10"
+        ],
+        "createdAt": "2025-10-10T12:00:00Z",
+        "updatedAt": "2025-10-10T12:00:00Z"
+      },
+      {
+        "id": "txn-exp-bkash-october-10-2025-peaches-raya-october-10-2025-2",
+        "date": "2025-10-10T12:00:00Z",
+        "type": "expense",
+        "amount": 2000,
+        "accountId": "acct-notion-bkash",
+        "counterpartyAccountId": null,
+        "categoryId": "cat-expense-lending-money",
+        "notes": "Peaches Raya",
+        "tags": [
+          "notion-import-2025-10"
+        ],
+        "createdAt": "2025-10-10T12:00:00Z",
+        "updatedAt": "2025-10-10T12:00:00Z"
+      },
+      {
+        "id": "txn-exp-bkash-october-10-2025-recharge-october-10-2025",
+        "date": "2025-10-10T12:00:00Z",
+        "type": "expense",
+        "amount": 20,
+        "accountId": "acct-notion-bkash",
+        "counterpartyAccountId": null,
+        "categoryId": "cat-expense-bills-utilities",
+        "notes": "Recharge",
+        "tags": [
+          "notion-import-2025-10"
+        ],
+        "createdAt": "2025-10-10T12:00:00Z",
+        "updatedAt": "2025-10-10T12:00:00Z"
+      },
+      {
+        "id": "txn-exp-bkash-october-10-2025-recharge-october-10-2025-2",
+        "date": "2025-10-10T12:00:00Z",
+        "type": "expense",
+        "amount": 27,
+        "accountId": "acct-notion-bkash",
+        "counterpartyAccountId": null,
+        "categoryId": "cat-expense-bills-utilities",
+        "notes": "Recharge",
+        "tags": [
+          "notion-import-2025-10"
+        ],
+        "createdAt": "2025-10-10T12:00:00Z",
+        "updatedAt": "2025-10-10T12:00:00Z"
+      },
+      {
+        "id": "txn-exp-bkash-october-10-2025-recharge-october-10-2025-3",
+        "date": "2025-10-10T12:00:00Z",
+        "type": "expense",
+        "amount": 29,
+        "accountId": "acct-notion-bkash",
+        "counterpartyAccountId": null,
+        "categoryId": "cat-expense-bills-utilities",
+        "notes": "Recharge",
+        "tags": [
+          "notion-import-2025-10"
+        ],
+        "createdAt": "2025-10-10T12:00:00Z",
+        "updatedAt": "2025-10-10T12:00:00Z"
+      },
+      {
+        "id": "txn-exp-bkash-october-10-2025-sadi-october-10-2025",
+        "date": "2025-10-10T12:00:00Z",
+        "type": "expense",
+        "amount": 120,
+        "accountId": "acct-notion-bkash",
+        "counterpartyAccountId": null,
+        "categoryId": "cat-expense-lending-money",
+        "notes": "Sadi",
+        "tags": [
+          "notion-import-2025-10"
+        ],
+        "createdAt": "2025-10-10T12:00:00Z",
+        "updatedAt": "2025-10-10T12:00:00Z"
+      },
+      {
+        "id": "txn-exp-bkash-october-10-2025-uber-to-office-october-10-2025",
+        "date": "2025-10-10T12:00:00Z",
+        "type": "expense",
+        "amount": 198.52,
+        "accountId": "acct-notion-bkash",
+        "counterpartyAccountId": null,
+        "categoryId": "cat-expense-transportation-office",
+        "notes": "Uber to Office",
+        "tags": [
+          "notion-import-2025-10"
+        ],
+        "createdAt": "2025-10-10T12:00:00Z",
+        "updatedAt": "2025-10-10T12:00:00Z"
+      },
+      {
+        "id": "txn-exp-bkash-october-12-2025-investment-october-12-2025",
+        "date": "2025-10-12T12:00:00Z",
+        "type": "expense",
+        "amount": 1037,
+        "accountId": "acct-notion-bkash",
+        "counterpartyAccountId": null,
+        "categoryId": "cat-expense-investments",
+        "notes": "Investment",
+        "tags": [
+          "notion-import-2025-10"
+        ],
+        "createdAt": "2025-10-12T12:00:00Z",
+        "updatedAt": "2025-10-12T12:00:00Z"
+      },
+      {
+        "id": "txn-exp-bkash-october-12-2025-recharge-october-12-2025",
+        "date": "2025-10-12T12:00:00Z",
+        "type": "expense",
+        "amount": 20,
+        "accountId": "acct-notion-bkash",
+        "counterpartyAccountId": null,
+        "categoryId": "cat-expense-bills-utilities",
+        "notes": "Recharge",
+        "tags": [
+          "notion-import-2025-10"
+        ],
+        "createdAt": "2025-10-12T12:00:00Z",
+        "updatedAt": "2025-10-12T12:00:00Z"
+      },
+      {
+        "id": "txn-exp-bkash-october-12-2025-takeout-october-12-2025",
+        "date": "2025-10-12T12:00:00Z",
+        "type": "expense",
+        "amount": 270,
+        "accountId": "acct-notion-bkash",
+        "counterpartyAccountId": null,
+        "categoryId": "cat-expense-food",
+        "notes": "Takeout",
+        "tags": [
+          "notion-import-2025-10"
+        ],
+        "createdAt": "2025-10-12T12:00:00Z",
+        "updatedAt": "2025-10-12T12:00:00Z"
+      },
+      {
+        "id": "txn-exp-bkash-october-13-2025-munchies-october-13-2025",
+        "date": "2025-10-13T12:00:00Z",
+        "type": "expense",
+        "amount": 290,
+        "accountId": "acct-notion-bkash",
+        "counterpartyAccountId": null,
+        "categoryId": "cat-expense-food",
+        "notes": "Munchies",
+        "tags": [
+          "notion-import-2025-10"
+        ],
+        "createdAt": "2025-10-13T12:00:00Z",
+        "updatedAt": "2025-10-13T12:00:00Z"
+      },
+      {
+        "id": "txn-exp-bkash-october-14-2025-usd-transfer-charge-october-14-2025",
+        "date": "2025-10-14T12:00:00Z",
+        "type": "expense",
+        "amount": 37,
+        "accountId": "acct-notion-bkash",
+        "counterpartyAccountId": null,
+        "categoryId": "cat-expense-charge",
+        "notes": "USD Transfer Charge",
+        "tags": [
+          "notion-import-2025-10"
+        ],
+        "createdAt": "2025-10-14T12:00:00Z",
+        "updatedAt": "2025-10-14T12:00:00Z"
+      },
+      {
+        "id": "txn-exp-bkash-october-15-2025-cashout-charge-october-15-2025",
+        "date": "2025-10-15T12:00:00Z",
+        "type": "expense",
+        "amount": 5.55,
+        "accountId": "acct-notion-bkash",
+        "counterpartyAccountId": null,
+        "categoryId": "cat-expense-charge",
+        "notes": "cashout charge",
+        "tags": [
+          "notion-import-2025-10"
+        ],
+        "createdAt": "2025-10-15T12:00:00Z",
+        "updatedAt": "2025-10-15T12:00:00Z"
+      },
+      {
+        "id": "txn-exp-bkash-october-15-2025-home-to-office-uber-october-15-2025",
+        "date": "2025-10-15T12:00:00Z",
+        "type": "expense",
+        "amount": 205,
+        "accountId": "acct-notion-bkash",
+        "counterpartyAccountId": null,
+        "categoryId": "cat-expense-transportation-office",
+        "notes": "home to office uber",
+        "tags": [
+          "notion-import-2025-10"
+        ],
+        "createdAt": "2025-10-15T12:00:00Z",
+        "updatedAt": "2025-10-15T12:00:00Z"
+      },
+      {
+        "id": "txn-exp-bkash-october-15-2025-net-1-month-4-gb-october-15-2025",
+        "date": "2025-10-15T12:00:00Z",
+        "type": "expense",
+        "amount": 197,
+        "accountId": "acct-notion-bkash",
+        "counterpartyAccountId": null,
+        "categoryId": "cat-expense-bills-utilities",
+        "notes": "net 1 month 4 gb",
+        "tags": [
+          "notion-import-2025-10"
+        ],
+        "createdAt": "2025-10-15T12:00:00Z",
+        "updatedAt": "2025-10-15T12:00:00Z"
+      },
+      {
+        "id": "txn-exp-bkash-october-15-2025-recharge-october-15-2025",
+        "date": "2025-10-15T12:00:00Z",
+        "type": "expense",
+        "amount": 20,
+        "accountId": "acct-notion-bkash",
+        "counterpartyAccountId": null,
+        "categoryId": "cat-expense-bills-utilities",
+        "notes": "recharge",
+        "tags": [
+          "notion-import-2025-10"
+        ],
+        "createdAt": "2025-10-15T12:00:00Z",
+        "updatedAt": "2025-10-15T12:00:00Z"
+      },
+      {
+        "id": "txn-exp-bkash-october-15-2025-recharge-peaches-october-15-2025",
+        "date": "2025-10-15T12:00:00Z",
+        "type": "expense",
+        "amount": 98,
+        "accountId": "acct-notion-bkash",
+        "counterpartyAccountId": null,
+        "categoryId": "cat-expense-bills-utilities",
+        "notes": "Recharge peaches",
+        "tags": [
+          "notion-import-2025-10"
+        ],
+        "createdAt": "2025-10-15T12:00:00Z",
+        "updatedAt": "2025-10-15T12:00:00Z"
+      },
+      {
+        "id": "txn-exp-bkash-october-16-2025-card-october-16-2025",
+        "date": "2025-10-16T12:00:00Z",
+        "type": "expense",
+        "amount": 45,
+        "accountId": "acct-notion-bkash",
+        "counterpartyAccountId": null,
+        "categoryId": "cat-expense-shokh",
+        "notes": "card",
+        "tags": [
+          "notion-import-2025-10"
+        ],
+        "createdAt": "2025-10-16T12:00:00Z",
+        "updatedAt": "2025-10-16T12:00:00Z"
+      },
+      {
+        "id": "txn-exp-bkash-october-16-2025-cashout-october-16-2025",
+        "date": "2025-10-16T12:00:00Z",
+        "type": "expense",
+        "amount": 5.55,
+        "accountId": "acct-notion-bkash",
+        "counterpartyAccountId": null,
+        "categoryId": "cat-expense-charge",
+        "notes": "cashout",
+        "tags": [
+          "notion-import-2025-10"
+        ],
+        "createdAt": "2025-10-16T12:00:00Z",
+        "updatedAt": "2025-10-16T12:00:00Z"
+      },
+      {
+        "id": "txn-exp-bkash-october-16-2025-xpress-october-16-2025",
+        "date": "2025-10-16T12:00:00Z",
+        "type": "expense",
+        "amount": 383,
+        "accountId": "acct-notion-bkash",
+        "counterpartyAccountId": null,
+        "categoryId": "cat-expense-food",
+        "notes": "Xpress",
+        "tags": [
+          "notion-import-2025-10"
+        ],
+        "createdAt": "2025-10-16T12:00:00Z",
+        "updatedAt": "2025-10-16T12:00:00Z"
+      },
+      {
+        "id": "txn-exp-bkash-october-17-2025-bkash-loan-october-17-2025",
+        "date": "2025-10-17T12:00:00Z",
+        "type": "expense",
+        "amount": 1030.82,
+        "accountId": "acct-notion-bkash",
+        "counterpartyAccountId": null,
+        "categoryId": "cat-expense-loan-payment",
+        "notes": "Bkash loan",
+        "tags": [
+          "notion-import-2025-10"
+        ],
+        "createdAt": "2025-10-17T12:00:00Z",
+        "updatedAt": "2025-10-17T12:00:00Z"
+      },
+      {
+        "id": "txn-exp-bkash-october-17-2025-cashout-october-17-2025",
+        "date": "2025-10-17T12:00:00Z",
+        "type": "expense",
+        "amount": 13.41,
+        "accountId": "acct-notion-bkash",
+        "counterpartyAccountId": null,
+        "categoryId": "cat-expense-charge",
+        "notes": "cashout",
+        "tags": [
+          "notion-import-2025-10"
+        ],
+        "createdAt": "2025-10-17T12:00:00Z",
+        "updatedAt": "2025-10-17T12:00:00Z"
+      },
+      {
+        "id": "txn-exp-bkash-october-17-2025-peaches-chartola-to-unimart-october-17-2025",
+        "date": "2025-10-17T12:00:00Z",
+        "type": "expense",
+        "amount": 203.7,
+        "accountId": "acct-notion-bkash",
+        "counterpartyAccountId": null,
+        "categoryId": "cat-expense-outing",
+        "notes": "Peaches chartola to unimart",
+        "tags": [
+          "notion-import-2025-10"
+        ],
+        "createdAt": "2025-10-17T12:00:00Z",
+        "updatedAt": "2025-10-17T12:00:00Z"
+      },
+      {
+        "id": "txn-exp-bkash-october-18-2025-recharge-october-18-2025",
+        "date": "2025-10-18T12:00:00Z",
+        "type": "expense",
+        "amount": 20,
+        "accountId": "acct-notion-bkash",
+        "counterpartyAccountId": null,
+        "categoryId": "cat-expense-bills-utilities",
+        "notes": "recharge",
+        "tags": [
+          "notion-import-2025-10"
+        ],
+        "createdAt": "2025-10-18T12:00:00Z",
+        "updatedAt": "2025-10-18T12:00:00Z"
+      },
+      {
+        "id": "txn-exp-bkash-october-19-2025-october-19-2025",
+        "date": "2025-10-19T12:00:00Z",
+        "type": "expense",
+        "amount": 20,
+        "accountId": "acct-notion-bkash",
+        "counterpartyAccountId": null,
+        "categoryId": "cat-expense-bills-utilities",
+        "notes": null,
+        "tags": [
+          "notion-import-2025-10"
+        ],
+        "createdAt": "2025-10-19T12:00:00Z",
+        "updatedAt": "2025-10-19T12:00:00Z"
+      },
+      {
+        "id": "txn-exp-bkash-october-19-2025-recharge-october-19-2025",
+        "date": "2025-10-19T12:00:00Z",
+        "type": "expense",
+        "amount": 20,
+        "accountId": "acct-notion-bkash",
+        "counterpartyAccountId": null,
+        "categoryId": "cat-expense-bills-utilities",
+        "notes": "recharge",
+        "tags": [
+          "notion-import-2025-10"
+        ],
+        "createdAt": "2025-10-19T12:00:00Z",
+        "updatedAt": "2025-10-19T12:00:00Z"
+      },
+      {
+        "id": "txn-exp-bkash-october-20-2025-pizzaheist-october-20-2025",
+        "date": "2025-10-20T12:00:00Z",
+        "type": "expense",
+        "amount": 338,
+        "accountId": "acct-notion-bkash",
+        "counterpartyAccountId": null,
+        "categoryId": "cat-expense-food",
+        "notes": "pizzaheist",
+        "tags": [
+          "notion-import-2025-10"
+        ],
+        "createdAt": "2025-10-20T12:00:00Z",
+        "updatedAt": "2025-10-20T12:00:00Z"
+      },
+      {
+        "id": "txn-exp-bkash-october-20-2025-recharge-ammu-october-20-2025",
+        "date": "2025-10-20T12:00:00Z",
+        "type": "expense",
+        "amount": 20,
+        "accountId": "acct-notion-bkash",
+        "counterpartyAccountId": null,
+        "categoryId": "cat-expense-family",
+        "notes": "recharge ammu",
+        "tags": [
+          "notion-import-2025-10"
+        ],
+        "createdAt": "2025-10-20T12:00:00Z",
+        "updatedAt": "2025-10-20T12:00:00Z"
+      },
+      {
+        "id": "txn-exp-bkash-october-20-2025-smashnstack-october-20-2025",
+        "date": "2025-10-20T12:00:00Z",
+        "type": "expense",
+        "amount": 584,
+        "accountId": "acct-notion-bkash",
+        "counterpartyAccountId": null,
+        "categoryId": "cat-expense-food",
+        "notes": "smashnstack",
+        "tags": [
+          "notion-import-2025-10"
+        ],
+        "createdAt": "2025-10-20T12:00:00Z",
+        "updatedAt": "2025-10-20T12:00:00Z"
+      },
+      {
+        "id": "txn-exp-bkash-october-23-2025-recharge-october-23-2025",
+        "date": "2025-10-23T12:00:00Z",
+        "type": "expense",
+        "amount": 20,
+        "accountId": "acct-notion-bkash",
+        "counterpartyAccountId": null,
+        "categoryId": "cat-expense-bills-utilities",
+        "notes": "recharge",
+        "tags": [
+          "notion-import-2025-10"
+        ],
+        "createdAt": "2025-10-23T12:00:00Z",
+        "updatedAt": "2025-10-23T12:00:00Z"
+      },
+      {
+        "id": "txn-exp-bkash-october-23-2025-recharge-october-23-2025-2",
+        "date": "2025-10-23T12:00:00Z",
+        "type": "expense",
+        "amount": 20,
+        "accountId": "acct-notion-bkash",
+        "counterpartyAccountId": null,
+        "categoryId": "cat-expense-bills-utilities",
+        "notes": "recharge",
+        "tags": [
+          "notion-import-2025-10"
+        ],
+        "createdAt": "2025-10-23T12:00:00Z",
+        "updatedAt": "2025-10-23T12:00:00Z"
+      },
+      {
+        "id": "txn-exp-bkash-october-23-2025-skir-october-23-2025",
+        "date": "2025-10-23T12:00:00Z",
+        "type": "expense",
+        "amount": 2,
+        "accountId": "acct-notion-bkash",
+        "counterpartyAccountId": null,
+        "categoryId": "cat-expense-charge",
+        "notes": "skir",
+        "tags": [
+          "notion-import-2025-10"
+        ],
+        "createdAt": "2025-10-23T12:00:00Z",
+        "updatedAt": "2025-10-23T12:00:00Z"
+      },
+      {
+        "id": "txn-exp-bkash-october-26-2025-burger-xpress-october-26-2025",
+        "date": "2025-10-26T12:00:00Z",
+        "type": "expense",
+        "amount": 290,
+        "accountId": "acct-notion-bkash",
+        "counterpartyAccountId": null,
+        "categoryId": "cat-expense-food",
+        "notes": "burger xpress",
+        "tags": [
+          "notion-import-2025-10"
+        ],
+        "createdAt": "2025-10-26T12:00:00Z",
+        "updatedAt": "2025-10-26T12:00:00Z"
+      },
+      {
+        "id": "txn-exp-bkash-october-26-2025-demon-slayer-ticket-october-26-2025",
+        "date": "2025-10-26T12:00:00Z",
+        "type": "expense",
+        "amount": 500,
+        "accountId": "acct-notion-bkash",
+        "counterpartyAccountId": null,
+        "categoryId": "cat-expense-outing",
+        "notes": "demon slayer ticket",
+        "tags": [
+          "notion-import-2025-10"
+        ],
+        "createdAt": "2025-10-26T12:00:00Z",
+        "updatedAt": "2025-10-26T12:00:00Z"
+      },
+      {
+        "id": "txn-exp-bkash-october-27-2025-cashout-charge-october-27-2025",
+        "date": "2025-10-27T12:00:00Z",
+        "type": "expense",
+        "amount": 29.8,
+        "accountId": "acct-notion-bkash",
+        "counterpartyAccountId": null,
+        "categoryId": "cat-expense-charge",
+        "notes": "cashout charge",
+        "tags": [
+          "notion-import-2025-10"
+        ],
+        "createdAt": "2025-10-27T12:00:00Z",
+        "updatedAt": "2025-10-27T12:00:00Z"
+      },
+      {
+        "id": "txn-exp-bkash-october-27-2025-habibys-october-27-2025",
+        "date": "2025-10-27T12:00:00Z",
+        "type": "expense",
+        "amount": 336.95,
+        "accountId": "acct-notion-bkash",
+        "counterpartyAccountId": null,
+        "categoryId": "cat-expense-food",
+        "notes": "habibys",
+        "tags": [
+          "notion-import-2025-10"
+        ],
+        "createdAt": "2025-10-27T12:00:00Z",
+        "updatedAt": "2025-10-27T12:00:00Z"
+      },
+      {
+        "id": "txn-exp-bkash-october-27-2025-recharge-october-27-2025",
+        "date": "2025-10-27T12:00:00Z",
+        "type": "expense",
+        "amount": 40,
+        "accountId": "acct-notion-bkash",
+        "counterpartyAccountId": null,
+        "categoryId": "cat-expense-bills-utilities",
+        "notes": "recharge",
+        "tags": [
+          "notion-import-2025-10"
+        ],
+        "createdAt": "2025-10-27T12:00:00Z",
+        "updatedAt": "2025-10-27T12:00:00Z"
+      },
+      {
+        "id": "txn-exp-bkash-october-27-2025-recharge-october-27-2025-2",
+        "date": "2025-10-27T12:00:00Z",
+        "type": "expense",
+        "amount": 98,
+        "accountId": "acct-notion-bkash",
+        "counterpartyAccountId": null,
+        "categoryId": "cat-expense-bills-utilities",
+        "notes": "recharge",
+        "tags": [
+          "notion-import-2025-10"
+        ],
+        "createdAt": "2025-10-27T12:00:00Z",
+        "updatedAt": "2025-10-27T12:00:00Z"
+      },
+      {
+        "id": "txn-exp-bkash-october-27-2025-recharge-october-27-2025-3",
+        "date": "2025-10-27T12:00:00Z",
+        "type": "expense",
+        "amount": 98,
+        "accountId": "acct-notion-bkash",
+        "counterpartyAccountId": null,
+        "categoryId": "cat-expense-bills-utilities",
+        "notes": "recharge",
+        "tags": [
+          "notion-import-2025-10"
+        ],
+        "createdAt": "2025-10-27T12:00:00Z",
+        "updatedAt": "2025-10-27T12:00:00Z"
+      },
+      {
+        "id": "txn-exp-bkash-october-30-2025-hungry-rooster-october-30-2025",
+        "date": "2025-10-30T12:00:00Z",
+        "type": "expense",
+        "amount": 458,
+        "accountId": "acct-notion-bkash",
+        "counterpartyAccountId": null,
+        "categoryId": "cat-expense-food",
+        "notes": "hungry rooster",
+        "tags": [
+          "notion-import-2025-10"
+        ],
+        "createdAt": "2025-10-30T12:00:00Z",
+        "updatedAt": "2025-10-30T12:00:00Z"
+      },
+      {
+        "id": "txn-exp-bkash-october-30-2025-recharge-october-30-2025",
+        "date": "2025-10-30T12:00:00Z",
+        "type": "expense",
+        "amount": 14,
+        "accountId": "acct-notion-bkash",
+        "counterpartyAccountId": null,
+        "categoryId": "cat-expense-bills-utilities",
+        "notes": "recharge",
+        "tags": [
+          "notion-import-2025-10"
+        ],
+        "createdAt": "2025-10-30T12:00:00Z",
+        "updatedAt": "2025-10-30T12:00:00Z"
+      },
+      {
+        "id": "txn-exp-bkash-october-31-2025-herfy-october-31-2025",
+        "date": "2025-10-31T12:00:00Z",
+        "type": "expense",
+        "amount": 463,
+        "accountId": "acct-notion-bkash",
+        "counterpartyAccountId": null,
+        "categoryId": "cat-expense-food",
+        "notes": "herfy",
+        "tags": [
+          "notion-import-2025-10"
+        ],
+        "createdAt": "2025-10-31T12:00:00Z",
+        "updatedAt": "2025-10-31T12:00:00Z"
+      },
+      {
+        "id": "txn-exp-cash-october-10-2025-fuchka-october-10-2025",
+        "date": "2025-10-10T12:00:00Z",
+        "type": "expense",
+        "amount": 100,
+        "accountId": "acct-notion-cash",
+        "counterpartyAccountId": null,
+        "categoryId": "cat-expense-food",
+        "notes": "Fuchka",
+        "tags": [
+          "notion-import-2025-10"
+        ],
+        "createdAt": "2025-10-10T12:00:00Z",
+        "updatedAt": "2025-10-10T12:00:00Z"
+      },
+      {
+        "id": "txn-exp-cash-october-10-2025-meeting-raya-october-10-2025",
+        "date": "2025-10-10T12:00:00Z",
+        "type": "expense",
+        "amount": 50,
+        "accountId": "acct-notion-cash",
+        "counterpartyAccountId": null,
+        "categoryId": "cat-expense-outing",
+        "notes": "Meeting Raya",
+        "tags": [
+          "notion-import-2025-10"
+        ],
+        "createdAt": "2025-10-10T12:00:00Z",
+        "updatedAt": "2025-10-10T12:00:00Z"
+      },
+      {
+        "id": "txn-exp-cash-october-14-2025-home-to-office-uber-october-14-2025",
+        "date": "2025-10-14T12:00:00Z",
+        "type": "expense",
+        "amount": 190,
+        "accountId": "acct-notion-cash",
+        "counterpartyAccountId": null,
+        "categoryId": "cat-expense-transportation-office",
+        "notes": "home to office uber",
+        "tags": [
+          "notion-import-2025-10"
+        ],
+        "createdAt": "2025-10-14T12:00:00Z",
+        "updatedAt": "2025-10-14T12:00:00Z"
+      },
+      {
+        "id": "txn-exp-cash-october-14-2025-lunch-october-14-2025",
+        "date": "2025-10-14T12:00:00Z",
+        "type": "expense",
+        "amount": 40,
+        "accountId": "acct-notion-cash",
+        "counterpartyAccountId": null,
+        "categoryId": "cat-expense-lunch-office",
+        "notes": "lunch",
+        "tags": [
+          "notion-import-2025-10"
+        ],
+        "createdAt": "2025-10-14T12:00:00Z",
+        "updatedAt": "2025-10-14T12:00:00Z"
+      },
+      {
+        "id": "txn-exp-cash-october-14-2025-office-to-home-october-14-2025",
+        "date": "2025-10-14T12:00:00Z",
+        "type": "expense",
+        "amount": 100,
+        "accountId": "acct-notion-cash",
+        "counterpartyAccountId": null,
+        "categoryId": "cat-expense-transportation-office",
+        "notes": "Office to home",
+        "tags": [
+          "notion-import-2025-10"
+        ],
+        "createdAt": "2025-10-14T12:00:00Z",
+        "updatedAt": "2025-10-14T12:00:00Z"
+      },
+      {
+        "id": "txn-exp-cash-october-15-2025-office-to-home-october-15-2025",
+        "date": "2025-10-15T12:00:00Z",
+        "type": "expense",
+        "amount": 110,
+        "accountId": "acct-notion-cash",
+        "counterpartyAccountId": null,
+        "categoryId": "cat-expense-transportation-office",
+        "notes": "office to home",
+        "tags": [
+          "notion-import-2025-10"
+        ],
+        "createdAt": "2025-10-15T12:00:00Z",
+        "updatedAt": "2025-10-15T12:00:00Z"
+      },
+      {
+        "id": "txn-exp-cash-october-16-2025-dimchop-october-16-2025",
+        "date": "2025-10-16T12:00:00Z",
+        "type": "expense",
+        "amount": 40,
+        "accountId": "acct-notion-cash",
+        "counterpartyAccountId": null,
+        "categoryId": "cat-expense-lunch-office",
+        "notes": "Dimchop",
+        "tags": [
+          "notion-import-2025-10"
+        ],
+        "createdAt": "2025-10-16T12:00:00Z",
+        "updatedAt": "2025-10-16T12:00:00Z"
+      },
+      {
+        "id": "txn-exp-cash-october-16-2025-home-to-office-uber-october-16-2025",
+        "date": "2025-10-16T12:00:00Z",
+        "type": "expense",
+        "amount": 188,
+        "accountId": "acct-notion-cash",
+        "counterpartyAccountId": null,
+        "categoryId": "cat-expense-transportation-office",
+        "notes": "home to office uber",
+        "tags": [
+          "notion-import-2025-10"
+        ],
+        "createdAt": "2025-10-16T12:00:00Z",
+        "updatedAt": "2025-10-16T12:00:00Z"
+      },
+      {
+        "id": "txn-exp-cash-october-17-2025-chartola-to-home-october-17-2025",
+        "date": "2025-10-17T12:00:00Z",
+        "type": "expense",
+        "amount": 260,
+        "accountId": "acct-notion-cash",
+        "counterpartyAccountId": null,
+        "categoryId": "cat-expense-outing",
+        "notes": "chartola to home",
+        "tags": [
+          "notion-import-2025-10"
+        ],
+        "createdAt": "2025-10-17T12:00:00Z",
+        "updatedAt": "2025-10-17T12:00:00Z"
+      },
+      {
+        "id": "txn-exp-cash-october-17-2025-crimson-to-unity-aid-october-17-2025",
+        "date": "2025-10-17T12:00:00Z",
+        "type": "expense",
+        "amount": 290,
+        "accountId": "acct-notion-cash",
+        "counterpartyAccountId": null,
+        "categoryId": "cat-expense-outing",
+        "notes": "crimson to unity aid",
+        "tags": [
+          "notion-import-2025-10"
+        ],
+        "createdAt": "2025-10-17T12:00:00Z",
+        "updatedAt": "2025-10-17T12:00:00Z"
+      },
+      {
+        "id": "txn-exp-cash-october-17-2025-desserboutique-to-crimson-october-17-2025",
+        "date": "2025-10-17T12:00:00Z",
+        "type": "expense",
+        "amount": 60,
+        "accountId": "acct-notion-cash",
+        "counterpartyAccountId": null,
+        "categoryId": "cat-expense-outing",
+        "notes": "desserboutique to crimson",
+        "tags": [
+          "notion-import-2025-10"
+        ],
+        "createdAt": "2025-10-17T12:00:00Z",
+        "updatedAt": "2025-10-17T12:00:00Z"
+      },
+      {
+        "id": "txn-exp-cash-october-17-2025-home-to-niketon-2-october-17-2025",
+        "date": "2025-10-17T12:00:00Z",
+        "type": "expense",
+        "amount": 40,
+        "accountId": "acct-notion-cash",
+        "counterpartyAccountId": null,
+        "categoryId": "cat-expense-outing",
+        "notes": "home to niketon-2",
+        "tags": [
+          "notion-import-2025-10"
+        ],
+        "createdAt": "2025-10-17T12:00:00Z",
+        "updatedAt": "2025-10-17T12:00:00Z"
+      },
+      {
+        "id": "txn-exp-cash-october-17-2025-niketon2-unimart-october-17-2025",
+        "date": "2025-10-17T12:00:00Z",
+        "type": "expense",
+        "amount": 40,
+        "accountId": "acct-notion-cash",
+        "counterpartyAccountId": null,
+        "categoryId": "cat-expense-outing",
+        "notes": "niketon2 - unimart",
+        "tags": [
+          "notion-import-2025-10"
+        ],
+        "createdAt": "2025-10-17T12:00:00Z",
+        "updatedAt": "2025-10-17T12:00:00Z"
+      },
+      {
+        "id": "txn-exp-cash-october-17-2025-unimart-to-banani-october-17-2025",
+        "date": "2025-10-17T12:00:00Z",
+        "type": "expense",
+        "amount": 80,
+        "accountId": "acct-notion-cash",
+        "counterpartyAccountId": null,
+        "categoryId": "cat-expense-outing",
+        "notes": "unimart to banani",
+        "tags": [
+          "notion-import-2025-10"
+        ],
+        "createdAt": "2025-10-17T12:00:00Z",
+        "updatedAt": "2025-10-17T12:00:00Z"
+      },
+      {
+        "id": "txn-exp-cash-october-17-2025-unity-aid-to-p-home-october-17-2025",
+        "date": "2025-10-17T12:00:00Z",
+        "type": "expense",
+        "amount": 66,
+        "accountId": "acct-notion-cash",
+        "counterpartyAccountId": null,
+        "categoryId": "cat-expense-outing",
+        "notes": "unity aid to p home",
+        "tags": [
+          "notion-import-2025-10"
+        ],
+        "createdAt": "2025-10-17T12:00:00Z",
+        "updatedAt": "2025-10-17T12:00:00Z"
+      },
+      {
+        "id": "txn-exp-cash-october-18-2025-ammu-kneepain-medicine-october-18-2025",
+        "date": "2025-10-18T12:00:00Z",
+        "type": "expense",
+        "amount": 100,
+        "accountId": "acct-notion-cash",
+        "counterpartyAccountId": null,
+        "categoryId": "cat-expense-family",
+        "notes": "ammu kneepain medicine",
+        "tags": [
+          "notion-import-2025-10"
+        ],
+        "createdAt": "2025-10-18T12:00:00Z",
+        "updatedAt": "2025-10-18T12:00:00Z"
+      },
+      {
+        "id": "txn-exp-cash-october-18-2025-impulse-to-home-october-18-2025",
+        "date": "2025-10-18T12:00:00Z",
+        "type": "expense",
+        "amount": 20,
+        "accountId": "acct-notion-cash",
+        "counterpartyAccountId": null,
+        "categoryId": "cat-expense-family",
+        "notes": "impulse to home",
+        "tags": [
+          "notion-import-2025-10"
+        ],
+        "createdAt": "2025-10-18T12:00:00Z",
+        "updatedAt": "2025-10-18T12:00:00Z"
+      },
+      {
+        "id": "txn-exp-cash-october-18-2025-october-18-2025",
+        "date": "2025-10-18T12:00:00Z",
+        "type": "expense",
+        "amount": 100,
+        "accountId": "acct-notion-cash",
+        "counterpartyAccountId": null,
+        "categoryId": "cat-expense-family",
+        "notes": null,
+        "tags": [
+          "notion-import-2025-10"
+        ],
+        "createdAt": "2025-10-18T12:00:00Z",
+        "updatedAt": "2025-10-18T12:00:00Z"
+      },
+      {
+        "id": "txn-exp-cash-october-2-2025-peaches-october-2-2025",
+        "date": "2025-10-02T12:00:00Z",
+        "type": "expense",
+        "amount": 390,
+        "accountId": "acct-notion-cash",
+        "counterpartyAccountId": null,
+        "categoryId": "cat-expense-outing",
+        "notes": "Peaches",
+        "tags": [
+          "notion-import-2025-10"
+        ],
+        "createdAt": "2025-10-02T12:00:00Z",
+        "updatedAt": "2025-10-02T12:00:00Z"
+      },
+      {
+        "id": "txn-exp-cash-october-20-2025-office-to-home-october-16-2025",
+        "date": "2025-10-16T12:00:00Z",
+        "type": "expense",
+        "amount": 100,
+        "accountId": "acct-notion-cash",
+        "counterpartyAccountId": null,
+        "categoryId": "cat-expense-transportation-office",
+        "notes": "office to home",
+        "tags": [
+          "notion-import-2025-10"
+        ],
+        "createdAt": "2025-10-16T12:00:00Z",
+        "updatedAt": "2025-10-16T12:00:00Z"
+      },
+      {
+        "id": "txn-exp-cash-october-22-2025-pencil-battery-october-22-2025",
+        "date": "2025-10-22T12:00:00Z",
+        "type": "expense",
+        "amount": 30,
+        "accountId": "acct-notion-cash",
+        "counterpartyAccountId": null,
+        "categoryId": "cat-expense-family",
+        "notes": "pencil battery",
+        "tags": [
+          "notion-import-2025-10"
+        ],
+        "createdAt": "2025-10-22T12:00:00Z",
+        "updatedAt": "2025-10-22T12:00:00Z"
+      },
+      {
+        "id": "txn-exp-cash-october-27-2025-p-to-shimanto-shombhar-october-27-2025",
+        "date": "2025-10-27T12:00:00Z",
+        "type": "expense",
+        "amount": 250,
+        "accountId": "acct-notion-cash",
+        "counterpartyAccountId": null,
+        "categoryId": "cat-expense-outing",
+        "notes": "p to shimanto shombhar",
+        "tags": [
+          "notion-import-2025-10"
+        ],
+        "createdAt": "2025-10-27T12:00:00Z",
+        "updatedAt": "2025-10-27T12:00:00Z"
+      },
+      {
+        "id": "txn-exp-cash-october-27-2025-raya-light-october-27-2025",
+        "date": "2025-10-27T12:00:00Z",
+        "type": "expense",
+        "amount": 100,
+        "accountId": "acct-notion-cash",
+        "counterpartyAccountId": null,
+        "categoryId": "cat-expense-outing",
+        "notes": "raya light",
+        "tags": [
+          "notion-import-2025-10"
+        ],
+        "createdAt": "2025-10-27T12:00:00Z",
+        "updatedAt": "2025-10-27T12:00:00Z"
+      },
+      {
+        "id": "txn-exp-cash-october-27-2025-shimanto-to-taltola-october-27-2025",
+        "date": "2025-10-27T12:00:00Z",
+        "type": "expense",
+        "amount": 130,
+        "accountId": "acct-notion-cash",
+        "counterpartyAccountId": null,
+        "categoryId": "cat-expense-outing",
+        "notes": "shimanto to taltola",
+        "tags": [
+          "notion-import-2025-10"
+        ],
+        "createdAt": "2025-10-27T12:00:00Z",
+        "updatedAt": "2025-10-27T12:00:00Z"
+      },
+      {
+        "id": "txn-exp-cash-october-27-2025-taltola-to-home-october-27-2025",
+        "date": "2025-10-27T12:00:00Z",
+        "type": "expense",
+        "amount": 300,
+        "accountId": "acct-notion-cash",
+        "counterpartyAccountId": null,
+        "categoryId": "cat-expense-outing",
+        "notes": "taltola to home",
+        "tags": [
+          "notion-import-2025-10"
+        ],
+        "createdAt": "2025-10-27T12:00:00Z",
+        "updatedAt": "2025-10-27T12:00:00Z"
+      },
+      {
+        "id": "txn-exp-cash-october-27-2025-taltola-to-p-home-october-27-2025",
+        "date": "2025-10-27T12:00:00Z",
+        "type": "expense",
+        "amount": 50,
+        "accountId": "acct-notion-cash",
+        "counterpartyAccountId": null,
+        "categoryId": "cat-expense-outing",
+        "notes": "taltola to p home",
+        "tags": [
+          "notion-import-2025-10"
+        ],
+        "createdAt": "2025-10-27T12:00:00Z",
+        "updatedAt": "2025-10-27T12:00:00Z"
+      },
+      {
+        "id": "txn-exp-cash-october-28-2025-fried-rice-october-28-2025",
+        "date": "2025-10-28T12:00:00Z",
+        "type": "expense",
+        "amount": 100,
+        "accountId": "acct-notion-cash",
+        "counterpartyAccountId": null,
+        "categoryId": "cat-expense-lunch-office",
+        "notes": "fried rice",
+        "tags": [
+          "notion-import-2025-10"
+        ],
+        "createdAt": "2025-10-28T12:00:00Z",
+        "updatedAt": "2025-10-28T12:00:00Z"
+      },
+      {
+        "id": "txn-exp-cash-october-28-2025-home-to-office-october-28-2025",
+        "date": "2025-10-28T12:00:00Z",
+        "type": "expense",
+        "amount": 170,
+        "accountId": "acct-notion-cash",
+        "counterpartyAccountId": null,
+        "categoryId": "cat-expense-transportation-office",
+        "notes": "home to office",
+        "tags": [
+          "notion-import-2025-10"
+        ],
+        "createdAt": "2025-10-28T12:00:00Z",
+        "updatedAt": "2025-10-28T12:00:00Z"
+      },
+      {
+        "id": "txn-exp-cash-october-28-2025-office-to-home-october-28-2025",
+        "date": "2025-10-28T12:00:00Z",
+        "type": "expense",
+        "amount": 110,
+        "accountId": "acct-notion-cash",
+        "counterpartyAccountId": null,
+        "categoryId": "cat-expense-transportation-office",
+        "notes": "office to home",
+        "tags": [
+          "notion-import-2025-10"
+        ],
+        "createdAt": "2025-10-28T12:00:00Z",
+        "updatedAt": "2025-10-28T12:00:00Z"
+      },
+      {
+        "id": "txn-exp-cash-october-29-2025-cha-w-nafiz-october-29-2025",
+        "date": "2025-10-29T12:00:00Z",
+        "type": "expense",
+        "amount": 40,
+        "accountId": "acct-notion-cash",
+        "counterpartyAccountId": null,
+        "categoryId": "cat-expense-food",
+        "notes": "cha w/ nafiz",
+        "tags": [
+          "notion-import-2025-10"
+        ],
+        "createdAt": "2025-10-29T12:00:00Z",
+        "updatedAt": "2025-10-29T12:00:00Z"
+      },
+      {
+        "id": "txn-exp-cash-october-29-2025-fried-rice-october-29-2025",
+        "date": "2025-10-29T12:00:00Z",
+        "type": "expense",
+        "amount": 100,
+        "accountId": "acct-notion-cash",
+        "counterpartyAccountId": null,
+        "categoryId": "cat-expense-lunch-office",
+        "notes": "fried rice",
+        "tags": [
+          "notion-import-2025-10"
+        ],
+        "createdAt": "2025-10-29T12:00:00Z",
+        "updatedAt": "2025-10-29T12:00:00Z"
+      },
+      {
+        "id": "txn-exp-cash-october-29-2025-home-to-office-october-29-2025",
+        "date": "2025-10-29T12:00:00Z",
+        "type": "expense",
+        "amount": 190,
+        "accountId": "acct-notion-cash",
+        "counterpartyAccountId": null,
+        "categoryId": "cat-expense-transportation-office",
+        "notes": "home to office",
+        "tags": [
+          "notion-import-2025-10"
+        ],
+        "createdAt": "2025-10-29T12:00:00Z",
+        "updatedAt": "2025-10-29T12:00:00Z"
+      },
+      {
+        "id": "txn-exp-cash-october-29-2025-office-to-home-october-29-2025",
+        "date": "2025-10-29T12:00:00Z",
+        "type": "expense",
+        "amount": 40,
+        "accountId": "acct-notion-cash",
+        "counterpartyAccountId": null,
+        "categoryId": "cat-expense-transportation-office",
+        "notes": "office to home",
+        "tags": [
+          "notion-import-2025-10"
+        ],
+        "createdAt": "2025-10-29T12:00:00Z",
+        "updatedAt": "2025-10-29T12:00:00Z"
+      },
+      {
+        "id": "txn-exp-cash-october-3-2025-dmd-to-taltola-october-3-2025",
+        "date": "2025-10-03T12:00:00Z",
+        "type": "expense",
+        "amount": 110,
+        "accountId": "acct-notion-cash",
+        "counterpartyAccountId": null,
+        "categoryId": "cat-expense-outing",
+        "notes": "dmd to taltola",
+        "tags": [
+          "notion-import-2025-10"
+        ],
+        "createdAt": "2025-10-03T12:00:00Z",
+        "updatedAt": "2025-10-03T12:00:00Z"
+      },
+      {
+        "id": "txn-exp-cash-october-3-2025-peaches-home-to-dmd-october-3-2025",
+        "date": "2025-10-03T12:00:00Z",
+        "type": "expense",
+        "amount": 300,
+        "accountId": "acct-notion-cash",
+        "counterpartyAccountId": null,
+        "categoryId": "cat-expense-outing",
+        "notes": "Peaches Home to DMD",
+        "tags": [
+          "notion-import-2025-10"
+        ],
+        "createdAt": "2025-10-03T12:00:00Z",
+        "updatedAt": "2025-10-03T12:00:00Z"
+      },
+      {
+        "id": "txn-exp-cash-october-3-2025-taltola-to-home-october-3-2025",
+        "date": "2025-10-03T12:00:00Z",
+        "type": "expense",
+        "amount": 250,
+        "accountId": "acct-notion-cash",
+        "counterpartyAccountId": null,
+        "categoryId": "cat-expense-outing",
+        "notes": "taltola to home",
+        "tags": [
+          "notion-import-2025-10"
+        ],
+        "createdAt": "2025-10-03T12:00:00Z",
+        "updatedAt": "2025-10-03T12:00:00Z"
+      },
+      {
+        "id": "txn-exp-cash-october-3-2025-taltola-to-peaches-home-october-3-2025",
+        "date": "2025-10-03T12:00:00Z",
+        "type": "expense",
+        "amount": 100,
+        "accountId": "acct-notion-cash",
+        "counterpartyAccountId": null,
+        "categoryId": "cat-expense-outing",
+        "notes": "taltola to peaches home",
+        "tags": [
+          "notion-import-2025-10"
+        ],
+        "createdAt": "2025-10-03T12:00:00Z",
+        "updatedAt": "2025-10-03T12:00:00Z"
+      },
+      {
+        "id": "txn-exp-cash-october-30-2025-home-to-office-october-30-2025",
+        "date": "2025-10-30T12:00:00Z",
+        "type": "expense",
+        "amount": 200,
+        "accountId": "acct-notion-cash",
+        "counterpartyAccountId": null,
+        "categoryId": "cat-expense-transportation-office",
+        "notes": "home to office",
+        "tags": [
+          "notion-import-2025-10"
+        ],
+        "createdAt": "2025-10-30T12:00:00Z",
+        "updatedAt": "2025-10-30T12:00:00Z"
+      },
+      {
+        "id": "txn-exp-cash-october-30-2025-home-to-shimanto-shombhar-october-30-2025",
+        "date": "2025-10-30T12:00:00Z",
+        "type": "expense",
+        "amount": 250,
+        "accountId": "acct-notion-cash",
+        "counterpartyAccountId": null,
+        "categoryId": "cat-expense-outing",
+        "notes": "home to shimanto shombhar",
+        "tags": [
+          "notion-import-2025-10"
+        ],
+        "createdAt": "2025-10-30T12:00:00Z",
+        "updatedAt": "2025-10-30T12:00:00Z"
+      },
+      {
+        "id": "txn-exp-cash-october-30-2025-office-to-home-october-30-2025",
+        "date": "2025-10-30T12:00:00Z",
+        "type": "expense",
+        "amount": 70,
+        "accountId": "acct-notion-cash",
+        "counterpartyAccountId": null,
+        "categoryId": "cat-expense-transportation-office",
+        "notes": "office to home",
+        "tags": [
+          "notion-import-2025-10"
+        ],
+        "createdAt": "2025-10-30T12:00:00Z",
+        "updatedAt": "2025-10-30T12:00:00Z"
+      },
+      {
+        "id": "txn-exp-cash-october-5-2025-discone-october-5-2025",
+        "date": "2025-10-05T12:00:00Z",
+        "type": "expense",
+        "amount": 200,
+        "accountId": "acct-notion-cash",
+        "counterpartyAccountId": null,
+        "categoryId": "cat-expense-food",
+        "notes": "Discone",
+        "tags": [
+          "notion-import-2025-10"
+        ],
+        "createdAt": "2025-10-05T12:00:00Z",
+        "updatedAt": "2025-10-05T12:00:00Z"
+      },
+      {
+        "id": "txn-exp-cash-october-5-2025-going-to-eduko-october-5-2025",
+        "date": "2025-10-05T12:00:00Z",
+        "type": "expense",
+        "amount": 250,
+        "accountId": "acct-notion-cash",
+        "counterpartyAccountId": null,
+        "categoryId": "cat-expense-own-work",
+        "notes": "going to eduko",
+        "tags": [
+          "notion-import-2025-10"
+        ],
+        "createdAt": "2025-10-05T12:00:00Z",
+        "updatedAt": "2025-10-05T12:00:00Z"
+      },
+      {
+        "id": "txn-exp-cash-october-6-2025-burger-xpress-october-6-2025",
+        "date": "2025-10-06T12:00:00Z",
+        "type": "expense",
+        "amount": 290,
+        "accountId": "acct-notion-cash",
+        "counterpartyAccountId": null,
+        "categoryId": "cat-expense-food",
+        "notes": "Burger Xpress",
+        "tags": [
+          "notion-import-2025-10"
+        ],
+        "createdAt": "2025-10-06T12:00:00Z",
+        "updatedAt": "2025-10-06T12:00:00Z"
+      },
+      {
+        "id": "txn-exp-cash-october-7-2025-american-burger-october-7-2025",
+        "date": "2025-10-07T12:00:00Z",
+        "type": "expense",
+        "amount": 410,
+        "accountId": "acct-notion-cash",
+        "counterpartyAccountId": null,
+        "categoryId": "cat-expense-lunch-office",
+        "notes": "American Burger",
+        "tags": [
+          "notion-import-2025-10"
+        ],
+        "createdAt": "2025-10-07T12:00:00Z",
+        "updatedAt": "2025-10-07T12:00:00Z"
+      },
+      {
+        "id": "txn-exp-cash-october-7-2025-office-to-home-october-7-2025",
+        "date": "2025-10-07T12:00:00Z",
+        "type": "expense",
+        "amount": 50,
+        "accountId": "acct-notion-cash",
+        "counterpartyAccountId": null,
+        "categoryId": "cat-expense-transportation-office",
+        "notes": "office to home",
+        "tags": [
+          "notion-import-2025-10"
+        ],
+        "createdAt": "2025-10-07T12:00:00Z",
+        "updatedAt": "2025-10-07T12:00:00Z"
+      },
+      {
+        "id": "txn-exp-cash-october-8-2025-dimchop-october-8-2025",
+        "date": "2025-10-08T12:00:00Z",
+        "type": "expense",
+        "amount": 40,
+        "accountId": "acct-notion-cash",
+        "counterpartyAccountId": null,
+        "categoryId": "cat-expense-lunch-office",
+        "notes": "Dimchop",
+        "tags": [
+          "notion-import-2025-10"
+        ],
+        "createdAt": "2025-10-08T12:00:00Z",
+        "updatedAt": "2025-10-08T12:00:00Z"
+      },
+      {
+        "id": "txn-exp-cash-october-8-2025-home-to-office-october-8-2025",
+        "date": "2025-10-08T12:00:00Z",
+        "type": "expense",
+        "amount": 190,
+        "accountId": "acct-notion-cash",
+        "counterpartyAccountId": null,
+        "categoryId": "cat-expense-transportation-office",
+        "notes": "home to office",
+        "tags": [
+          "notion-import-2025-10"
+        ],
+        "createdAt": "2025-10-08T12:00:00Z",
+        "updatedAt": "2025-10-08T12:00:00Z"
+      },
+      {
+        "id": "txn-exp-cash-october-8-2025-office-to-home-october-8-2025",
+        "date": "2025-10-08T12:00:00Z",
+        "type": "expense",
+        "amount": 125,
+        "accountId": "acct-notion-cash",
+        "counterpartyAccountId": null,
+        "categoryId": "cat-expense-transportation-office",
+        "notes": "Office to home",
+        "tags": [
+          "notion-import-2025-10"
+        ],
+        "createdAt": "2025-10-08T12:00:00Z",
+        "updatedAt": "2025-10-08T12:00:00Z"
+      },
+      {
+        "id": "txn-exp-cash-october-9-2025-cp-chicken-october-9-2025",
+        "date": "2025-10-09T12:00:00Z",
+        "type": "expense",
+        "amount": 210,
+        "accountId": "acct-notion-cash",
+        "counterpartyAccountId": null,
+        "categoryId": "cat-expense-food",
+        "notes": "CP Chicken",
+        "tags": [
+          "notion-import-2025-10"
+        ],
+        "createdAt": "2025-10-09T12:00:00Z",
+        "updatedAt": "2025-10-09T12:00:00Z"
+      },
+      {
+        "id": "txn-exp-cash-october-9-2025-fried-rice-october-9-2025",
+        "date": "2025-10-09T12:00:00Z",
+        "type": "expense",
+        "amount": 100,
+        "accountId": "acct-notion-cash",
+        "counterpartyAccountId": null,
+        "categoryId": "cat-expense-lunch-office",
+        "notes": "fried rice",
+        "tags": [
+          "notion-import-2025-10"
+        ],
+        "createdAt": "2025-10-09T12:00:00Z",
+        "updatedAt": "2025-10-09T12:00:00Z"
+      },
+      {
+        "id": "txn-exp-cash-october-9-2025-home-to-office-october-9-2025",
+        "date": "2025-10-09T12:00:00Z",
+        "type": "expense",
+        "amount": 110,
+        "accountId": "acct-notion-cash",
+        "counterpartyAccountId": null,
+        "categoryId": "cat-expense-transportation-office",
+        "notes": "home to office",
+        "tags": [
+          "notion-import-2025-10"
+        ],
+        "createdAt": "2025-10-09T12:00:00Z",
+        "updatedAt": "2025-10-09T12:00:00Z"
+      },
+      {
+        "id": "txn-exp-cash-october-9-2025-new-50tk-note-keep-october-9-2025",
+        "date": "2025-10-09T12:00:00Z",
+        "type": "expense",
+        "amount": 50,
+        "accountId": "acct-notion-cash",
+        "counterpartyAccountId": null,
+        "categoryId": "cat-expense-savings",
+        "notes": "new 50tk note keep",
+        "tags": [
+          "notion-import-2025-10"
+        ],
+        "createdAt": "2025-10-09T12:00:00Z",
+        "updatedAt": "2025-10-09T12:00:00Z"
+      },
+      {
+        "id": "txn-exp-cash-october-9-2025-office-to-home-october-9-2025",
+        "date": "2025-10-09T12:00:00Z",
+        "type": "expense",
+        "amount": 100,
+        "accountId": "acct-notion-cash",
+        "counterpartyAccountId": null,
+        "categoryId": "cat-expense-transportation-office",
+        "notes": "office to home",
+        "tags": [
+          "notion-import-2025-10"
+        ],
+        "createdAt": "2025-10-09T12:00:00Z",
+        "updatedAt": "2025-10-09T12:00:00Z"
+      },
+      {
+        "id": "txn-fd201bee4fcc",
+        "date": "2025-11-03",
+        "type": "expense",
+        "amount": 7.45,
+        "accountId": "acct-notion-bkash",
+        "counterpartyAccountId": null,
+        "categoryId": "cat-expense-charge",
+        "notes": "Bkash cashout charge",
+        "tags": [],
+        "createdAt": "2025-11-03T15:05:27.052Z",
+        "updatedAt": "2025-11-03T15:05:27.052Z"
+      },
+      {
+        "id": "txn-inc-bank-asia-november-1-2025-salary-november-1-2025",
+        "date": "2025-11-01T12:00:00Z",
+        "type": "income",
+        "amount": 44583,
+        "accountId": "acct-notion-bank-asia",
+        "counterpartyAccountId": null,
+        "categoryId": "cat-income-salary-wages",
+        "notes": "Salary",
+        "tags": [
+          "notion-import-2025-10"
+        ],
+        "createdAt": "2025-11-01T12:00:00Z",
+        "updatedAt": "2025-11-01T12:00:00Z"
+      },
+      {
+        "id": "txn-inc-bank-asia-october-1-2025-october-1-2025",
+        "date": "2025-10-01T12:00:00Z",
+        "type": "income",
+        "amount": 44583,
+        "accountId": "acct-notion-bank-asia",
+        "counterpartyAccountId": null,
+        "categoryId": "cat-income-salary-wages",
+        "notes": null,
+        "tags": [
+          "notion-import-2025-10"
+        ],
+        "createdAt": "2025-10-01T12:00:00Z",
+        "updatedAt": "2025-10-01T12:00:00Z"
+      },
+      {
+        "id": "txn-inc-bkash-october-10-2025-apu-october-10-2025",
+        "date": "2025-10-10T12:00:00Z",
+        "type": "income",
+        "amount": 1000,
+        "accountId": "acct-notion-bkash",
+        "counterpartyAccountId": null,
+        "categoryId": "cat-income-repayment",
+        "notes": "Apu",
+        "tags": [
+          "notion-import-2025-10"
+        ],
+        "createdAt": "2025-10-10T12:00:00Z",
+        "updatedAt": "2025-10-10T12:00:00Z"
+      },
+      {
+        "id": "txn-inc-bkash-october-12-2025-peaches-october-12-2025",
+        "date": "2025-10-12T12:00:00Z",
+        "type": "income",
+        "amount": 8000,
+        "accountId": "acct-notion-bkash",
+        "counterpartyAccountId": null,
+        "categoryId": "cat-income-repayment",
+        "notes": "Peaches",
+        "tags": [
+          "notion-import-2025-10"
+        ],
+        "createdAt": "2025-10-12T12:00:00Z",
+        "updatedAt": "2025-10-12T12:00:00Z"
+      },
+      {
+        "id": "txn-inc-bkash-october-28-2025-apu-october-28-2025",
+        "date": "2025-10-28T12:00:00Z",
+        "type": "income",
+        "amount": 1810,
+        "accountId": "acct-notion-bkash",
+        "counterpartyAccountId": null,
+        "categoryId": "cat-income-repayment",
+        "notes": "apu",
+        "tags": [
+          "notion-import-2025-10"
+        ],
+        "createdAt": "2025-10-28T12:00:00Z",
+        "updatedAt": "2025-10-28T12:00:00Z"
+      },
+      {
+        "id": "txn-inc-cash-october-11-2025-sadi-october-11-2025",
+        "date": "2025-10-11T12:00:00Z",
+        "type": "income",
+        "amount": 230,
+        "accountId": "acct-notion-cash",
+        "counterpartyAccountId": null,
+        "categoryId": "cat-income-repayment",
+        "notes": "Sadi",
+        "tags": [
+          "notion-import-2025-10"
+        ],
+        "createdAt": "2025-10-11T12:00:00Z",
+        "updatedAt": "2025-10-11T12:00:00Z"
+      },
+      {
+        "id": "txn-inc-cash-october-30-2025-ammu-october-30-2025",
+        "date": "2025-10-30T12:00:00Z",
+        "type": "income",
+        "amount": 100,
+        "accountId": "acct-notion-cash",
+        "counterpartyAccountId": null,
+        "categoryId": "cat-income-pocket-money",
+        "notes": "ammu",
+        "tags": [
+          "notion-import-2025-10"
+        ],
+        "createdAt": "2025-10-30T12:00:00Z",
+        "updatedAt": "2025-10-30T12:00:00Z"
+      },
+      {
+        "id": "txn-inc-cash-october-9-2025-ammu-october-9-2025",
+        "date": "2025-10-09T12:00:00Z",
+        "type": "income",
+        "amount": 50,
+        "accountId": "acct-notion-cash",
+        "counterpartyAccountId": null,
+        "categoryId": "cat-income-pocket-money",
+        "notes": "ammu",
+        "tags": [
+          "notion-import-2025-10"
+        ],
+        "createdAt": "2025-10-09T12:00:00Z",
+        "updatedAt": "2025-10-09T12:00:00Z"
+      },
+      {
+        "id": "txn-xfer-bank-asia-bkash-october-10-2025",
+        "date": "2025-10-10T12:00:00Z",
+        "type": "transfer",
+        "amount": 1020,
+        "accountId": "acct-notion-bank-asia",
+        "counterpartyAccountId": "acct-notion-bkash",
+        "categoryId": null,
+        "notes": "Lend Apu",
+        "tags": [
+          "notion-import-2025-10"
+        ],
+        "createdAt": "2025-10-10T12:00:00Z",
+        "updatedAt": "2025-10-10T12:00:00Z"
+      },
+      {
+        "id": "txn-xfer-bank-asia-bkash-october-10-2025-10",
+        "date": "2025-10-10T12:00:00Z",
+        "type": "transfer",
+        "amount": 1700,
+        "accountId": "acct-notion-bank-asia",
+        "counterpartyAccountId": "acct-notion-bkash",
+        "categoryId": null,
+        "notes": "Chatgpt",
+        "tags": [
+          "notion-import-2025-10"
+        ],
+        "createdAt": "2025-10-10T12:00:00Z",
+        "updatedAt": "2025-10-10T12:00:00Z"
+      },
+      {
+        "id": "txn-xfer-bank-asia-bkash-october-10-2025-11",
+        "date": "2025-10-10T12:00:00Z",
+        "type": "transfer",
+        "amount": 450,
+        "accountId": "acct-notion-bank-asia",
+        "counterpartyAccountId": "acct-notion-bkash",
+        "categoryId": null,
+        "notes": null,
+        "tags": [
+          "notion-import-2025-10"
+        ],
+        "createdAt": "2025-10-10T12:00:00Z",
+        "updatedAt": "2025-10-10T12:00:00Z"
+      },
+      {
+        "id": "txn-xfer-bank-asia-bkash-october-10-2025-12",
+        "date": "2025-10-10T12:00:00Z",
+        "type": "transfer",
+        "amount": 50,
+        "accountId": "acct-notion-bank-asia",
+        "counterpartyAccountId": "acct-notion-bkash",
+        "categoryId": null,
+        "notes": null,
+        "tags": [
+          "notion-import-2025-10"
+        ],
+        "createdAt": "2025-10-10T12:00:00Z",
+        "updatedAt": "2025-10-10T12:00:00Z"
+      },
+      {
+        "id": "txn-xfer-bank-asia-bkash-october-10-2025-13",
+        "date": "2025-10-10T12:00:00Z",
+        "type": "transfer",
+        "amount": 1050,
+        "accountId": "acct-notion-bank-asia",
+        "counterpartyAccountId": "acct-notion-bkash",
+        "categoryId": null,
+        "notes": null,
+        "tags": [
+          "notion-import-2025-10"
+        ],
+        "createdAt": "2025-10-10T12:00:00Z",
+        "updatedAt": "2025-10-10T12:00:00Z"
+      },
+      {
+        "id": "txn-xfer-bank-asia-bkash-october-10-2025-14",
+        "date": "2025-10-10T12:00:00Z",
+        "type": "transfer",
+        "amount": 161,
+        "accountId": "acct-notion-bank-asia",
+        "counterpartyAccountId": "acct-notion-bkash",
+        "categoryId": null,
+        "notes": "Peaches Internet",
+        "tags": [
+          "notion-import-2025-10"
+        ],
+        "createdAt": "2025-10-10T12:00:00Z",
+        "updatedAt": "2025-10-10T12:00:00Z"
+      },
+      {
+        "id": "txn-xfer-bank-asia-bkash-october-10-2025-15",
+        "date": "2025-10-10T12:00:00Z",
+        "type": "transfer",
+        "amount": 161,
+        "accountId": "acct-notion-bank-asia",
+        "counterpartyAccountId": "acct-notion-bkash",
+        "categoryId": null,
+        "notes": "Peaches Net",
+        "tags": [
+          "notion-import-2025-10"
+        ],
+        "createdAt": "2025-10-10T12:00:00Z",
+        "updatedAt": "2025-10-10T12:00:00Z"
+      },
+      {
+        "id": "txn-xfer-bank-asia-bkash-october-10-2025-16",
+        "date": "2025-10-10T12:00:00Z",
+        "type": "transfer",
+        "amount": 290,
+        "accountId": "acct-notion-bank-asia",
+        "counterpartyAccountId": "acct-notion-bkash",
+        "categoryId": null,
+        "notes": null,
+        "tags": [
+          "notion-import-2025-10"
+        ],
+        "createdAt": "2025-10-10T12:00:00Z",
+        "updatedAt": "2025-10-10T12:00:00Z"
+      },
+      {
+        "id": "txn-xfer-bank-asia-bkash-october-10-2025-17",
+        "date": "2025-10-10T12:00:00Z",
+        "type": "transfer",
+        "amount": 50,
+        "accountId": "acct-notion-bank-asia",
+        "counterpartyAccountId": "acct-notion-bkash",
+        "categoryId": null,
+        "notes": null,
+        "tags": [
+          "notion-import-2025-10"
+        ],
+        "createdAt": "2025-10-10T12:00:00Z",
+        "updatedAt": "2025-10-10T12:00:00Z"
+      },
+      {
+        "id": "txn-xfer-bank-asia-bkash-october-10-2025-18",
+        "date": "2025-10-10T12:00:00Z",
+        "type": "transfer",
+        "amount": 500,
+        "accountId": "acct-notion-bank-asia",
+        "counterpartyAccountId": "acct-notion-bkash",
+        "categoryId": null,
+        "notes": null,
+        "tags": [
+          "notion-import-2025-10"
+        ],
+        "createdAt": "2025-10-10T12:00:00Z",
+        "updatedAt": "2025-10-10T12:00:00Z"
+      },
+      {
+        "id": "txn-xfer-bank-asia-bkash-october-10-2025-19",
+        "date": "2025-10-10T12:00:00Z",
+        "type": "transfer",
+        "amount": 393,
+        "accountId": "acct-notion-bank-asia",
+        "counterpartyAccountId": "acct-notion-bkash",
+        "categoryId": null,
+        "notes": null,
+        "tags": [
+          "notion-import-2025-10"
+        ],
+        "createdAt": "2025-10-10T12:00:00Z",
+        "updatedAt": "2025-10-10T12:00:00Z"
+      },
+      {
+        "id": "txn-xfer-bank-asia-bkash-october-10-2025-2",
+        "date": "2025-10-10T12:00:00Z",
+        "type": "transfer",
+        "amount": 520,
+        "accountId": "acct-notion-bank-asia",
+        "counterpartyAccountId": "acct-notion-bkash",
+        "categoryId": null,
+        "notes": "iCloud",
+        "tags": [
+          "notion-import-2025-10"
+        ],
+        "createdAt": "2025-10-10T12:00:00Z",
+        "updatedAt": "2025-10-10T12:00:00Z"
+      },
+      {
+        "id": "txn-xfer-bank-asia-bkash-october-10-2025-3",
+        "date": "2025-10-10T12:00:00Z",
+        "type": "transfer",
+        "amount": 2000,
+        "accountId": "acct-notion-bank-asia",
+        "counterpartyAccountId": "acct-notion-bkash",
+        "categoryId": null,
+        "notes": "Peaches + Raya",
+        "tags": [
+          "notion-import-2025-10"
+        ],
+        "createdAt": "2025-10-10T12:00:00Z",
+        "updatedAt": "2025-10-10T12:00:00Z"
+      },
+      {
+        "id": "txn-xfer-bank-asia-bkash-october-10-2025-4",
+        "date": "2025-10-10T12:00:00Z",
+        "type": "transfer",
+        "amount": 2000,
+        "accountId": "acct-notion-bank-asia",
+        "counterpartyAccountId": "acct-notion-bkash",
+        "categoryId": null,
+        "notes": "Peaches Raya",
+        "tags": [
+          "notion-import-2025-10"
+        ],
+        "createdAt": "2025-10-10T12:00:00Z",
+        "updatedAt": "2025-10-10T12:00:00Z"
+      },
+      {
+        "id": "txn-xfer-bank-asia-bkash-october-10-2025-5",
+        "date": "2025-10-10T12:00:00Z",
+        "type": "transfer",
+        "amount": 1020,
+        "accountId": "acct-notion-bank-asia",
+        "counterpartyAccountId": "acct-notion-bkash",
+        "categoryId": null,
+        "notes": null,
+        "tags": [
+          "notion-import-2025-10"
+        ],
+        "createdAt": "2025-10-10T12:00:00Z",
+        "updatedAt": "2025-10-10T12:00:00Z"
+      },
+      {
+        "id": "txn-xfer-bank-asia-bkash-october-10-2025-6",
+        "date": "2025-10-10T12:00:00Z",
+        "type": "transfer",
+        "amount": 1000,
+        "accountId": "acct-notion-bank-asia",
+        "counterpartyAccountId": "acct-notion-bkash",
+        "categoryId": null,
+        "notes": "Ammu",
+        "tags": [
+          "notion-import-2025-10"
+        ],
+        "createdAt": "2025-10-10T12:00:00Z",
+        "updatedAt": "2025-10-10T12:00:00Z"
+      },
+      {
+        "id": "txn-xfer-bank-asia-bkash-october-10-2025-7",
+        "date": "2025-10-10T12:00:00Z",
+        "type": "transfer",
+        "amount": 500,
+        "accountId": "acct-notion-bank-asia",
+        "counterpartyAccountId": "acct-notion-bkash",
+        "categoryId": null,
+        "notes": null,
+        "tags": [
+          "notion-import-2025-10"
+        ],
+        "createdAt": "2025-10-10T12:00:00Z",
+        "updatedAt": "2025-10-10T12:00:00Z"
+      },
+      {
+        "id": "txn-xfer-bank-asia-bkash-october-10-2025-8",
+        "date": "2025-10-10T12:00:00Z",
+        "type": "transfer",
+        "amount": 1530,
+        "accountId": "acct-notion-bank-asia",
+        "counterpartyAccountId": "acct-notion-bkash",
+        "categoryId": null,
+        "notes": null,
+        "tags": [
+          "notion-import-2025-10"
+        ],
+        "createdAt": "2025-10-10T12:00:00Z",
+        "updatedAt": "2025-10-10T12:00:00Z"
+      },
+      {
+        "id": "txn-xfer-bank-asia-bkash-october-10-2025-9",
+        "date": "2025-10-10T12:00:00Z",
+        "type": "transfer",
+        "amount": 1500,
+        "accountId": "acct-notion-bank-asia",
+        "counterpartyAccountId": "acct-notion-bkash",
+        "categoryId": null,
+        "notes": null,
+        "tags": [
+          "notion-import-2025-10"
+        ],
+        "createdAt": "2025-10-10T12:00:00Z",
+        "updatedAt": "2025-10-10T12:00:00Z"
+      },
+      {
+        "id": "txn-xfer-bank-asia-bkash-october-20-2025",
+        "date": "2025-10-20T12:00:00Z",
+        "type": "transfer",
+        "amount": 1002,
+        "accountId": "acct-notion-bank-asia",
+        "counterpartyAccountId": "acct-notion-bkash",
+        "categoryId": null,
+        "notes": "mahfuz er taka theke khoroch",
+        "tags": [
+          "notion-import-2025-10"
+        ],
+        "createdAt": "2025-10-20T12:00:00Z",
+        "updatedAt": "2025-10-20T12:00:00Z"
+      },
+      {
+        "id": "txn-xfer-bank-asia-bkash-october-23-2025",
+        "date": "2025-10-23T12:00:00Z",
+        "type": "transfer",
+        "amount": 4100,
+        "accountId": "acct-notion-bank-asia",
+        "counterpartyAccountId": "acct-notion-bkash",
+        "categoryId": null,
+        "notes": "punom",
+        "tags": [
+          "notion-import-2025-10"
+        ],
+        "createdAt": "2025-10-23T12:00:00Z",
+        "updatedAt": "2025-10-23T12:00:00Z"
+      },
+      {
+        "id": "txn-xfer-bkash-cash-october-10-2025",
+        "date": "2025-10-10T12:00:00Z",
+        "type": "transfer",
+        "amount": 1527.75,
+        "accountId": "acct-notion-bkash",
+        "counterpartyAccountId": "acct-notion-cash",
+        "categoryId": null,
+        "notes": "Cashout",
+        "tags": [
+          "notion-import-2025-10"
+        ],
+        "createdAt": "2025-10-10T12:00:00Z",
+        "updatedAt": "2025-10-10T12:00:00Z"
+      },
+      {
+        "id": "txn-xfer-bkash-cash-october-10-2025-2",
+        "date": "2025-10-10T12:00:00Z",
+        "type": "transfer",
+        "amount": 509.25,
+        "accountId": "acct-notion-bkash",
+        "counterpartyAccountId": "acct-notion-cash",
+        "categoryId": null,
+        "notes": null,
+        "tags": [
+          "notion-import-2025-10"
+        ],
+        "createdAt": "2025-10-10T12:00:00Z",
+        "updatedAt": "2025-10-10T12:00:00Z"
+      },
+      {
+        "id": "txn-xfer-bkash-cash-october-10-2025-3",
+        "date": "2025-10-10T12:00:00Z",
+        "type": "transfer",
+        "amount": 507.45,
+        "accountId": "acct-notion-bkash",
+        "counterpartyAccountId": "acct-notion-cash",
+        "categoryId": null,
+        "notes": null,
+        "tags": [
+          "notion-import-2025-10"
+        ],
+        "createdAt": "2025-10-10T12:00:00Z",
+        "updatedAt": "2025-10-10T12:00:00Z"
+      },
+      {
+        "id": "txn-xfer-bkash-cash-october-10-2025-4",
+        "date": "2025-10-10T12:00:00Z",
+        "type": "transfer",
+        "amount": 509.25,
+        "accountId": "acct-notion-bkash",
+        "counterpartyAccountId": "acct-notion-cash",
+        "categoryId": null,
+        "notes": "Cashout (Near Office)",
+        "tags": [
+          "notion-import-2025-10"
+        ],
+        "createdAt": "2025-10-10T12:00:00Z",
+        "updatedAt": "2025-10-10T12:00:00Z"
+      },
+      {
+        "id": "txn-xfer-bkash-cash-october-15-2025",
+        "date": "2025-10-15T12:00:00Z",
+        "type": "transfer",
+        "amount": 300,
+        "accountId": "acct-notion-bkash",
+        "counterpartyAccountId": "acct-notion-cash",
+        "categoryId": null,
+        "notes": "cashout",
+        "tags": [
+          "notion-import-2025-10"
+        ],
+        "createdAt": "2025-10-15T12:00:00Z",
+        "updatedAt": "2025-10-15T12:00:00Z"
+      },
+      {
+        "id": "txn-xfer-bkash-cash-october-16-2025",
+        "date": "2025-10-16T12:00:00Z",
+        "type": "transfer",
+        "amount": 300,
+        "accountId": "acct-notion-bkash",
+        "counterpartyAccountId": "acct-notion-cash",
+        "categoryId": null,
+        "notes": "cashout",
+        "tags": [
+          "notion-import-2025-10"
+        ],
+        "createdAt": "2025-10-16T12:00:00Z",
+        "updatedAt": "2025-10-16T12:00:00Z"
+      },
+      {
+        "id": "txn-xfer-bkash-cash-october-20-2025",
+        "date": "2025-10-20T12:00:00Z",
+        "type": "transfer",
+        "amount": 900,
+        "accountId": "acct-notion-bkash",
+        "counterpartyAccountId": "acct-notion-cash",
+        "categoryId": null,
+        "notes": "cashout",
+        "tags": [
+          "notion-import-2025-10"
+        ],
+        "createdAt": "2025-10-20T12:00:00Z",
+        "updatedAt": "2025-10-20T12:00:00Z"
+      },
+      {
+        "id": "txn-xfer-bkash-cash-october-27-2025",
+        "date": "2025-10-27T12:00:00Z",
+        "type": "transfer",
+        "amount": 2000,
+        "accountId": "acct-notion-bkash",
+        "counterpartyAccountId": "acct-notion-cash",
+        "categoryId": null,
+        "notes": null,
+        "tags": [
+          "notion-import-2025-10"
+        ],
+        "createdAt": "2025-10-27T12:00:00Z",
+        "updatedAt": "2025-10-27T12:00:00Z"
+      },
+      {
+        "id": "txn-xfer-bkash-savings-usd-october-14-2025",
+        "date": "2025-10-14T12:00:00Z",
+        "type": "transfer",
+        "amount": 3000,
+        "accountId": "acct-notion-bkash",
+        "counterpartyAccountId": "acct-notion-savings-usd",
+        "categoryId": null,
+        "notes": "usd",
+        "tags": [
+          "notion-import-2025-10"
+        ],
+        "createdAt": "2025-10-14T12:00:00Z",
+        "updatedAt": "2025-10-14T12:00:00Z"
+      }
+    ],
+    "goals": [
+      {
+        "id": "goal-notion-masters-application-free",
+        "name": "Masters Application Free",
+        "targetAmount": 100000,
+        "targetDate": "2025-11-30T12:00:00Z",
+        "currentAllocated": 0,
+        "createdAt": "2025-02-01T12:00:00Z",
+        "updatedAt": "2025-11-02T22:46:02Z"
+      },
+      {
+        "id": "goal-notion-new-gadget",
+        "name": "New Gadget",
+        "targetAmount": 1000,
+        "targetDate": "2025-04-25T12:00:00Z",
+        "currentAllocated": 1000,
+        "createdAt": "2025-03-25T12:00:00Z",
+        "updatedAt": "2025-04-25T12:00:00Z"
+      },
+      {
+        "id": "goal-notion-plan-a-vacation",
+        "name": "Plan a Vacation",
+        "targetAmount": 30000,
+        "targetDate": "2025-10-31T12:00:00Z",
+        "currentAllocated": 0,
+        "createdAt": "2025-03-01T12:00:00Z",
+        "updatedAt": "2025-11-02T22:46:02Z"
+      }
+    ],
+    "snapshots": []
+  }
+}
