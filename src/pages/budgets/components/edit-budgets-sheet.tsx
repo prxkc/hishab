@@ -126,7 +126,10 @@ export function EditBudgetsSheet({ triggerLabel = 'Adjust Budgets' }: EditBudget
                 <div className="flex items-center justify-between text-sm font-medium text-foreground">
                   <span>{category.name}</span>
                   <span className="text-xs text-muted-foreground">
-                    Current: {formatCurrency(initialAllocations[category.id] ?? 0)}
+                    Current:{' '}
+                    <span className="font-money">
+                      {formatCurrency(initialAllocations[category.id] ?? 0)}
+                    </span>
                   </span>
                 </div>
                 <div className="space-y-1">
@@ -155,7 +158,9 @@ export function EditBudgetsSheet({ triggerLabel = 'Adjust Budgets' }: EditBudget
         <SheetFooter className="flex flex-col gap-3 sm:flex-col">
           <div className="flex items-center justify-between rounded-lg border border-border/20 bg-muted/10 px-4 py-2 text-sm">
             <span className="text-muted-foreground">Total allocation</span>
-            <span className="font-semibold text-foreground">{formatCurrency(total)}</span>
+            <span className="font-money font-semibold text-foreground">
+              {formatCurrency(total)}
+            </span>
           </div>
           <Button onClick={handleSubmit} disabled={categories.length === 0}>
             Save budgets

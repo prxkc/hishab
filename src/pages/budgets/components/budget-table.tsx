@@ -86,13 +86,13 @@ export function BudgetTable() {
                   </span>
                 </div>
               </td>
-              <td className="px-4 py-4 text-right text-muted-foreground">
+              <td className="px-4 py-4 text-right font-money text-muted-foreground">
                 {formatCurrency(budget.amount)}
               </td>
-              <td className="px-4 py-4 text-right text-muted-foreground">
+              <td className="px-4 py-4 text-right font-money text-muted-foreground">
                 {formatCurrency(budget.spent ?? 0)}
               </td>
-              <td className="px-4 py-4 text-right text-muted-foreground">
+              <td className="px-4 py-4 text-right font-money text-muted-foreground">
                 {formatCurrency(budget.remaining ?? 0)}
               </td>
               <td className="px-4 py-4">
@@ -147,20 +147,20 @@ export function BudgetTable() {
         <tfoot className="bg-black/20 text-sm">
           <tr>
             <td className="px-4 py-3 font-medium text-foreground">Totals</td>
-            <td className="px-4 py-3 text-right font-semibold text-foreground">
+            <td className="px-4 py-3 text-right font-money font-semibold text-foreground">
               {formatCurrency(budgets.reduce((total, budget) => total + budget.amount, 0))}
             </td>
-            <td className="px-4 py-3 text-right font-semibold text-foreground">
+            <td className="px-4 py-3 text-right font-money font-semibold text-foreground">
               {formatCurrency(budgets.reduce((total, budget) => total + (budget.spent ?? 0), 0))}
             </td>
-            <td className="px-4 py-3 text-right font-semibold text-foreground">
+            <td className="px-4 py-3 text-right font-money font-semibold text-foreground">
               {formatCurrency(
                 budgets.reduce((total, budget) => total + (budget.remaining ?? 0), 0),
               )}
             </td>
             <td className="px-4 py-3 text-xs text-muted-foreground">
-              Cash flow net: {formatCurrency(cashFlow.net)} ({formatNumber(cashFlow.income)} /
-              {formatNumber(cashFlow.expense)})
+              Cash flow net: <span className="font-money">{formatCurrency(cashFlow.net)}</span> (
+              {formatNumber(cashFlow.income)} / {formatNumber(cashFlow.expense)})
             </td>
           </tr>
         </tfoot>

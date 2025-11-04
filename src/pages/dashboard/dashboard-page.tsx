@@ -7,7 +7,7 @@ import { EChart } from '@/components/charts/echart'
 import { Progress } from '@/components/ui/progress'
 import { MonthSwitcher } from '@/components/shared/month-switcher'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
-import { formatCurrency } from '@/lib/utils'
+import { cn, formatCurrency } from '@/lib/utils'
 import { useAppStore } from '@/store/app-store'
 import {
   selectBudgetUsage,
@@ -271,7 +271,9 @@ export function DashboardPage() {
               {/* Title and Balance */}
               <div>
                 <p className="mb-2 text-sm text-muted-foreground">Total Balance</p>
-                <p className="text-4xl font-bold tracking-tight text-foreground">{netWorth}</p>
+                <p className="font-money text-4xl font-bold tracking-tight text-foreground">
+                  {netWorth}
+                </p>
               </div>
 
               {/* Income and Expense - Compact */}
@@ -279,7 +281,7 @@ export function DashboardPage() {
                 {/* Income */}
                 <div className="flex items-center gap-1">
                   <ArrowUpRight className="h-3 w-3 text-success" />
-                  <span className="text-xs font-medium text-success">
+                  <span className="font-money text-xs font-medium text-success">
                     {formatCurrency(cashFlow.income)}
                   </span>
                 </div>
@@ -287,7 +289,7 @@ export function DashboardPage() {
                 {/* Expense */}
                 <div className="flex items-center gap-1">
                   <ArrowDownRight className="h-3 w-3 text-destructive" />
-                  <span className="text-xs font-medium text-destructive">
+                  <span className="font-money text-xs font-medium text-destructive">
                     {formatCurrency(cashFlow.expense)}
                   </span>
                 </div>
@@ -306,7 +308,7 @@ export function DashboardPage() {
               <CardContent className="p-6">
                 <div className="space-y-3">
                   <p className="text-sm text-muted-foreground">{account.name}</p>
-                  <p className="text-3xl font-bold tracking-tight text-foreground">
+                  <p className="font-money text-3xl font-bold tracking-tight text-foreground">
                     {formatCurrency(account.balance)}
                   </p>
                 </div>
@@ -352,6 +354,14 @@ export function DashboardPage() {
               {recentTransactions.length > 0 ? (
                 recentTransactions.map((tx) => {
                   const category = categories.find((c) => c.id === tx.categoryId)
+                  const amountClass = cn(
+                    'text-sm font-semibold font-money',
+                    tx.type === 'income'
+                      ? 'text-success'
+                      : tx.type === 'expense'
+                        ? 'text-destructive'
+                        : 'text-blue-500 dark:text-blue-400',
+                  )
                   return (
                     <div
                       key={tx.id}
@@ -408,17 +418,11 @@ export function DashboardPage() {
                           </p>
                         </div>
                       </div>
-                      <p
-                        className={`text-sm font-semibold ${
-                          tx.type === 'income'
-                            ? 'text-success'
-                            : tx.type === 'expense'
-                              ? 'text-destructive'
-                              : 'text-blue-500 dark:text-blue-400'
-                        }`}
-                      >
-                        {tx.type === 'income' ? '+' : tx.type === 'expense' ? '-' : ''}
-                        {formatCurrency(tx.amount)}
+                      <p className={amountClass}>
+                        <span className="font-money">
+                          {tx.type === 'income' ? '+' : tx.type === 'expense' ? '-' : ''}
+                          {formatCurrency(tx.amount)}
+                        </span>
                       </p>
                     </div>
                   )
@@ -470,7 +474,7 @@ export function DashboardPage() {
                       <span className="font-medium text-foreground">
                         {category?.name || budget.categoryId}
                       </span>
-                      <span className="text-xs text-muted-foreground">
+                      <span className="font-money text-xs text-muted-foreground">
                         {formatCurrency(budget.spent ?? 0)} / {formatCurrency(budget.amount)}
                       </span>
                     </div>

@@ -64,7 +64,7 @@ export function AccountsList() {
             <div className="flex items-start justify-between gap-3">
               <div className="space-y-3">
                 <p className="text-sm text-muted-foreground">{account.name}</p>
-                <p className="text-3xl font-bold tracking-tight text-foreground">
+                <p className="font-money text-3xl font-bold tracking-tight text-foreground">
                   {formatCurrency(account.balance)}
                 </p>
               </div>

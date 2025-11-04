@@ -112,7 +112,8 @@ export function GoalsList() {
           <div>
             <p className="text-sm font-medium text-foreground">Portfolio progress</p>
             <p className="text-xs text-muted-foreground">
-              {formatCurrency(summary.allocated)} saved of {formatCurrency(summary.target)} target.
+              <span className="font-money">{formatCurrency(summary.allocated)}</span> saved of{' '}
+              <span className="font-money">{formatCurrency(summary.target)}</span> target.
             </p>
           </div>
           <div className="flex items-center gap-3">
@@ -140,7 +141,8 @@ export function GoalsList() {
                     <div>
                       <p className="text-base font-semibold text-foreground">{goal.name}</p>
                       <p className="text-xs text-muted-foreground">
-                        Target: {formatCurrency(goal.targetAmount)}
+                        Target:{' '}
+                        <span className="font-money">{formatCurrency(goal.targetAmount)}</span>
                       </p>
                     </div>
                     <div className="flex items-center gap-2">
@@ -193,7 +195,7 @@ export function GoalsList() {
                     <Progress value={Math.min(100, completion)} className="h-2 bg-primary/10" />
                     <div className="flex items-center justify-between text-xs text-muted-foreground">
                       <span>{Math.round(completion)}% funded</span>
-                      <span>
+                      <span className="font-money">
                         {formatCurrency(goal.currentAllocated)} /{' '}
                         {formatCurrency(goal.targetAmount)}
                       </span>

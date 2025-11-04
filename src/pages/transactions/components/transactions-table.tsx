@@ -16,7 +16,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from '@/components/ui/dialog'
-import { formatCurrency } from '@/lib/utils'
+import { cn, formatCurrency } from '@/lib/utils'
 import { useAppStore } from '@/store/app-store'
 import { useToast } from '@/hooks/use-toast'
 
@@ -135,7 +135,12 @@ export function TransactionsTable() {
                 </td>
                 <td className="px-6 py-3 text-muted-foreground">{destinationLabel}</td>
                 <td className="px-6 py-3 text-right font-medium text-foreground">
-                  <span className={isExpense ? 'text-destructive' : isIncome ? 'text-success' : ''}>
+                  <span
+                    className={cn(
+                      'font-money',
+                      isExpense ? 'text-destructive' : isIncome ? 'text-success' : '',
+                    )}
+                  >
                     {signPrefix}
                     {amountDisplay}
                   </span>

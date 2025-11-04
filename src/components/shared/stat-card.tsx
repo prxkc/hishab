@@ -29,7 +29,7 @@ export function StatCard({ label, value, description, delta, icon, className }: 
             <CardDescription className="mb-2 text-sm font-medium text-muted-foreground">
               {label}
             </CardDescription>
-            <CardTitle className="text-3xl font-bold tracking-tight text-foreground">
+            <CardTitle className="font-money text-3xl font-bold tracking-tight text-foreground">
               {value}
             </CardTitle>
           </div>
@@ -45,7 +45,7 @@ export function StatCard({ label, value, description, delta, icon, className }: 
             {delta ? (
               <span
                 className={cn(
-                  'inline-flex items-center gap-1 text-sm font-medium',
+                  'inline-flex items-center gap-1 font-money text-sm font-medium',
                   delta.positive ? 'text-success' : 'text-destructive',
                 )}
               >

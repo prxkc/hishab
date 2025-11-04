@@ -61,7 +61,7 @@ export function AccountCard({
           <div className="flex items-center justify-between border-t border-border pt-4">
             <div>
               <p className="mb-1 text-xs text-muted-foreground">Total income</p>
-              <p className="text-xl font-bold text-foreground">{income || balance}</p>
+              <p className="font-money text-xl font-bold text-foreground">{income || balance}</p>
             </div>
             <div className="flex gap-4">
               <button className="flex h-10 items-center justify-center rounded-full bg-foreground px-6 text-sm font-medium text-background transition-opacity hover:opacity-90">
@@ -78,7 +78,7 @@ export function AccountCard({
             <div className="flex items-center justify-between border-t border-border pt-4">
               <div>
                 <p className="mb-1 text-xs text-muted-foreground">Monthly regular fee</p>
-                <p className="text-base font-semibold text-foreground">{expense}</p>
+                <p className="font-money text-base font-semibold text-foreground">{expense}</p>
               </div>
               <button className="flex items-center gap-1 text-sm text-primary hover:underline">
                 <span>Edit</span>
