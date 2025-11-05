@@ -233,13 +233,37 @@ export function DashboardPage() {
       series: [
         {
           type: 'pie',
-          radius: ['40%', '70%'],
+          radius: ['45%', '70%'],
+          center: ['50%', '50%'],
           avoidLabelOverlap: false,
+          minShowLabelAngle: 0,
           itemStyle: { borderRadius: 8, borderColor: '#fff', borderWidth: 2 },
           label: {
             show: true,
+            position: 'outside',
             formatter: '{b}\n{d}%',
             fontSize: 11,
+            color: '#1f1f1f',
+            overflow: 'none',
+            alignTo: 'none',
+            bleedMargin: 5,
+          },
+          labelLine: {
+            show: true,
+            length: 20,
+            length2: 15,
+            smooth: false,
+            lineStyle: {
+              color: '#ccc',
+              width: 1,
+            },
+          },
+          emphasis: {
+            label: {
+              show: true,
+              fontSize: 12,
+              fontWeight: 'bold',
+            },
           },
           data: sorted.map((budget) => ({
             name: getCategoryName(budget.categoryId),
@@ -320,30 +344,8 @@ export function DashboardPage() {
         )}
       </div>
 
-      {/* Weekly Expenses & Recent Transactions */}
-      <div className="grid gap-4 lg:grid-cols-[1fr_1.5fr]">
-        {/* Weekly Expenses */}
-        <Card className="rounded-2xl border-0 bg-card shadow-sm">
-          <CardContent className="p-5">
-            <div className="mb-3">
-              <h3 className="text-base font-bold text-foreground">Weekly expenses</h3>
-              <div className="mt-1 flex items-center gap-1">
-                <span className="text-xs text-muted-foreground">Expenses</span>
-                <ArrowDownRight className="h-3 w-3 text-destructive" />
-              </div>
-            </div>
-            <div className="h-[180px]">
-              {weeklyExpensesData.length > 0 ? (
-                <EChart option={weeklyExpensesOption} aria-label="Weekly expenses" />
-              ) : (
-                <div className="flex h-full items-center justify-center text-sm text-muted-foreground">
-                  No expenses this month
-                </div>
-              )}
-            </div>
-          </CardContent>
-        </Card>
-
+      {/* Recent Transactions & Weekly Expenses */}
+      <div className="grid gap-4 lg:grid-cols-[1fr_2fr]">
         {/* Recent Transactions */}
         <Card className="rounded-2xl border-0 bg-card shadow-sm">
           <CardHeader className="pb-3">
@@ -363,10 +365,7 @@ export function DashboardPage() {
                         : 'text-blue-500 dark:text-blue-400',
                   )
                   return (
-                    <div
-                      key={tx.id}
-                      className="flex items-center justify-between border-b border-border py-2 last:border-0"
-                    >
+                    <div key={tx.id} className="flex items-center justify-between py-2">
                       <div className="flex items-center gap-3">
                         {(() => {
                           const baseClasses =
@@ -435,17 +434,39 @@ export function DashboardPage() {
             </div>
           </CardContent>
         </Card>
+
+        {/* Weekly Expenses */}
+        <Card className="rounded-2xl border-0 bg-card shadow-sm">
+          <CardContent className="p-5">
+            <div className="mb-3">
+              <h3 className="text-base font-bold text-foreground">Weekly expenses</h3>
+              <div className="mt-1 flex items-center gap-1">
+                <span className="text-xs text-muted-foreground">Expenses</span>
+                <ArrowDownRight className="h-3 w-3 text-destructive" />
+              </div>
+            </div>
+            <div className="h-[240px]">
+              {weeklyExpensesData.length > 0 ? (
+                <EChart option={weeklyExpensesOption} aria-label="Weekly expenses" />
+              ) : (
+                <div className="flex h-full items-center justify-center text-sm text-muted-foreground">
+                  No expenses this month
+                </div>
+              )}
+            </div>
+          </CardContent>
+        </Card>
       </div>
 
       {/* Spending by Category & Budget Status */}
       <div className="grid gap-4 lg:grid-cols-2">
         {/* Spending by Category */}
         <Card className="rounded-2xl border-0 bg-card shadow-sm">
-          <CardHeader className="pb-3">
+          <CardHeader className="pb-2">
             <CardTitle className="text-base font-bold">Spending by Category</CardTitle>
           </CardHeader>
-          <CardContent>
-            <div className="h-[260px]">
+          <CardContent className="px-4 pb-4">
+            <div className="h-[380px]">
               {budgets.length > 0 ? (
                 <EChart option={categoryOption} aria-label="Spending by category" />
               ) : (
